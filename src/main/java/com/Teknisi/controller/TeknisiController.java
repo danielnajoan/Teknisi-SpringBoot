@@ -55,7 +55,6 @@ public class TeknisiController {
 		logger.debug("Get with id : " + id);
 		if(id.equals(null)) throw new DataNotfoundException();
 		Teknisi teknisi = teknisiService.getTeknisiById(id);
-		
 		return new ResponseEntity<>(teknisi, HttpStatus.OK);
 	}
 	
@@ -68,12 +67,8 @@ public class TeknisiController {
 	})
 	@RequestMapping(value = "/teknisi/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createTeknisi(@RequestBody Teknisi teknisi) {
-		try {
-			logger.debug("Input : "+new ObjectMapper().writeValueAsString(teknisi));
-		} catch (JsonProcessingException jsonProcessingException) {
-			logger.error("Error : "+jsonProcessingException.getLocalizedMessage());
-		}
-		return new ResponseEntity<>("Teknisi is created successsfully", HttpStatus.OK);
+		teknisiService.insert(teknisi);
+		return new ResponseEntity<>(teknisiService, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Update Teknisi", response = Teknisi.class)
@@ -85,12 +80,8 @@ public class TeknisiController {
 	})
 	@RequestMapping(value = "/teknisi/update", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateTeknisi(@RequestBody Teknisi teknisi) {
-		try {
-			logger.debug("Input : "+new ObjectMapper().writeValueAsString(teknisi));
-		} catch (JsonProcessingException jsonProcessingException) {
-			logger.error("Error : "+jsonProcessingException.getLocalizedMessage());
-		}
-		return new ResponseEntity<>("Teknisi is updated successsfully", HttpStatus.OK);
+		teknisiService.updateTeknisi(teknisi);
+		return new ResponseEntity<>(teknisiService, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Delete Teknisi", response = Teknisi.class)
@@ -102,7 +93,7 @@ public class TeknisiController {
 	})
 	@RequestMapping(value = "/teknisi/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
-		logger.debug("Delete with id : " + id);
-		return new ResponseEntity<>("Teknisi is deleted successsfully", HttpStatus.OK);
+		teknisiService.deleteById(id);
+		return new ResponseEntity<>(teknisiService, HttpStatus.OK);
 	}
 }
