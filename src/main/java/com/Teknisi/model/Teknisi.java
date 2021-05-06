@@ -3,23 +3,58 @@ package com.Teknisi.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Teknisi Model")
 public class Teknisi implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@ApiModelProperty(notes = "ID of the Teknisi", name = "id", required = true, value = "234567")
 	private Long id;
+	
+	@ApiModelProperty(notes = "Phone of the Teknisi", name = "phone", required = true, value = "234567")
 	private String phone;
+	
+	@ApiModelProperty(notes = "Name of the Teknisi", name = "name", required = true, value = "Dante")
 	private String name;
+	
+	@ApiModelProperty(notes = "Nik of the Teknisi", name = "nik", required = true, value = "2001732555")
 	private String nik;
+	
+	@ApiModelProperty(notes = "Address of the Teknisi", name = "address", required = true, value = "Dubai")
 	private String address;
+	
+	@ApiModelProperty(notes = "Email of the Teknisi", name = "email", required = true, value = "dante@gmail.com")
 	private String email;
+	
+	@ApiModelProperty(notes = "City of the Teknisi", name = "city", required = true, value = "Dubai")
 	private String city;
+	
+	@ApiModelProperty(notes = "Postal_code of the Teknisi", name = "postal_code", required = true, value = "00119")
 	private String postal_code;
+	
+	@ApiModelProperty(notes = "Last_login of the Teknisi", name = "last_login", required = true, value = "234567")
 	private Date last_login;
+	
+	@ApiModelProperty(notes = "Longitude", name = "longitude", required = true, value = "5555555")
 	private String longitude;
+	
+	@ApiModelProperty(notes = "Latitude", name = "latitude", required = true, value = "0000000")
 	private String latitude;
+	
+	@ApiModelProperty(notes = "Created_date of the Teknisi", name = "created_date", required = true, value = "234567")
 	private Date created_date;
+	
+	@ApiModelProperty(notes = "The Teknisi created_by", name = "created_by", required = true, value = "Merilda")
 	private String created_by;
+	
+	@ApiModelProperty(notes = "Update_date of the Teknisi", name = "update_date", required = true, value = "234567")
 	private Date update_date;
+	
+	@ApiModelProperty(notes = "The Teknisi update_by", name = "update_by", required = true, value = "Esther")
 	private String update_by;
+	
 	
 	public Teknisi() {
 		

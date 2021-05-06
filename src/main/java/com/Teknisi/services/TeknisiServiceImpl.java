@@ -14,11 +14,8 @@ public class TeknisiServiceImpl implements TeknisiService{
 	@Autowired TeknisiDao teknisiDao;
 	
 	@Override
-	public void showAllTeknisi() {
-		List<Teknisi> listTeknisi = teknisiDao.getAllTeknisi();
-		for(Teknisi teknisi: listTeknisi){
-			System.out.println(teknisi.toString());
-		}
+	public List<Teknisi> showAllTeknisi() {
+		return teknisiDao.getAllTeknisi();
 	}
 
 	@Override
@@ -40,10 +37,8 @@ public class TeknisiServiceImpl implements TeknisiService{
 	}
 
 	@Override
-	public void getTeknisiById(long id) {
-		Teknisi teknisi = teknisiDao.findTeknisiById(id);
-		System.out.println(teknisi);
+	public Teknisi getTeknisiById(long id) {
+		return teknisiDao.findTeknisiById(id);
 		
 	}
-
 }
