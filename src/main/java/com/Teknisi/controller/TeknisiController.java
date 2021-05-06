@@ -1,9 +1,6 @@
 package com.Teknisi.controller;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Teknisi.dao.TeknisiDao;
 import com.Teknisi.exception.DataNotfoundException;
 import com.Teknisi.model.Teknisi;
 import com.Teknisi.services.TeknisiService;
@@ -27,14 +23,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@ApiOperation(value = "/profile/v1/teknisi", tags = "Teknisi Profile Controller")
+@ApiOperation(value = "/", tags = "Teknisi Profile Controller")
 @RestController
-@RequestMapping("/profile/v1/teknisi")
 public class TeknisiController {
 	private Logger logger = LoggerFactory.getLogger("TeknisiApplication");
 	
 	@Autowired TeknisiService teknisiService;
-	@Autowired TeknisiDao teknisiDao;
 	
 	@ApiOperation(value = "Fetch All Teknisi Data", response = Iterable.class)
 	@ApiResponses(value = {
@@ -50,6 +44,12 @@ public class TeknisiController {
 	}
 	
 	@ApiOperation(value = "Fetch Teknisi by ID", response = Teknisi.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 401, message = "Unauthorized!"),
+			@ApiResponse(code = 403, message = "Forbidden!"),
+			@ApiResponse(code = 404, message = "Not Found")
+	})
 	@RequestMapping(value = "/teknisi/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> retrieveById(@PathVariable("id") Long id) {
 		logger.debug("Get with id : " + id);
@@ -60,6 +60,12 @@ public class TeknisiController {
 	}
 	
 	@ApiOperation(value = "Create Teknisi", response = Teknisi.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 401, message = "Unauthorized!"),
+			@ApiResponse(code = 403, message = "Forbidden!"),
+			@ApiResponse(code = 404, message = "Not Found")
+	})
 	@RequestMapping(value = "/teknisi/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createTeknisi(@RequestBody Teknisi teknisi) {
 		try {
@@ -71,6 +77,12 @@ public class TeknisiController {
 	}
 	
 	@ApiOperation(value = "Update Teknisi", response = Teknisi.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 401, message = "Unauthorized!"),
+			@ApiResponse(code = 403, message = "Forbidden!"),
+			@ApiResponse(code = 404, message = "Not Found")
+	})
 	@RequestMapping(value = "/teknisi/update", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateTeknisi(@RequestBody Teknisi teknisi) {
 		try {
@@ -82,6 +94,12 @@ public class TeknisiController {
 	}
 	
 	@ApiOperation(value = "Delete Teknisi", response = Teknisi.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 401, message = "Unauthorized!"),
+			@ApiResponse(code = 403, message = "Forbidden!"),
+			@ApiResponse(code = 404, message = "Not Found")
+	})
 	@RequestMapping(value = "/teknisi/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
 		logger.debug("Delete with id : " + id);
