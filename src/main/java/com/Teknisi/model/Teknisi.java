@@ -10,59 +10,57 @@ import io.swagger.annotations.ApiModelProperty;
 public class Teknisi implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@ApiModelProperty(notes = "ID of the Teknisi", name = "id", required = true, value = "234567")
+	@ApiModelProperty(notes = "ID of the Teknisi", name = "id", required = true, example = "100")
 	private Long id;
 	
-	@ApiModelProperty(notes = "Phone of the Teknisi", name = "phone", required = true, value = "234567")
+	@ApiModelProperty(notes = "Phone of the Teknisi", name = "phone", required = true, example = "08194455001")
 	private String phone;
 	
-	@ApiModelProperty(notes = "Name of the Teknisi", name = "name", required = true, value = "Dante")
+	@ApiModelProperty(notes = "Name of the Teknisi", name = "name", required = true, example = "Dante")
 	private String name;
 	
-	@ApiModelProperty(notes = "Nik of the Teknisi", name = "nik", required = true, value = "2001732555")
+	@ApiModelProperty(notes = "Nik of the Teknisi", name = "nik", required = true, example = "2001732555")
 	private String nik;
 	
-	@ApiModelProperty(notes = "Address of the Teknisi", name = "address", required = true, value = "Dubai")
+	@ApiModelProperty(notes = "Address of the Teknisi", name = "address", required = true, example = "Dubai")
 	private String address;
 	
-	@ApiModelProperty(notes = "Email of the Teknisi", name = "email", required = true, value = "dante@gmail.com")
+	@ApiModelProperty(notes = "Email of the Teknisi", name = "email", required = true, example = "dante@gmail.com")
 	private String email;
 	
-	@ApiModelProperty(notes = "City of the Teknisi", name = "city", required = true, value = "Dubai")
+	@ApiModelProperty(notes = "City of the Teknisi", name = "city", required = true, example = "Dubai")
 	private String city;
 	
-	@ApiModelProperty(notes = "Postal_code of the Teknisi", name = "postal_code", required = true, value = "00119")
+	@ApiModelProperty(notes = "Postal_code of the Teknisi", name = "postal_code", required = true, example = "00119")
 	private String postal_code;
 	
-	@ApiModelProperty(notes = "Last_login of the Teknisi", name = "last_login", required = true, value = "234567")
+	@ApiModelProperty(notes = "Last_login of the Teknisi", name = "last_login", required = true)
 	private Date last_login;
 	
-	@ApiModelProperty(notes = "Longitude", name = "longitude", required = true, value = "5555555")
+	@ApiModelProperty(notes = "Longitude", name = "longitude", required = true, example = "5555555")
 	private String longitude;
 	
-	@ApiModelProperty(notes = "Latitude", name = "latitude", required = true, value = "0000000")
+	@ApiModelProperty(notes = "Latitude", name = "latitude", required = true, example = "0000000")
 	private String latitude;
 	
-	@ApiModelProperty(notes = "Created_date of the Teknisi", name = "created_date", required = true, value = "234567")
+	@ApiModelProperty(notes = "Created_date of the Teknisi", name = "created_date", required = true)
 	private Date created_date;
 	
-	@ApiModelProperty(notes = "The Teknisi created_by", name = "created_by", required = true, value = "Merilda")
+	@ApiModelProperty(notes = "The Teknisi created_by", name = "created_by", required = true, example = "Merilda")
 	private String created_by;
 	
-	@ApiModelProperty(notes = "Update_date of the Teknisi", name = "update_date", required = true, value = "234567")
+	@ApiModelProperty(notes = "Update_date of the Teknisi", name = "update_date", required = true)
 	private Date update_date;
 	
-	@ApiModelProperty(notes = "The Teknisi update_by", name = "update_by", required = true, value = "Esther")
+	@ApiModelProperty(notes = "The Teknisi update_by", name = "update_by", required = true, example  = "Esther")
 	private String update_by;
-	
 	
 	public Teknisi() {
 		
 	}
 
 	public Teknisi(Long id, String phone, String name, String nik, String address, String email, String city,
-			String postal_code, Date last_login, String longitude, String latitude, Date created_date,
-			String created_by, Date update_date, String update_by) {
+			String postal_code, Date last_login, String longitude, String latitude) {
 		super();
 		this.id = id;
 		this.phone = phone;
@@ -75,10 +73,6 @@ public class Teknisi implements Serializable{
 		this.last_login = last_login;
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.created_date = created_date;
-		this.created_by = created_by;
-		this.update_date = update_date;
-		this.update_by = update_by;
 	}
 
 	public Long getId() {
@@ -237,6 +231,6 @@ public class Teknisi implements Serializable{
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	
 }

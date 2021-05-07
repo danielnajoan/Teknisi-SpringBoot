@@ -37,11 +37,13 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 	    		 + "postal_code, last_login, longitude, latitude, "
 	    		 + "created_date, created_by, update_date, update_by) "
 	    		 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
+	    Date created_date = new Date();
+		String created_by = "Manager Teknisi";
 	     getJdbcTemplate()
 	     	.update(query, new Object[]{
 	     		teknisi.getId(), teknisi.getPhone(), teknisi.getName(), teknisi.getNik(), teknisi.getAddress(), teknisi.getEmail(), teknisi.getCity(),
 	     		teknisi.getPostal_code(), teknisi.getLast_login(), teknisi.getLongitude(), teknisi.getLatitude(),
-	     		teknisi.getCreated_date(), teknisi.getCreated_by(), teknisi.getUpdate_date(), teknisi.getUpdate_by()
+	     		created_date, created_by, teknisi.getUpdate_date(), teknisi.getUpdate_by()
 	     		});
 		
 	}
@@ -130,11 +132,13 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 		String query = "update teknisi set phone=? , name=? , nik=?, address=?, email=?, city=?, "
 				+ "postal_code=?, last_login=?, longitude=?, latitude=?, "
 				+ "created_date=?, created_by=?, update_date=?, update_by=? where id=?";
+		Date update_date = new Date();
+		String update_by = "Database Admin";
 		getJdbcTemplate()
      	.update(query, new Object[]{
      		teknisi.getPhone(), teknisi.getName(), teknisi.getNik(), teknisi.getAddress(), teknisi.getEmail(), teknisi.getCity(),
      		teknisi.getPostal_code(), teknisi.getLast_login(), teknisi.getLongitude(), teknisi.getLatitude(),
-     		teknisi.getCreated_date(), teknisi.getCreated_by(), teknisi.getUpdate_date(), teknisi.getUpdate_by(), teknisi.getId()
+     		teknisi.getCreated_date(), teknisi.getCreated_by(), update_date, update_by, teknisi.getId()
      		});
 		
 	}

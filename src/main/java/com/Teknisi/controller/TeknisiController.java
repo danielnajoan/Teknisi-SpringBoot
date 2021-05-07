@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Teknisi.exception.DataNotfoundException;
@@ -30,9 +31,9 @@ public class TeknisiController {
 	
 	@Autowired TeknisiService teknisiService;
 	
-	@ApiOperation(value = "Fetch All Teknisi Data", response = Iterable.class)
+	@ApiOperation(value = "Fetch All Teknisi Data")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 200, message = "Success", response = Iterable.class),
 			@ApiResponse(code = 401, message = "Unauthorized!"),
 			@ApiResponse(code = 403, message = "Forbidden!"),
 			@ApiResponse(code = 404, message = "Not Found")
@@ -43,7 +44,7 @@ public class TeknisiController {
 		return new ResponseEntity<>(listTeknisi, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Fetch Teknisi by ID", response = Teknisi.class)
+	@ApiOperation(value = "Fetch Teknisi by ID")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
 			@ApiResponse(code = 401, message = "Unauthorized!"),
@@ -58,9 +59,9 @@ public class TeknisiController {
 		return new ResponseEntity<>(teknisi, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Create Teknisi", response = Teknisi.class)
+	@ApiOperation(value = "Create Teknisi")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 200, message = "Data has been created"),
 			@ApiResponse(code = 401, message = "Unauthorized!"),
 			@ApiResponse(code = 403, message = "Forbidden!"),
 			@ApiResponse(code = 404, message = "Not Found")
@@ -68,12 +69,12 @@ public class TeknisiController {
 	@RequestMapping(value = "/teknisi/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createTeknisi(@RequestBody Teknisi teknisi) {
 		teknisiService.insert(teknisi);
-		return new ResponseEntity<>(teknisiService, HttpStatus.OK);
+		return new ResponseEntity<>("Teknisi Created Successsfully", HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Update Teknisi", response = Teknisi.class)
+	@ApiOperation(value = "Update Teknisi")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 200, message = "Data has been updated"),
 			@ApiResponse(code = 401, message = "Unauthorized!"),
 			@ApiResponse(code = 403, message = "Forbidden!"),
 			@ApiResponse(code = 404, message = "Not Found")
@@ -81,12 +82,12 @@ public class TeknisiController {
 	@RequestMapping(value = "/teknisi/update", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateTeknisi(@RequestBody Teknisi teknisi) {
 		teknisiService.updateTeknisi(teknisi);
-		return new ResponseEntity<>(teknisiService, HttpStatus.OK);
+		return new ResponseEntity<>("Teknisi Updated Successsfully", HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Delete Teknisi", response = Teknisi.class)
+	@ApiOperation(value = "Delete Teknisi")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Success", response = Teknisi.class),
+			@ApiResponse(code = 200, message = "Data has been deleted"),
 			@ApiResponse(code = 401, message = "Unauthorized!"),
 			@ApiResponse(code = 403, message = "Forbidden!"),
 			@ApiResponse(code = 404, message = "Not Found")
@@ -94,6 +95,6 @@ public class TeknisiController {
 	@RequestMapping(value = "/teknisi/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
 		teknisiService.deleteById(id);
-		return new ResponseEntity<>(teknisiService, HttpStatus.OK);
+		return new ResponseEntity<>("Teknisi has been deleted", HttpStatus.OK);
 	}
 }
