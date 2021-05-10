@@ -4,8 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -16,6 +18,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.Teknisi.model.Request;
 import com.Teknisi.model.Teknisi;
 
 @Repository
@@ -30,7 +33,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
     }
     
 	@Override
-	public void insert(Teknisi teknisi) {
+	public void insertTeknisi(Teknisi teknisi) {
 	     String query = 
 	    		 "INSERT INTO teknisi("
 	    		 + "id, phone, name, nik, address, email, city, "
@@ -50,9 +53,9 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 
 	@Override
 	public Teknisi findTeknisiById(long id) {
-		String query = "select id, phone, name, nik, address, email, city, "
-				+ "postal_code, last_login, longitude, latitude, "
-				+ "created_date, created_by, update_date, update_by from teknisi where id = ?";
+		String query = "select * from teknisi tek "
+				+ "left join request req on tek.id = req.teknisi_id "
+				+ "where tek.id = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		//using RowMapper anonymous class, we can create a separate RowMapper for reuse
@@ -63,6 +66,8 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 			public Teknisi mapRow(ResultSet rs, int rowNum)
 					throws SQLException {
 				Teknisi teknisi = new Teknisi();
+				Set<Request> listRequest = new HashSet<Request>();
+				Request request = new Request();
 				teknisi.setId((rs.getLong("id")));
 				teknisi.setPhone(rs.getString("phone"));
 				teknisi.setName(rs.getString("name"));
@@ -78,6 +83,9 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				teknisi.setCreated_by(rs.getString("created_by"));
 				teknisi.setUpdate_date(rs.getDate("update_date"));
 				teknisi.setUpdate_by(rs.getString("update_by"));
+				request.setRequest_id(rs.getString("request_id"));
+				listRequest.add(request);
+				teknisi.setRequest(listRequest);
 				return teknisi;
 
 			}});
@@ -90,9 +98,8 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 
 	@Override
 	public List<Teknisi> getAllTeknisi() {
-		String query = "select id, phone, name, nik, address, email, city, "
-				+ "postal_code, last_login, longitude, latitude, "
-				+ "created_date, created_by, update_date, update_by from teknisi";
+		String query = "select * from teknisi tek "
+				+ "left join request req on req.teknisi_id = tek.id";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Teknisi> teknisiList = new ArrayList<Teknisi>();
 
@@ -100,6 +107,8 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 
 		for(Map<String,Object> teknisiColumn : teknisiRows){
 			Teknisi teknisi = new Teknisi();
+			Set<Request> listRequest = new HashSet<Request>();
+			Request request = new Request();
 			teknisi.setId(Long.parseLong(teknisiColumn.get("id").toString()));
 			teknisi.setPhone(String.valueOf(teknisiColumn.get("phone")));
 			teknisi.setName(String.valueOf(teknisiColumn.get("name")));
@@ -115,6 +124,19 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 			teknisi.setCreated_by(String.valueOf(teknisiColumn.get("created_by")));
 			teknisi.setUpdate_date((Date)(teknisiColumn.get("update_date")));
 			teknisi.setUpdate_by(String.valueOf(teknisiColumn.get("update_by")));
+			request.setRequest_id(String.valueOf(teknisiColumn.get("request_id")));
+			request.setMerchant_name(String.valueOf(teknisiColumn.get("name")));
+			request.setAddress(String.valueOf(teknisiColumn.get("address")));
+			request.setCity(String.valueOf(teknisiColumn.get("city")));
+			request.setPostal_code(String.valueOf(teknisiColumn.get("postal_code")));
+			request.setPhone(String.valueOf(teknisiColumn.get("phone")));
+			request.setPerson_in_charge(String.valueOf(teknisiColumn.get("pic")));
+			request.setCreated_date((Date)(teknisiColumn.get("created_date")));
+			request.setCreated_by(String.valueOf(teknisiColumn.get("created_by")));
+			request.setUpdate_date((Date)(teknisiColumn.get("update_date")));
+			request.setUpdate_by(String.valueOf(teknisiColumn.get("update_by")));
+			listRequest.add(request);
+			teknisi.setRequest(listRequest);
 			teknisiList.add(teknisi);
 		}
 		return teknisiList;
@@ -122,7 +144,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 
 	
 	@Override
-    public int deleteById(Long id) {
+    public int deleteTeknisiById(Long id) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return jdbcTemplate.update("delete from teknisi where id = ?",id);
     }

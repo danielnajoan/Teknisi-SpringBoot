@@ -1,24 +1,30 @@
 package com.Teknisi.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Teknisi.exception.DataNotfoundException;
 import com.Teknisi.model.Teknisi;
 import com.Teknisi.services.TeknisiService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -39,7 +45,7 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi", method = RequestMethod.GET)
-	public ResponseEntity<Object> retrieveAll() {
+	public ResponseEntity<Object> retrieveAllTeknisi() {
 		List<Teknisi> listTeknisi = teknisiService.showAllTeknisi();
 		return new ResponseEntity<>(listTeknisi, HttpStatus.OK);
 	}
@@ -52,7 +58,7 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Object> retrieveById(@PathVariable("id") Long id) {
+	public ResponseEntity<Object> retrieveTeknisiById(@Valid @PathVariable("id") Long id) {
 		logger.debug("Get with id : " + id);
 		if(id.equals(null)) throw new DataNotfoundException();
 		Teknisi teknisi = teknisiService.getTeknisiById(id);
@@ -67,9 +73,14 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi/create", method = RequestMethod.POST)
-	public ResponseEntity<Object> createTeknisi(@RequestBody Teknisi teknisi) {
-		teknisiService.insert(teknisi);
-		return new ResponseEntity<>("Teknisi Created Successsfully", HttpStatus.OK);
+	public ResponseEntity<Object> createTeknisi(@Valid @RequestBody Teknisi teknisi, final BindingResult bindingResult) {
+		if (teknisi != null && teknisi.getId() > 0) {
+			return new ResponseEntity<>("Teknisi ID already exist", HttpStatus.BAD_REQUEST);
+		}else {
+			teknisiService.insertTeknisi(teknisi);
+			return new ResponseEntity<>("Teknisi Created Successsfully", HttpStatus.OK);
+		}
+		
 	}
 	
 	@ApiOperation(value = "Update Teknisi")
@@ -80,9 +91,14 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi/update", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateTeknisi(@RequestBody Teknisi teknisi) {
-		teknisiService.updateTeknisi(teknisi);
-		return new ResponseEntity<>("Teknisi Updated Successsfully", HttpStatus.OK);
+	public ResponseEntity<Object> updateTeknisi(@Valid @RequestBody Teknisi teknisi, final BindingResult bindingResult) {
+		if (teknisi != null && teknisi.getId() > 0) {
+			teknisiService.updateTeknisi(teknisi);
+			return new ResponseEntity<>("Teknisi Updated Successsfully", HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Teknisi ID did not exist", HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 	
 	@ApiOperation(value = "Delete Teknisi")
@@ -93,8 +109,21 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
-		teknisiService.deleteById(id);
+	public ResponseEntity<Object> deleteTeknisi(@Valid @PathVariable("id") Long id, final BindingResult bindingResult) {
+		teknisiService.deleteTeknisiById(id);
 		return new ResponseEntity<>("Teknisi has been deleted", HttpStatus.OK);
+	}
+	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public Map<String, String> handleValidationExceptions(
+	  MethodArgumentNotValidException ex) {
+	    Map<String, String> errors = new HashMap<>();
+	    ex.getBindingResult().getAllErrors().forEach((error) -> {
+	        String fieldName = ((FieldError) error).getField();
+	        String errorMessage = error.getDefaultMessage();
+	        errors.put(fieldName, errorMessage);
+	    });
+	    return errors;
 	}
 }

@@ -19,14 +19,13 @@ public class TeknisiServiceImpl implements TeknisiService{
 	}
 
 	@Override
-	public void insert(Teknisi teknisi) {
-		teknisiDao.insert(teknisi);
-		
+	public void insertTeknisi(Teknisi teknisi) {
+			teknisiDao.insertTeknisi(teknisi);
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		teknisiDao.deleteById(id);
+	public void deleteTeknisiById(Long id) {
+		teknisiDao.deleteTeknisiById(id);
 		
 	}
 
