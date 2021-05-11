@@ -2,6 +2,7 @@ package com.Teknisi.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -107,7 +108,7 @@ public class Teknisi implements Serializable{
 	private String update_by;
 	
 	@OneToMany(mappedBy="teknisi_id")
-    private Set<Request> request;
+    private Set<Request> request = new HashSet<Request>();
 	
 	
 	public Teknisi() {
@@ -338,6 +339,5 @@ public class Teknisi implements Serializable{
 		builder.append("]");
 		return builder.toString();
 	}
-
 	
 }

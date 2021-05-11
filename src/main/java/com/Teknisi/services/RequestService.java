@@ -1,14 +1,14 @@
-package com.Teknisi.dao;
+package com.Teknisi.services;
 
 import java.util.List;
 
 import com.Teknisi.model.Request;
 
-public interface RequestDao {
-	List<Request> getAllRequest();
-	public Request findRequestById(String id);
+public interface RequestService {
+	List<Request> showAllRequest();
+	Request getRequestById(String id);
 	void insertRequest(Request request);
-	int deleteRequestById(String id);
+	void deleteRequestById(String id);
 	void updateRequest(Request request);
 	boolean isRequestIdExists(String id);
 }

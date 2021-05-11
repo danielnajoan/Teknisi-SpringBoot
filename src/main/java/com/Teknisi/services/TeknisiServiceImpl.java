@@ -19,6 +19,11 @@ public class TeknisiServiceImpl implements TeknisiService{
 	}
 
 	@Override
+	public Teknisi getTeknisiById(long id) {
+		return teknisiDao.findTeknisiById(id);
+	}
+	
+	@Override
 	public void insertTeknisi(Teknisi teknisi) {
 			teknisiDao.insertTeknisi(teknisi);
 	}
@@ -26,18 +31,15 @@ public class TeknisiServiceImpl implements TeknisiService{
 	@Override
 	public void deleteTeknisiById(Long id) {
 		teknisiDao.deleteTeknisiById(id);
-		
 	}
 
 	@Override
 	public void updateTeknisi(Teknisi teknisi) {
 		teknisiDao.updateTeknisi(teknisi);
-		
 	}
 
 	@Override
-	public Teknisi getTeknisiById(long id) {
-		return teknisiDao.findTeknisiById(id);
-		
+	public boolean isTeknisiIdExists(long id) {
+		return teknisiDao.isTeknisiIdExists(id);
 	}
 }

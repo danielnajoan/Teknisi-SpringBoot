@@ -1,5 +1,7 @@
 package com.Teknisi.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,11 +12,11 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.Teknisi.model.Request;
-import com.Teknisi.model.Teknisi;
 
 @Repository
 public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
@@ -30,10 +32,7 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 	@Override
 	public List<Request> getAllRequest() {
 		String query = 
-			"select req.request_id, req.merchant_name, req.address, "
-			+ "req.city, req.postal_code, req.phone, req.pic, tek.id, "
-			+ "req.created_date, req.created_by, req.update_date, req.update_by "
-			+ "from request req right join teknisi tek on req.teknisi_id = tek.id";
+			"select * from request order by request_id asc";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Request> requestList = new ArrayList<Request>();
 
@@ -41,16 +40,14 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 
 		for(Map<String,Object> requestColumn : requestRows){
 			Request request = new Request();
-			Teknisi teknisi = new Teknisi();
 			request.setRequest_id(String.valueOf(requestColumn.get("request_id")));
-			request.setMerchant_name(String.valueOf(requestColumn.get("name")));
+			request.setMerchant_name(String.valueOf(requestColumn.get("merchant_name")));
 			request.setAddress(String.valueOf(requestColumn.get("address")));
 			request.setCity(String.valueOf(requestColumn.get("city")));
 			request.setPostal_code(String.valueOf(requestColumn.get("postal_code")));
 			request.setPhone(String.valueOf(requestColumn.get("phone")));
 			request.setPerson_in_charge(String.valueOf(requestColumn.get("pic")));
-			teknisi.setId(Long.parseLong(requestColumn.get("id").toString()));
-			request.setTeknisi_id(teknisi);
+			request.setTeknisi_id(Integer.parseInt(requestColumn.get("teknisi_id").toString()));
 			request.setCreated_date((Date)(requestColumn.get("created_date")));
 			request.setCreated_by(String.valueOf(requestColumn.get("created_by")));
 			request.setUpdate_date((Date)(requestColumn.get("update_date")));
@@ -59,29 +56,78 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 		}
 		return requestList;
 	}
-
+	@Override
+	public Request findRequestById(String id) {
+		String query = "select * from request where request_id = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		//using RowMapper anonymous class, we can create a separate RowMapper for reuse
+		@SuppressWarnings("deprecation")
+		Request request = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<Request>(){
+			@Override
+			public Request mapRow(ResultSet rs, int rowNum)
+					throws SQLException {
+				Request request = new Request();
+				request.setRequest_id(rs.getString("request_id"));
+				request.setMerchant_name(rs.getString("merchant_name"));
+				request.setAddress(rs.getString("address"));
+				request.setCity(rs.getString("city"));
+				request.setPostal_code(rs.getString("postal_code"));
+				request.setPhone(rs.getString("phone"));
+				request.setPerson_in_charge(rs.getString("pic"));
+				request.setTeknisi_id(rs.getInt("teknisi_id"));
+				request.setCreated_date(rs.getDate("created_date"));
+				request.setCreated_by(rs.getString("created_by"));
+				request.setUpdate_date(rs.getDate("update_date"));
+				request.setUpdate_by(rs.getString("update_by"));
+				return request;
+			}});
+		return request;
+	}
 	@Override
 	public void insertRequest(Request request) {
-		// TODO Auto-generated method stub
+		String query = 
+	    		 "INSERT INTO request("
+	    		 + "request_id, merchant_name, address, city, postal_code, phone, pic, "
+	    		 + "teknisi_id, created_date, created_by, update_date, update_by) "
+	    		 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
+	    Date created_date = new Date();
+		String created_by = "Merchant PIC";
+		
+	     getJdbcTemplate()
+	     	.update(query, new Object[]{
+	     			request.getRequest_id(), request.getMerchant_name(), request.getAddress(), request.getCity(), request.getPostal_code(),
+	     			request.getPhone(), request.getPerson_in_charge(), request.getTeknisi_id(), created_date, created_by, 
+	     			request.getUpdate_date(), request.getUpdate_by()
+	     		});
 		
 	}
 
 	@Override
-	public int deleteRequestById(Long id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteRequestById(String id) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate.update("delete from request where request_id = ?",id);
 	}
 
 	@Override
 	public void updateRequest(Request request) {
-		// TODO Auto-generated method stub
+		String query = "update request set merchant_name=? , address=? , city=?, postal_code=?, phone=?, pic=?, "
+				+ "teknisi_id=?, created_date=?, created_by=?, update_date=?, update_by=? where request_id=?";
+		Date update_date = new Date();
+		String update_by = "Database Admin";
+		getJdbcTemplate()
+     	.update(query, new Object[]{
+     			request.getMerchant_name(), request.getAddress(), request.getCity(), request.getPostal_code(), request.getPhone(),
+     			request.getPerson_in_charge(), request.getTeknisi_id(), request.getCreated_date(), request.getCreated_by(),
+     			update_date, update_by, request.getRequest_id()
+     		});
 		
 	}
-
 	@Override
-	public Request findRequestById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isRequestIdExists(String id) {
+		String sql = "select count(*) from request where request_id= ? limit 1";
+	    @SuppressWarnings("deprecation")
+		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id }, Long.class);
+		return count > 0;
 	}
 
 }

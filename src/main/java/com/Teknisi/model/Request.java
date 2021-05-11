@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
@@ -59,9 +60,14 @@ public class Request {
 	@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters")
 	private String person_in_charge;
 	
+	@Column(name="teknisi_id")
+	@ApiModelProperty(notes = "PIC of the Merchant", name = "teknisi_id", required = true, example = "100")
+	@Max(value = 1000, message = "ID should not be greater than 1000")
+	private int teknisi_id;
+	
 	@ManyToOne
-    @JoinColumn(name="teknisi_id", nullable=false)
-    private Teknisi teknisi_id;
+    @JoinColumn(name="teknisi_id", referencedColumnName = "id", nullable=false, insertable=false, updatable=false)
+    private Teknisi teknisi_data;
 	
 	@Column(name="created_date")
 	@ApiModelProperty(notes = "Created_date of the Request", name = "created_date", required = true)
@@ -95,7 +101,7 @@ public class Request {
 			@Pattern(regexp = "[\\d]{1,5}", message = "Postal Code should have length between 1 and 5 numeric") String postal_code,
 			@Pattern(regexp = "[\\d]{1,13}", message = "NIK should have length between 1 and 13 numeric") String phone,
 			@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters") String person_in_charge,
-			Teknisi teknisi_id) {
+			@Max(value = 1000, message = "ID should not be greater than 1000") int teknisi_id) {
 		super();
 		this.request_id = request_id;
 		this.merchant_name = merchant_name;
@@ -163,12 +169,20 @@ public class Request {
 		this.person_in_charge = person_in_charge;
 	}
 
-	public Teknisi getTeknisi_id() {
+	public int getTeknisi_id() {
 		return teknisi_id;
 	}
 
-	public void setTeknisi_id(Teknisi teknisi_id) {
+	public void setTeknisi_id(int teknisi_id) {
 		this.teknisi_id = teknisi_id;
+	}
+
+	public Teknisi getTeknisi_data() {
+		return teknisi_data;
+	}
+
+	public void setTeknisi_data(Teknisi teknisi_data) {
+		this.teknisi_data = teknisi_data;
 	}
 
 	public Date getCreated_date() {
@@ -222,6 +236,8 @@ public class Request {
 		builder.append(person_in_charge);
 		builder.append(", teknisi_id=");
 		builder.append(teknisi_id);
+		builder.append(", teknisi_data=");
+		builder.append(teknisi_data);
 		builder.append(", created_date=");
 		builder.append(created_date);
 		builder.append(", created_by=");
@@ -233,6 +249,7 @@ public class Request {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
+
 	
 }
