@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -73,7 +72,7 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi/create", method = RequestMethod.POST)
-	public ResponseEntity<Object> createTeknisi(@Valid @RequestBody Teknisi teknisi, final BindingResult bindingResult) {
+	public ResponseEntity<Object> createTeknisi(@Valid @RequestBody Teknisi teknisi) {
 		long id = teknisi.getId();
 		if(teknisiService.isTeknisiIdExists(id) == true) {
 			return new ResponseEntity<>("Teknisi ID already exist", HttpStatus.BAD_REQUEST);
@@ -93,7 +92,7 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi/update", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateTeknisi(@Valid @RequestBody Teknisi teknisi, final BindingResult bindingResult) {
+	public ResponseEntity<Object> updateTeknisi(@Valid @RequestBody Teknisi teknisi) {
 		long id = teknisi.getId();
 		if(teknisiService.isTeknisiIdExists(id) == true) {
 			teknisiService.updateTeknisi(teknisi);
