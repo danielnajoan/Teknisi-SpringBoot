@@ -111,13 +111,13 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 	@Override
 	public void updateRequest(Request request) {
 		String query = "update request set merchant_name=? , address=? , city=?, postal_code=?, phone=?, pic=?, "
-				+ "teknisi_id=?, created_date=?, created_by=?, update_date=?, update_by=? where request_id=?";
+				+ "teknisi_id=?, update_date=?, update_by=? where request_id=?";
 		Date update_date = new Date();
 		String update_by = "Database Admin";
 		getJdbcTemplate()
      	.update(query, new Object[]{
      			request.getMerchant_name(), request.getAddress(), request.getCity(), request.getPostal_code(), request.getPhone(),
-     			request.getPerson_in_charge(), request.getTeknisi_id(), request.getCreated_date(), request.getCreated_by(),
+     			request.getPerson_in_charge(), request.getTeknisi_id(),
      			update_date, update_by, request.getRequest_id()
      		});
 		

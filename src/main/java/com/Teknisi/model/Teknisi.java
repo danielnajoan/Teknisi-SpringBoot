@@ -1,8 +1,10 @@
 package com.Teknisi.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -88,27 +90,26 @@ public class Teknisi implements Serializable{
 	private String latitude;
 	
 	@Column(name="created_date")
-	@ApiModelProperty(notes = "Created_date of the Teknisi", name = "created_date", required = true)
 	@PastOrPresent
+	@ApiModelProperty(hidden = true)
 	private Date created_date;
 	
-	@NotBlank(message = "Teknisi created_by need to be filled")
     @Column(name="created_by")
-	@ApiModelProperty(notes = "The Teknisi created_by", name = "created_by", required = true, example = "Merilda")
+    @ApiModelProperty(hidden = true)
 	private String created_by;
 	
 	@Column(name="update_date")
-	@ApiModelProperty(notes = "Update_date of the Teknisi", name = "update_date", required = true)
 	@PastOrPresent
+	@ApiModelProperty(hidden = true)
 	private Date update_date;
 	
-	@NotBlank(message = "Teknisi update_by need to be filled")
     @Column(name="update_by")
-	@ApiModelProperty(notes = "The Teknisi update_by", name = "update_by", required = true, example  = "Esther")
+    @ApiModelProperty(hidden = true)
 	private String update_by;
 	
 	@OneToMany(mappedBy="teknisi_id")
-    private Set<Request> request = new HashSet<Request>();
+	@ApiModelProperty(hidden = true)
+    private List<Request> request = new ArrayList<Request>();
 	
 	
 	public Teknisi() {
@@ -291,12 +292,12 @@ public class Teknisi implements Serializable{
 	}
 
 
-	public Set<Request> getRequest() {
+	public List<Request> getRequest() {
 		return request;
 	}
 
 
-	public void setRequest(Set<Request> request) {
+	public void setRequest(List<Request> request) {
 		this.request = request;
 	}
 

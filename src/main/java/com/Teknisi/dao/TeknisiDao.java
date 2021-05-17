@@ -6,7 +6,7 @@ import com.Teknisi.model.Teknisi;
 
 public interface TeknisiDao {
 	List<Teknisi> getAllTeknisi();
-	public Teknisi findTeknisiById(long id);
+	public List<Teknisi> findTeknisiById(long id);
 	void insertTeknisi(Teknisi teknisi);
 	int deleteTeknisiById(Long id);
 	void updateTeknisi(Teknisi teknisi);

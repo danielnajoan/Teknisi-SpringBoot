@@ -56,7 +56,7 @@ public class TeknisiController {
 	@RequestMapping(value = "/teknisi/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> retrieveTeknisiById(@Valid @PathVariable("id") Long id) {
 		if(teknisiService.isTeknisiIdExists(id) == true) {
-			Teknisi teknisi = teknisiService.getTeknisiById(id);
+			List<Teknisi> teknisi = teknisiService.getTeknisiById(id);
 			return new ResponseEntity<>(teknisi, HttpStatus.OK);
 		}else if (teknisiService.isTeknisiIdExists(id) == false ) {
 			return new ResponseEntity<>("Teknisi ID did not exist", HttpStatus.BAD_REQUEST);
@@ -113,7 +113,7 @@ public class TeknisiController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisi/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteTeknisi(@Valid @PathVariable("id") Long id, final BindingResult bindingResult) {
+	public ResponseEntity<Object> deleteTeknisi(@Valid @PathVariable("id") Long id) {
 		if(teknisiService.isTeknisiIdExists(id) == true) {
 			teknisiService.deleteTeknisiById(id);
 			return new ResponseEntity<>("Teknisi has been deleted", HttpStatus.OK);

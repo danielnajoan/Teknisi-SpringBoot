@@ -26,7 +26,7 @@ public class Request {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="request_id")
-	@ApiModelProperty(notes = "Request ID of the Merchant", name = "id", required = true, example = "Req100")
+	@ApiModelProperty(notes = "Request ID of the Merchant", name = "id", required = true, example = "100")
 	@Pattern(regexp = "^[A-Za-z0-9]{1,10}$", message = "Request ID should have length between 1 and 10 Alphanumeric characters")
 	private String request_id;
 	
@@ -65,28 +65,22 @@ public class Request {
 	@Max(value = 1000, message = "ID should not be greater than 1000")
 	private int teknisi_id;
 	
-	@ManyToOne
-    @JoinColumn(name="teknisi_id", referencedColumnName = "id", nullable=false, insertable=false, updatable=false)
-    private Teknisi teknisi_data;
-	
 	@Column(name="created_date")
-	@ApiModelProperty(notes = "Created_date of the Request", name = "created_date", required = true)
 	@PastOrPresent
+	@ApiModelProperty(hidden = true)
 	private Date created_date;
 	
-	@NotBlank(message = "Request created_by need to be filled")
     @Column(name="created_by")
-	@ApiModelProperty(notes = "The Teknisi created_by", name = "created_by", required = true, example = "Merilda")
+    @ApiModelProperty(hidden = true)
 	private String created_by;
 	
 	@Column(name="update_date")
-	@ApiModelProperty(notes = "Update_date of the Request", name = "update_date", required = true)
 	@PastOrPresent
+	@ApiModelProperty(hidden = true)
 	private Date update_date;
 	
-	@NotBlank(message = "Request update_by need to be filled")
     @Column(name="update_by")
-	@ApiModelProperty(notes = "The Teknisi update_by", name = "update_by", required = true, example  = "Esther")
+    @ApiModelProperty(hidden = true)
 	private String update_by;
 	
 	public Request() {
@@ -177,14 +171,6 @@ public class Request {
 		this.teknisi_id = teknisi_id;
 	}
 
-	public Teknisi getTeknisi_data() {
-		return teknisi_data;
-	}
-
-	public void setTeknisi_data(Teknisi teknisi_data) {
-		this.teknisi_data = teknisi_data;
-	}
-
 	public Date getCreated_date() {
 		return created_date;
 	}
@@ -236,8 +222,6 @@ public class Request {
 		builder.append(person_in_charge);
 		builder.append(", teknisi_id=");
 		builder.append(teknisi_id);
-		builder.append(", teknisi_data=");
-		builder.append(teknisi_data);
 		builder.append(", created_date=");
 		builder.append(created_date);
 		builder.append(", created_by=");
@@ -251,5 +235,4 @@ public class Request {
 	}
 
 
-	
 }

@@ -1,11 +1,14 @@
 package com.Teknisi.services;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Teknisi.dao.TeknisiDao;
+import com.Teknisi.model.Request;
 import com.Teknisi.model.Teknisi;
 
 @Service
@@ -15,12 +18,52 @@ public class TeknisiServiceImpl implements TeknisiService{
 	
 	@Override
 	public List<Teknisi> showAllTeknisi() {
-		return teknisiDao.getAllTeknisi();
+		List<Teknisi> teknisiList = teknisiDao.getAllTeknisi();
+		List<Teknisi> clearList = new ArrayList<Teknisi>();
+		Hashtable<Long, Teknisi> filterHash = new Hashtable<Long, Teknisi>();
+		for(Teknisi teknisiObject:teknisiList){
+			Teknisi TeknisiOnHash = filterHash.get(teknisiObject.getId());
+		  
+		  if(TeknisiOnHash==null){
+		    filterHash.put(teknisiObject.getId(),teknisiObject);
+		  }
+		  else{
+		    List<Request> requestList = TeknisiOnHash.getRequest();
+		    requestList.addAll(teknisiObject.getRequest());
+		    TeknisiOnHash.setRequest(requestList);
+		    filterHash.put(TeknisiOnHash.getId(),TeknisiOnHash);
+		  }
+		}
+		for(Long key:filterHash.keySet()){
+		  clearList.add(filterHash.get(key));
+		}
+
+		return clearList;
 	}
 
 	@Override
-	public Teknisi getTeknisiById(long id) {
-		return teknisiDao.findTeknisiById(id);
+	public List<Teknisi> getTeknisiById(long id) {
+		List<Teknisi> teknisiList = teknisiDao.findTeknisiById(id);
+		List<Teknisi> clearList = new ArrayList<Teknisi>();
+		Hashtable<Long, Teknisi> filterHash = new Hashtable<Long, Teknisi>();
+		for(Teknisi teknisiObject:teknisiList){
+			Teknisi TeknisiOnHash = filterHash.get(teknisiObject.getId());
+		  
+		  if(TeknisiOnHash==null){
+		    filterHash.put(teknisiObject.getId(),teknisiObject);
+		  }
+		  else{
+		    List<Request> requestList = TeknisiOnHash.getRequest();
+		    requestList.addAll(teknisiObject.getRequest());
+		    TeknisiOnHash.setRequest(requestList);
+		    filterHash.put(TeknisiOnHash.getId(),TeknisiOnHash);
+		  }
+		}
+		for(Long key:filterHash.keySet()){
+		  clearList.add(filterHash.get(key));
+		}
+
+		return clearList;
 	}
 	
 	@Override

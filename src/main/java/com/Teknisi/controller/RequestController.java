@@ -126,7 +126,7 @@ public class RequestController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/request/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteRequest(@Valid @PathVariable("id") String id, final BindingResult bindingResult) {
+	public ResponseEntity<Object> deleteRequest(@Valid @PathVariable("id") String id) {
 		if(requestService.isRequestIdExists(id) == true) {
 			requestService.deleteRequestById(id);
 			return new ResponseEntity<>("Request has been deleted", HttpStatus.OK);
