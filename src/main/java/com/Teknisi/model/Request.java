@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
@@ -28,41 +29,49 @@ public class Request {
     @Column(name="request_id")
 	@ApiModelProperty(notes = "Request ID of the Merchant", name = "id", required = true, example = "100")
 	@Pattern(regexp = "^[A-Za-z0-9]{1,10}$", message = "Request ID should have length between 1 and 10 Alphanumeric characters")
+	@NotBlank(message = "Request ID cannot be blank")
 	private String request_id;
 	
 	@Column(name="merchant_name ")
 	@ApiModelProperty(notes = "Name of the Merchant", name = "merchant_name", required = true, example = "Apolos")
 	@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "Name should have length between 1 and 50 characters")
+	@NotBlank(message = "Merchant name cannot be blank")
 	private String merchant_name;
 	
 	@Column(name="address")
 	@ApiModelProperty(notes = "address of the Merchant", name = "address", required = true, example = "Jalan bunga matahari IX, Bekasi")
 	@Pattern(regexp = "^[-a-zA-Z0-9,]{5,140}$", message = "Address should have length between 5 and 140 characters")
+	@NotBlank(message = "Address cannot be blank")
 	private String address;
 	
 	@Column(name="city")
 	@ApiModelProperty(notes = "City of the Merchant", name = "city", required = true, example = "Markus")
 	@Pattern(regexp = "^[-a-zA-Z0-9,]{1,25}$", message = "City should have length between 1 and 25 characters")
+	@NotBlank(message = "City cannot be blank")
 	private String city;
 	
 	@Column(name="postal_code")
 	@ApiModelProperty(notes = "Postal_code of the Merchant", name = "postal_code", required = true, example = "00119")
 	@Pattern(regexp="[\\d]{1,5}", message = "Postal Code should have length between 1 and 5 numeric")
+	@NotBlank(message = "Postal code cannot be blank")
 	private String postal_code;
 	
 	@Column(name="phone")
 	@ApiModelProperty(notes = "Phone of the Teknisi", name = "phone", required = true, example = "08194455001")
 	@Pattern(regexp="[\\d]{1,13}", message = "NIK should have length between 1 and 13 numeric")
+	@NotBlank(message = "Phone cannot be blank")
 	private String phone;
 	
 	@Column(name="pic")
 	@ApiModelProperty(notes = "PIC of the Merchant", name = "pic", required = true, example = "Devin")
 	@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters")
+	@NotBlank(message = "Person in charge cannot be blank")
 	private String person_in_charge;
 	
 	@Column(name="teknisi_id")
 	@ApiModelProperty(notes = "PIC of the Merchant", name = "teknisi_id", required = true, example = "100")
 	@Max(value = 1000, message = "ID should not be greater than 1000")
+	@NotNull(message = "Teknisi ID cannot be null")
 	private int teknisi_id;
 	
 	@Column(name="created_date")
@@ -88,14 +97,14 @@ public class Request {
 	}
 
 	public Request(
-			@Pattern(regexp = "^[A-Za-z0-9]{1,10}$", message = "Request ID should have length between 1 and 10 Alphanumeric characters") String request_id,
-			@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "Name should have length between 1 and 50 characters") String merchant_name,
-			@Pattern(regexp = "^[-a-zA-Z0-9,]{5,140}$", message = "Address should have length between 5 and 140 characters") String address,
-			@Pattern(regexp = "^[-a-zA-Z0-9,]{1,25}$", message = "City should have length between 1 and 25 characters") String city,
-			@Pattern(regexp = "[\\d]{1,5}", message = "Postal Code should have length between 1 and 5 numeric") String postal_code,
-			@Pattern(regexp = "[\\d]{1,13}", message = "NIK should have length between 1 and 13 numeric") String phone,
-			@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters") String person_in_charge,
-			@Max(value = 1000, message = "ID should not be greater than 1000") int teknisi_id) {
+			@Pattern(regexp = "^[A-Za-z0-9]{1,10}$", message = "Request ID should have length between 1 and 10 Alphanumeric characters") @NotBlank(message = "Request ID cannot be blank") String request_id,
+			@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "Name should have length between 1 and 50 characters") @NotBlank(message = "Merchant name cannot be blank") String merchant_name,
+			@Pattern(regexp = "^[-a-zA-Z0-9,]{5,140}$", message = "Address should have length between 5 and 140 characters") @NotBlank(message = "Address cannot be blank") String address,
+			@Pattern(regexp = "^[-a-zA-Z0-9,]{1,25}$", message = "City should have length between 1 and 25 characters") @NotBlank(message = "City cannot be blank") String city,
+			@Pattern(regexp = "[\\d]{1,5}", message = "Postal Code should have length between 1 and 5 numeric") @NotBlank(message = "Postal code cannot be blank") String postal_code,
+			@Pattern(regexp = "[\\d]{1,13}", message = "NIK should have length between 1 and 13 numeric") @NotBlank(message = "Phone cannot be blank") String phone,
+			@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters") @NotBlank(message = "Person in charge cannot be blank") String person_in_charge,
+			@Max(value = 1000, message = "ID should not be greater than 1000") @NotNull(message = "Teknisi ID cannot be null") int teknisi_id) {
 		super();
 		this.request_id = request_id;
 		this.merchant_name = merchant_name;
@@ -106,6 +115,7 @@ public class Request {
 		this.person_in_charge = person_in_charge;
 		this.teknisi_id = teknisi_id;
 	}
+
 
 	public String getRequest_id() {
 		return request_id;

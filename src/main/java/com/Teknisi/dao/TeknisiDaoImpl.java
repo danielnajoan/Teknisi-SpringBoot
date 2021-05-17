@@ -38,7 +38,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				+ "tek.created_date as teknisiCreatedDate, tek.created_by as teknisiCreatedBy, tek.update_date as teknisiUpdateDate, tek.update_by as teknisiUpdateBy, "
 				+ "req.request_id as requestID, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
 				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy from teknisi tek "
-				+ "left join request req on req.teknisi_id = tek.id";
+				+ "left join request req on req.teknisi_id = tek.id order by tek.id asc";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Teknisi> teknisiList = new ArrayList<Teknisi>();
 
@@ -89,7 +89,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				+ "tek.created_date as teknisiCreatedDate, tek.created_by as teknisiCreatedBy, tek.update_date as teknisiUpdateDate, tek.update_by as teknisiUpdateBy, "
 				+ "req.request_id as requestID, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
 				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy from teknisi tek "
-				+ "left join request req on req.teknisi_id = tek.id "
+				+ "left join request req on req.teknisi_id = tek.id order by request_id asc"
 				+ "where tek.id = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Teknisi> teknisiList = new ArrayList<Teknisi>();
