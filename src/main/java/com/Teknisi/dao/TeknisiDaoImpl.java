@@ -82,7 +82,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 			request.setCreated_by(String.valueOf(teknisiColumn.get("requestCreatedBy")));
 			request.setUpdate_date((Date)(teknisiColumn.get("requestUpdateDate")));
 			request.setUpdate_by(String.valueOf(teknisiColumn.get("requestUpdateBy")));
-//			teknisiPhoto.setId(Long.parseLong(teknisiColumn.get("tekPhotoID").toString()));
+			teknisiPhoto.setId(Long.parseLong(teknisiColumn.get("tekPhotoID").toString()));
 			teknisiPhoto.setFile_type(String.valueOf(teknisiColumn.get("tekPhotoFile")));
 			teknisiPhoto.setName(String.valueOf(teknisiColumn.get("tekPhotoName")));
 			teknisiPhoto.setImages(String.valueOf(teknisiColumn.get("tekPhotoImages")));
