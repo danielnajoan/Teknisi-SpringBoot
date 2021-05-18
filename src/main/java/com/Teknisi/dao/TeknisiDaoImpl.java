@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import com.Teknisi.model.Request;
 import com.Teknisi.model.Teknisi;
+import com.Teknisi.model.TeknisiPhoto;
 
 @Repository
 public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
@@ -37,8 +38,13 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				+ "tek.postal_code as teknisiPostalCode, tek.last_login as teknisiLastLogin, tek.longitude as teknisiLongitude, tek.latitude as teknisiLatitude, "
 				+ "tek.created_date as teknisiCreatedDate, tek.created_by as teknisiCreatedBy, tek.update_date as teknisiUpdateDate, tek.update_by as teknisiUpdateBy, "
 				+ "req.request_id as requestID, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
-				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy from teknisi tek "
-				+ "left join request req on req.teknisi_id = tek.id order by tek.id asc";
+				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy, "
+				+ "tekPhoto.id as tekPhotoID, tekPhoto.teknisi_id as tekPhotoTekID, tekPhoto.file_type as tekPhotoFile, tekPhoto.name as tekPhotoName, "
+				+ "tekPhoto.images as tekPhotoImages, tekPhoto.created_date as tekPhotoCreatedDate, tekPhoto.created_by as tekPhotoCreatedBy, tekPhoto.update_date as tekPhotoUpdateDate, tekPhoto.update_by as tekPhotoUpdateBy "
+				+ "from teknisi tek "
+				+ "left join request req on req.teknisi_id = tek.id "
+				+ "left join teknisi_photo tekPhoto on tekPhoto.teknisi_id = tek.id "
+				+ "order by tek.id asc";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Teknisi> teknisiList = new ArrayList<Teknisi>();
 
@@ -48,6 +54,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 			Teknisi teknisi = new Teknisi();
 			List<Request> listRequest = new ArrayList<Request>();
 			Request request = new Request();
+			TeknisiPhoto teknisiPhoto = new TeknisiPhoto();
 			teknisi.setId(Long.parseLong(teknisiColumn.get("teknisiID").toString()));
 			teknisi.setPhone(String.valueOf(teknisiColumn.get("teknisiPhone")));
 			teknisi.setName(String.valueOf(teknisiColumn.get("teknisiName")));
@@ -75,8 +82,17 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 			request.setCreated_by(String.valueOf(teknisiColumn.get("requestCreatedBy")));
 			request.setUpdate_date((Date)(teknisiColumn.get("requestUpdateDate")));
 			request.setUpdate_by(String.valueOf(teknisiColumn.get("requestUpdateBy")));
+//			teknisiPhoto.setId(Long.parseLong(teknisiColumn.get("tekPhotoID").toString()));
+			teknisiPhoto.setFile_type(String.valueOf(teknisiColumn.get("tekPhotoFile")));
+			teknisiPhoto.setName(String.valueOf(teknisiColumn.get("tekPhotoName")));
+			teknisiPhoto.setImages(String.valueOf(teknisiColumn.get("tekPhotoImages")));
+			teknisiPhoto.setCreated_date((Date)(teknisiColumn.get("tekPhotoCreatedDate")));
+			teknisiPhoto.setCreated_by(String.valueOf(teknisiColumn.get("tekPhotoCreatedBy")));
+			teknisiPhoto.setUpdate_date((Date)(teknisiColumn.get("tekPhotoUpdateDate")));
+			teknisiPhoto.setUpdate_by(String.valueOf(teknisiColumn.get("tekPhotoUpdateBy")));
 			listRequest.add(request);
 			teknisi.setRequest(listRequest);
+			teknisi.setTeknisiPhoto(teknisiPhoto);
 			teknisiList.add(teknisi);
 		}
 		return teknisiList;
