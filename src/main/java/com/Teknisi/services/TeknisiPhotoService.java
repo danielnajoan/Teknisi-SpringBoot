@@ -1,14 +1,14 @@
-package com.Teknisi.dao;
+package com.Teknisi.services;
 
 import java.util.List;
 
 import com.Teknisi.model.TeknisiPhoto;
 
-public interface TeknisiPhotoDao {
-	List<TeknisiPhoto> getAllTeknisiPhoto();
-	public TeknisiPhoto findTeknisiPhotoById(Long id);
+public interface TeknisiPhotoService {
+	List<TeknisiPhoto> showAllTeknisiPhoto();
+	TeknisiPhoto getTeknisiPhotoById(Long id);
 	void insertTeknisiPhoto(TeknisiPhoto teknisiPhoto, String fileName, String fileType, String base64);
-	int deleteTeknisiPhotoById(Long id);
+	void deleteTeknisiPhotoById(Long id);
 	void updateTeknisiPhoto(TeknisiPhoto teknisiPhoto);
 	boolean isTeknisiPhotoIdExists(Long id);
 }

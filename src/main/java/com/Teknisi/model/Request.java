@@ -2,14 +2,6 @@ package com.Teknisi.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,76 +11,60 @@ import javax.validation.constraints.Pattern;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity
-@Table(name = "request")
 @ApiModel(description = "Request Model")
 public class Request {
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="request_id")
 	@NotBlank(message = "Request ID cannot be blank")
 	@Pattern(regexp = "^[A-Za-z0-9]{1,10}$", message = "Request ID should have length between 1 and 10 Alphanumeric characters")
 	@ApiModelProperty(notes = "Request ID of the Merchant", name = "request_id", required = true, example = "100")
 	private String request_id;
 	
-	@Column(name="merchant_name ")
 	@NotBlank(message = "Merchant name cannot be blank")
 	@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "Name should have length between 1 and 50 characters")
 	@ApiModelProperty(notes = "Name of the Merchant", name = "merchant_name", required = true, example = "Apolos")
 	private String merchant_name;
 	
-	@Column(name="address")
 	@NotBlank(message = "Address cannot be blank")
 	@Pattern(regexp = "^[-a-zA-Z0-9,]{5,140}$", message = "Address should have length between 5 and 140 characters")
 	@ApiModelProperty(notes = "address of the Merchant", name = "address", required = true, example = "Jalan bunga matahari IX, Bekasi")
 	private String address;
 	
-	@Column(name="city")
 	@NotBlank(message = "City cannot be blank")
 	@Pattern(regexp = "^[-a-zA-Z0-9,]{1,25}$", message = "City should have length between 1 and 25 characters")
 	@ApiModelProperty(notes = "City of the Merchant", name = "city", required = true, example = "Markus")
 	private String city;
 	
-	@Column(name="postal_code")
 	@NotBlank(message = "Postal code cannot be blank")
 	@Pattern(regexp="[\\d]{1,5}", message = "Postal Code should have length between 1 and 5 numeric")
 	@ApiModelProperty(notes = "Postal_code of the Merchant", name = "postal_code", required = true, example = "00119")
 	private String postal_code;
 	
-	@Column(name="phone")
 	@NotBlank(message = "Phone cannot be blank")
 	@Pattern(regexp="[\\d]{1,13}", message = "NIK should have length between 1 and 13 numeric")
 	@ApiModelProperty(notes = "Phone of the Teknisi", name = "phone", required = true, example = "08194455001")
 	private String phone;
 	
-	@Column(name="pic")
 	@NotBlank(message = "Person in charge cannot be blank")
 	@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters")
 	@ApiModelProperty(notes = "PIC of the Merchant", name = "pic", required = true, example = "Devin")
 	private String person_in_charge;
 	
-	@Column(name="teknisi_id")
 	@NotNull(message = "Teknisi ID cannot be null")
 	@Max(value = 1000, message = "ID should not be greater than 1000")
 	@ApiModelProperty(notes = "PIC of the Merchant", name = "teknisi_id", required = true, example = "100")
 	private int teknisi_id;
 	
-	@Column(name="created_date")
 	@PastOrPresent
 	@ApiModelProperty(hidden = true)
 	private Date created_date;
 	
-    @Column(name="created_by")
     @ApiModelProperty(hidden = true)
 	private String created_by;
 	
-	@Column(name="update_date")
 	@PastOrPresent
 	@ApiModelProperty(hidden = true)
 	private Date update_date;
 	
-    @Column(name="update_by")
     @ApiModelProperty(hidden = true)
 	private String update_by;
 	

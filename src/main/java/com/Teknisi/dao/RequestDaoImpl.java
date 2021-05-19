@@ -36,22 +36,22 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Request> requestList = new ArrayList<Request>();
 
-		List<Map<String,Object>> requestRows = jdbcTemplate.queryForList(query);
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(query);
 
-		for(Map<String,Object> requestColumn : requestRows){
+		for(Map<String,Object> column : rows){
 			Request request = new Request();
-			request.setRequest_id(String.valueOf(requestColumn.get("request_id")));
-			request.setMerchant_name(String.valueOf(requestColumn.get("merchant_name")));
-			request.setAddress(String.valueOf(requestColumn.get("address")));
-			request.setCity(String.valueOf(requestColumn.get("city")));
-			request.setPostal_code(String.valueOf(requestColumn.get("postal_code")));
-			request.setPhone(String.valueOf(requestColumn.get("phone")));
-			request.setPerson_in_charge(String.valueOf(requestColumn.get("pic")));
-			request.setTeknisi_id(Integer.parseInt(requestColumn.get("teknisi_id").toString()));
-			request.setCreated_date((Date)(requestColumn.get("created_date")));
-			request.setCreated_by(String.valueOf(requestColumn.get("created_by")));
-			request.setUpdate_date((Date)(requestColumn.get("update_date")));
-			request.setUpdate_by(String.valueOf(requestColumn.get("update_by")));
+			request.setRequest_id(String.valueOf(column.get("request_id")));
+			request.setMerchant_name(String.valueOf(column.get("merchant_name")));
+			request.setAddress(String.valueOf(column.get("address")));
+			request.setCity(String.valueOf(column.get("city")));
+			request.setPostal_code(String.valueOf(column.get("postal_code")));
+			request.setPhone(String.valueOf(column.get("phone")));
+			request.setPerson_in_charge(String.valueOf(column.get("pic")));
+			request.setTeknisi_id(Integer.parseInt(column.get("teknisi_id").toString()));
+			request.setCreated_date((Date)(column.get("created_date")));
+			request.setCreated_by(String.valueOf(column.get("created_by")));
+			request.setUpdate_date((Date)(column.get("update_date")));
+			request.setUpdate_by(String.valueOf(column.get("update_by")));
 			requestList.add(request);
 		}
 		return requestList;
@@ -120,7 +120,6 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
      			request.getPerson_in_charge(), request.getTeknisi_id(),
      			update_date, update_by, request.getRequest_id()
      		});
-		
 	}
 	@Override
 	public boolean isRequestIdExists(String id) {

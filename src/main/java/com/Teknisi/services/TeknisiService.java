@@ -6,9 +6,9 @@ import com.Teknisi.model.Teknisi;
 
 public interface TeknisiService {
 	List<Teknisi> showAllTeknisi();
-	List<Teknisi> getTeknisiById(long id);
+	List<Teknisi> getTeknisiById(Long id);
 	void insertTeknisi(Teknisi teknisi);
 	void deleteTeknisiById(Long id);
 	void updateTeknisi(Teknisi teknisi);
-	boolean isTeknisiIdExists(long id);
+	boolean isTeknisiIdExists(Long id);
 }

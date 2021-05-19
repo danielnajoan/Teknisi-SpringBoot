@@ -3,15 +3,6 @@ package com.Teknisi.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,57 +12,43 @@ import javax.validation.constraints.Pattern;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity
-@Table(name = "teknisi_photo")
+
 @ApiModel(description = "Teknisi Photo Model")
 public class TeknisiPhoto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(notes = "ID of the Teknisi Photo", name = "id", required = true, example = "100")
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
 	@NotNull(message = "Teknisi Photo ID cannot be blank")
+	@Max(value = 1000, message = "ID should not be greater than 1000")
 	private Long id;
 	
-	
-	@Column(name = "teknisi_id")
-    @ApiModelProperty(hidden = true)
+
+	@ApiModelProperty(notes = "ID of the Teknisi", name = "teknisi_id", required = true, example = "100")
+	@NotNull(message = "Teknisi ID cannot be null")
+	@Max(value = 1000, message = "ID should not be greater than 1000")
 	private int teknisi_id;
 	
-	@Column(name="file_type")
-	@NotBlank(message = "Person in charge cannot be blank")
-	@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters")
-	@ApiModelProperty(notes = "File type of the ", name = "file_type", required = true, example = "")
+	@ApiModelProperty(hidden = true)
 	private String file_type;
 	
-	@ApiModelProperty(notes = "Name of the Teknisi", name = "name", required = true, example = "Dante")
-	@Column(name="name")
-	@NotBlank(message = "Name cannot be blank")
-	@Pattern(regexp = "^[A-Za-z0-9]{1,50}+$", message = "Name should have length between 1 and 50 characters")
+	@ApiModelProperty(hidden = true)
 	private String name;
 	
-	@ApiModelProperty(notes = "Images of the Teknisi", name = "images", required = true, example = "Dante.jpg")
-	@Column(name="images")
-	@NotBlank(message = "Images cannot be blank")
+	@ApiModelProperty(hidden = true)
 	private String images;
 	
-	@Column(name="created_date")
 	@PastOrPresent
 	@ApiModelProperty(hidden = true)
 	private Date created_date;
 	
-    @Column(name="created_by")
     @ApiModelProperty(hidden = true)
 	private String created_by;
 	
-	@Column(name="update_date")
 	@PastOrPresent
 	@ApiModelProperty(hidden = true)
 	private Date update_date;
 	
-    @Column(name="update_by")
     @ApiModelProperty(hidden = true)
 	private String update_by;
     
@@ -79,9 +56,11 @@ public class TeknisiPhoto implements Serializable{
     	
     }
 
-	public TeknisiPhoto(@NotNull(message = "Teknisi Photo ID cannot be blank") Long id, int teknisi_id,
-			@NotBlank(message = "Person in charge cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "PIC should have length between 1 and 50 characters") String file_type,
-			@NotBlank(message = "Name cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}+$", message = "Name should have length between 1 and 50 characters") String name,
+	public TeknisiPhoto(
+			@NotNull(message = "Teknisi Photo ID cannot be blank") @Max(value = 1000, message = "ID should not be greater than 1000") Long id,
+			@NotNull(message = "Teknisi ID cannot be null") @Max(value = 1000, message = "ID should not be greater than 1000") int teknisi_id,
+			@NotBlank(message = "File type cannot be blank") String file_type,
+			@NotBlank(message = "Name cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}+$", message = "Photo name should have length between 1 and 50 characters") String name,
 			@NotBlank(message = "Images cannot be blank") String images) {
 		super();
 		this.id = id;

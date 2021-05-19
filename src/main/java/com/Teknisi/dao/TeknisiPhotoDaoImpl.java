@@ -1,13 +1,23 @@
 package com.Teknisi.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+
+
+import com.Teknisi.model.TeknisiPhoto;
 
 @Repository
 public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoDao{
@@ -21,39 +31,100 @@ public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoD
     }
     
 	@Override
-	public List<com.Teknisi.model.TeknisiPhoto> getAllTeknisiPhoto() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TeknisiPhoto> getAllTeknisiPhoto() {
+		String query = 
+				"select * from teknisi_photo order by id asc";
+			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+			List<TeknisiPhoto> teknisiPhotoList = new ArrayList<TeknisiPhoto>();
+
+			List<Map<String,Object>> rows = jdbcTemplate.queryForList(query);
+
+			for(Map<String,Object> column : rows){
+				TeknisiPhoto teknisiPhoto = new TeknisiPhoto();
+				teknisiPhoto.setId(Long.parseLong(column.get("id").toString()));
+				teknisiPhoto.setTeknisi_id(Integer.parseInt(column.get("teknisi_id").toString()));
+				teknisiPhoto.setFile_type(String.valueOf(column.get("file_type")));
+				teknisiPhoto.setName(String.valueOf(column.get("name")));
+				teknisiPhoto.setImages(String.valueOf(column.get("images")));
+				teknisiPhoto.setCreated_date((Date)(column.get("created_date")));
+				teknisiPhoto.setCreated_by(String.valueOf(column.get("created_by")));
+				teknisiPhoto.setUpdate_date((Date)(column.get("update_date")));
+				teknisiPhoto.setUpdate_by(String.valueOf(column.get("update_by")));
+				teknisiPhotoList.add(teknisiPhoto);
+			}
+			return teknisiPhotoList;
 	}
 
 	@Override
-	public List<com.Teknisi.model.TeknisiPhoto> findTeknisiPhotoById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public TeknisiPhoto findTeknisiPhotoById(Long id) {
+		String query = "select * from teknisi_photo where id = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		//using RowMapper anonymous class, we can create a separate RowMapper for reuse
+		@SuppressWarnings("deprecation")
+		TeknisiPhoto teknisiPhoto = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<TeknisiPhoto>(){
+			@Override
+			public TeknisiPhoto mapRow(ResultSet rs, int rowNum)
+					throws SQLException {
+				TeknisiPhoto teknisiPhoto = new TeknisiPhoto();
+				teknisiPhoto.setId(rs.getLong("id"));
+				teknisiPhoto.setTeknisi_id(rs.getInt("teknisi_id"));
+				teknisiPhoto.setFile_type(rs.getString("file_type"));
+				teknisiPhoto.setName(rs.getString("name"));
+				teknisiPhoto.setImages(rs.getString("images"));
+				teknisiPhoto.setCreated_date(rs.getDate("created_date"));
+				teknisiPhoto.setCreated_by(rs.getString("created_by"));
+				teknisiPhoto.setUpdate_date(rs.getDate("update_date"));
+				teknisiPhoto.setUpdate_by(rs.getString("update_by"));
+				return teknisiPhoto;
+			}});
+		return teknisiPhoto;
 	}
 
 	@Override
-	public void TeknisiPhoto(com.Teknisi.model.TeknisiPhoto teknisiPhoto) {
-		// TODO Auto-generated method stub
+	public void insertTeknisiPhoto(TeknisiPhoto teknisiPhoto, String fileName, String fileType, String base64) {
+		String query = 
+	    		 "INSERT INTO teknisi_photo("
+	    		 + "id, teknisi_id, file_type, name, images, "
+	    		 + "created_date, created_by, update_date, update_by) "
+	    		 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
+	    Date created_date = new Date();
+		String created_by = "Teknisi Manager";
+		
+	     getJdbcTemplate()
+	     	.update(query, new Object[]{
+	     			teknisiPhoto.getId(), teknisiPhoto.getTeknisi_id(), fileType,
+	     			fileName, base64, created_date, created_by, 
+	     			teknisiPhoto.getUpdate_date(), teknisiPhoto.getUpdate_by()
+	     		});
 		
 	}
+
 
 	@Override
 	public int deleteTeknisiPhotoById(Long id) {
-		// TODO Auto-generated method stub
-		return 0;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate.update("delete from teknisi_photo where id = ?",id);
 	}
 
 	@Override
-	public void updateTeknisiPhoto(com.Teknisi.model.TeknisiPhoto teknisi) {
-		// TODO Auto-generated method stub
-		
+	public void updateTeknisiPhoto(TeknisiPhoto teknisiPhoto) {
+		String query = "update teknisi_photo set teknisi_id=?, file_type=?, name=?, images=?, "
+				+ "update_date=?, update_by=? where id = ?";
+		Date update_date = new Date();
+		String update_by = "Database Admin";
+		getJdbcTemplate()
+     	.update(query, new Object[]{
+     			teknisiPhoto.getTeknisi_id(), teknisiPhoto.getFile_type(), teknisiPhoto.getName(), 
+     			teknisiPhoto.getImages(), update_date, update_by, teknisiPhoto.getId()
+     		});
 	}
 
 	@Override
-	public boolean isTeknisiPhotoIdExists(long id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isTeknisiPhotoIdExists(Long id) {
+		String sql = "select count(*) from teknisi_photo where id= ? limit 1";
+	    @SuppressWarnings("deprecation")
+		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id }, Long.class);
+		return count > 0;
 	}
 
 }
