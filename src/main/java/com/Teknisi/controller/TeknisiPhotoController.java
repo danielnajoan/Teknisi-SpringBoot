@@ -86,12 +86,12 @@ public class TeknisiPhotoController {
 		String base64 = imagesUtils.convertImagesBase64(fileByte, fileType);
 		Long id = teknisiPhoto.getId();
 		long teknisi_id = teknisiPhoto.getTeknisi_id();
-		if(teknisiPhotoService.isTeknisiPhotoIdExists(id) != true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null
+		if(teknisiPhotoService.isTeknisiPhotoIdOrTeknisiIdExists(id, teknisi_id) != true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null
 				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false && fileType.isBlank() != false)) {
 			teknisiPhotoService.insertTeknisiPhoto(teknisiPhoto, fileName, fileType, base64);
 			return new ResponseEntity<>("TeknisiPhoto Created Successsfully", HttpStatus.OK);
-		}else if(teknisiPhotoService.isTeknisiPhotoIdExists(id) == true) {
-			return new ResponseEntity<>("TeknisiPhoto ID already exist", HttpStatus.BAD_REQUEST);
+		}else if(teknisiPhotoService.isTeknisiPhotoIdOrTeknisiIdExists(id, teknisi_id) == true) {
+			return new ResponseEntity<>("TeknisiPhoto ID already exist and Teknisi ID already exist", HttpStatus.BAD_REQUEST);
 		}else if(teknisiService.isTeknisiIdExists(teknisi_id) != true){
 			return new ResponseEntity<>("Teknisi ID is not exist", HttpStatus.BAD_REQUEST);
 		}else if (teknisiPhoto.getId() == null || teknisiPhoto.getTeknisi_id() == 0) {
@@ -109,11 +109,16 @@ public class TeknisiPhotoController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/teknisiPhoto/update", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateTeknisiPhoto(@Valid @ModelAttribute TeknisiPhoto teknisiPhoto) {
+	public ResponseEntity<Object> updateTeknisiPhoto(@Valid @ModelAttribute TeknisiPhoto teknisiPhoto,  @RequestPart MultipartFile file) throws Exception{
+		String fileName = file.getOriginalFilename().split("\\.")[0];
+		String fileType = file.getOriginalFilename().split("\\.")[1];
+		byte[] fileByte =  file.getBytes();
+		String base64 = imagesUtils.convertImagesBase64(fileByte, fileType);
 		Long id = teknisiPhoto.getId();
 		long teknisi_id = teknisiPhoto.getTeknisi_id();
-		if(teknisiPhotoService.isTeknisiPhotoIdExists(id) == true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null) {
-			teknisiPhotoService.updateTeknisiPhoto(teknisiPhoto);
+		if(teknisiPhotoService.isTeknisiPhotoIdAndTeknisiIdExists(id, teknisi_id) == true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null
+				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false && fileType.isBlank() != false)) {
+			teknisiPhotoService.updateTeknisiPhoto(teknisiPhoto, fileName, fileType, base64);
 			return new ResponseEntity<>("TeknisiPhoto Updated Successsfully", HttpStatus.OK);
 		}else if(teknisiPhotoService.isTeknisiPhotoIdExists(id) != true) {
 			return new ResponseEntity<>("TeknisiPhoto ID is not exist", HttpStatus.BAD_REQUEST);

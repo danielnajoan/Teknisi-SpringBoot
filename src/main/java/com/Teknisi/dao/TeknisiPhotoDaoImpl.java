@@ -107,15 +107,15 @@ public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoD
 	}
 
 	@Override
-	public void updateTeknisiPhoto(TeknisiPhoto teknisiPhoto) {
+	public void updateTeknisiPhoto(TeknisiPhoto teknisiPhoto, String fileName, String fileType, String base64) {
 		String query = "update teknisi_photo set teknisi_id=?, file_type=?, name=?, images=?, "
 				+ "update_date=?, update_by=? where id = ?";
 		Date update_date = new Date();
 		String update_by = "Database Admin";
 		getJdbcTemplate()
      	.update(query, new Object[]{
-     			teknisiPhoto.getTeknisi_id(), teknisiPhoto.getFile_type(), teknisiPhoto.getName(), 
-     			teknisiPhoto.getImages(), update_date, update_by, teknisiPhoto.getId()
+     			teknisiPhoto.getTeknisi_id(), fileType, fileName, 
+     			base64, update_date, update_by, teknisiPhoto.getId()
      		});
 	}
 
@@ -123,8 +123,23 @@ public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoD
 	public boolean isTeknisiPhotoIdExists(Long id) {
 		String sql = "select count(*) from teknisi_photo where id= ? limit 1";
 	    @SuppressWarnings("deprecation")
-		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id }, Long.class);
+		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id}, Long.class);
 		return count > 0;
 	}
 
+	@Override
+	public boolean isTeknisiPhotoIdAndTeknisiIdExists(Long id, long teknisi_id) {
+		String sql = "select count(*) from teknisi_photo where id= ? and teknisi_id = ? limit 1";
+	    @SuppressWarnings("deprecation")
+		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id, teknisi_id }, Long.class);
+		return count > 0;
+	}
+	
+	@Override
+	public boolean isTeknisiPhotoIdOrTeknisiIdExists(Long id, long teknisi_id) {
+		String sql = "select count(*) from teknisi_photo where id= ? or teknisi_id = ? limit 1";
+	    @SuppressWarnings("deprecation")
+		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id, teknisi_id }, Long.class);
+		return count > 0;
+	}
 }

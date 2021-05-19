@@ -34,13 +34,22 @@ public class TeknisiPhotoServiceImpl implements TeknisiPhotoService{
 	}
 
 	@Override
-	public void updateTeknisiPhoto(TeknisiPhoto teknisiPhoto) {
-		teknisiPhotoDao.updateTeknisiPhoto(teknisiPhoto);
+	public void updateTeknisiPhoto(TeknisiPhoto teknisiPhoto, String fileName, String fileType, String base64) {
+		teknisiPhotoDao.updateTeknisiPhoto(teknisiPhoto, fileName, fileType, base64);
 	}
 
 	@Override
 	public boolean isTeknisiPhotoIdExists(Long id) {
 		return teknisiPhotoDao.isTeknisiPhotoIdExists(id);
 	}
-
+	
+	@Override
+	public boolean isTeknisiPhotoIdAndTeknisiIdExists(Long id, long teknisi_id) {
+		return teknisiPhotoDao.isTeknisiPhotoIdAndTeknisiIdExists(id, teknisi_id);
+	}
+	
+	@Override
+	public boolean isTeknisiPhotoIdOrTeknisiIdExists(Long id, long teknisi_id) {
+		return teknisiPhotoDao.isTeknisiPhotoIdOrTeknisiIdExists(id, teknisi_id);
+	}
 }
