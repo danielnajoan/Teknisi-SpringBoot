@@ -85,7 +85,7 @@ public class TeknisiPhotoController {
 		byte[] fileByte =  file.getBytes();
 		String base64 = imagesUtils.convertImagesBase64(fileByte, fileType);
 		Long id = teknisiPhoto.getId();
-		long teknisi_id = teknisiPhoto.getTeknisi_id();
+		Long teknisi_id = teknisiPhoto.getTeknisi_id();
 		if(teknisiPhotoService.isTeknisiPhotoIdOrTeknisiIdExists(id, teknisi_id) != true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null
 				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false && fileType.isBlank() != false)) {
 			teknisiPhotoService.insertTeknisiPhoto(teknisiPhoto, fileName, fileType, base64);
@@ -115,7 +115,7 @@ public class TeknisiPhotoController {
 		byte[] fileByte =  file.getBytes();
 		String base64 = imagesUtils.convertImagesBase64(fileByte, fileType);
 		Long id = teknisiPhoto.getId();
-		long teknisi_id = teknisiPhoto.getTeknisi_id();
+		Long teknisi_id = teknisiPhoto.getTeknisi_id();
 		if(teknisiPhotoService.isTeknisiPhotoIdAndTeknisiIdExists(id, teknisi_id) == true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null
 				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false && fileType.isBlank() != false)) {
 			teknisiPhotoService.updateTeknisiPhoto(teknisiPhoto, fileName, fileType, base64);

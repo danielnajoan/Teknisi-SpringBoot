@@ -44,12 +44,12 @@ public class TeknisiPhotoServiceImpl implements TeknisiPhotoService{
 	}
 	
 	@Override
-	public boolean isTeknisiPhotoIdAndTeknisiIdExists(Long id, long teknisi_id) {
+	public boolean isTeknisiPhotoIdAndTeknisiIdExists(Long id, Long teknisi_id) {
 		return teknisiPhotoDao.isTeknisiPhotoIdAndTeknisiIdExists(id, teknisi_id);
 	}
 	
 	@Override
-	public boolean isTeknisiPhotoIdOrTeknisiIdExists(Long id, long teknisi_id) {
+	public boolean isTeknisiPhotoIdOrTeknisiIdExists(Long id, Long teknisi_id) {
 		return teknisiPhotoDao.isTeknisiPhotoIdOrTeknisiIdExists(id, teknisi_id);
 	}
 }

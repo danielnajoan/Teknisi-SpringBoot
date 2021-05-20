@@ -27,7 +27,7 @@ public class TeknisiPhoto implements Serializable{
 	@ApiModelProperty(notes = "ID of the Teknisi", name = "teknisi_id", required = true, example = "100")
 	@NotNull(message = "Teknisi ID cannot be null")
 	@Max(value = 1000, message = "ID should not be greater than 1000")
-	private int teknisi_id;
+	private Long teknisi_id;
 	
 	@ApiModelProperty(hidden = true)
 	private String file_type;
@@ -58,10 +58,8 @@ public class TeknisiPhoto implements Serializable{
 
 	public TeknisiPhoto(
 			@NotNull(message = "Teknisi Photo ID cannot be blank") @Max(value = 1000, message = "ID should not be greater than 1000") Long id,
-			@NotNull(message = "Teknisi ID cannot be null") @Max(value = 1000, message = "ID should not be greater than 1000") int teknisi_id,
-			@NotBlank(message = "File type cannot be blank") String file_type,
-			@NotBlank(message = "Name cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}+$", message = "Photo name should have length between 1 and 50 characters") String name,
-			@NotBlank(message = "Images cannot be blank") String images) {
+			@NotNull(message = "Teknisi ID cannot be null") @Max(value = 1000, message = "ID should not be greater than 1000") Long teknisi_id,
+			String file_type, String name, String images) {
 		super();
 		this.id = id;
 		this.teknisi_id = teknisi_id;
@@ -78,11 +76,11 @@ public class TeknisiPhoto implements Serializable{
 		this.id = id;
 	}
 
-	public int getTeknisi_id() {
+	public Long getTeknisi_id() {
 		return teknisi_id;
 	}
 
-	public void setTeknisi_id(int teknisi_id) {
+	public void setTeknisi_id(Long teknisi_id) {
 		this.teknisi_id = teknisi_id;
 	}
 

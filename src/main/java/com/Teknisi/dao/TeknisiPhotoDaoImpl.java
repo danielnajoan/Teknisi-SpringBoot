@@ -42,7 +42,7 @@ public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoD
 			for(Map<String,Object> column : rows){
 				TeknisiPhoto teknisiPhoto = new TeknisiPhoto();
 				teknisiPhoto.setId(Long.parseLong(column.get("id").toString()));
-				teknisiPhoto.setTeknisi_id(Integer.parseInt(column.get("teknisi_id").toString()));
+				teknisiPhoto.setTeknisi_id(Long.parseLong(column.get("teknisi_id").toString()));
 				teknisiPhoto.setFile_type(String.valueOf(column.get("file_type")));
 				teknisiPhoto.setName(String.valueOf(column.get("name")));
 				teknisiPhoto.setImages(String.valueOf(column.get("images")));
@@ -67,7 +67,7 @@ public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoD
 					throws SQLException {
 				TeknisiPhoto teknisiPhoto = new TeknisiPhoto();
 				teknisiPhoto.setId(rs.getLong("id"));
-				teknisiPhoto.setTeknisi_id(rs.getInt("teknisi_id"));
+				teknisiPhoto.setTeknisi_id(rs.getLong("teknisi_id"));
 				teknisiPhoto.setFile_type(rs.getString("file_type"));
 				teknisiPhoto.setName(rs.getString("name"));
 				teknisiPhoto.setImages(rs.getString("images"));
@@ -128,7 +128,7 @@ public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoD
 	}
 
 	@Override
-	public boolean isTeknisiPhotoIdAndTeknisiIdExists(Long id, long teknisi_id) {
+	public boolean isTeknisiPhotoIdAndTeknisiIdExists(Long id, Long teknisi_id) {
 		String sql = "select count(*) from teknisi_photo where id= ? and teknisi_id = ? limit 1";
 	    @SuppressWarnings("deprecation")
 		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id, teknisi_id }, Long.class);
@@ -136,7 +136,7 @@ public class TeknisiPhotoDaoImpl extends JdbcDaoSupport implements TeknisiPhotoD
 	}
 	
 	@Override
-	public boolean isTeknisiPhotoIdOrTeknisiIdExists(Long id, long teknisi_id) {
+	public boolean isTeknisiPhotoIdOrTeknisiIdExists(Long id, Long teknisi_id) {
 		String sql = "select count(*) from teknisi_photo where id= ? or teknisi_id = ? limit 1";
 	    @SuppressWarnings("deprecation")
 		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id, teknisi_id }, Long.class);

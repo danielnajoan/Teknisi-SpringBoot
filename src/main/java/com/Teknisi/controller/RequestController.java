@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -75,7 +75,7 @@ public class RequestController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/request/create", method = RequestMethod.POST)
-	public ResponseEntity<Object> createRequest(@Valid @ModelAttribute Request request) {
+	public ResponseEntity<Object> createRequest(@Valid @RequestBody Request request) {
 		String id = request.getRequest_id();
 		long teknisi_id = request.getTeknisi_id();
 		if(requestService.isRequestIdExists(id) != true && teknisiService.isTeknisiIdExists(teknisi_id) == true && request.getRequest_id() != null) {
@@ -100,7 +100,7 @@ public class RequestController {
 			@ApiResponse(code = 404, message = "Not Found")
 	})
 	@RequestMapping(value = "/request/update", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateRequest(@Valid @ModelAttribute Request request) {
+	public ResponseEntity<Object> updateRequest(@Valid @RequestBody Request request) {
 		String id = request.getRequest_id();
 		long teknisi_id = request.getTeknisi_id();
 		if(requestService.isRequestIdExists(id) == true && teknisiService.isTeknisiIdExists(teknisi_id) == true && request.getRequest_id() != null) {

@@ -32,9 +32,9 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 		String query = "select tek.id as teknisiID, tek.phone as teknisiPhone, tek.name as teknisiName, tek.nik as teknisiNIK, tek.address as teknisiAddress, tek.email as teknisiEmail, tek.city as teknisiCity, "
 				+ "tek.postal_code as teknisiPostalCode, tek.last_login as teknisiLastLogin, tek.longitude as teknisiLongitude, tek.latitude as teknisiLatitude, "
 				+ "tek.created_date as teknisiCreatedDate, tek.created_by as teknisiCreatedBy, tek.update_date as teknisiUpdateDate, tek.update_by as teknisiUpdateBy, "
-				+ "req.request_id as requestID, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
+				+ "req.request_id as requestID, req.teknisi_id as reqTeknisiId, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
 				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy, "
-				+ "tekPhoto.id as tekPhotoID, tekPhoto.teknisi_id as tekPhotoTekID, tekPhoto.file_type as tekPhotoFile, tekPhoto.name as tekPhotoName, "
+				+ "tekPhoto.id as tekPhotoID, tekPhoto.teknisi_id as tekPhotoTeknisiId, tekPhoto.file_type as tekPhotoFile, tekPhoto.name as tekPhotoName, "
 				+ "tekPhoto.images as tekPhotoImages, tekPhoto.created_date as tekPhotoCreatedDate, tekPhoto.created_by as tekPhotoCreatedBy, tekPhoto.update_date as tekPhotoUpdateDate, tekPhoto.update_by as tekPhotoUpdateBy "
 				+ "from teknisi tek "
 				+ "left join request req on req.teknisi_id = tek.id "
@@ -65,43 +65,47 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 			teknisi.setCreated_by(String.valueOf(column.get("teknisiCreatedBy")));
 			teknisi.setUpdate_date((Date)(column.get("teknisiUpdateDate")));
 			teknisi.setUpdate_by(String.valueOf(column.get("teknisiUpdateBy")));
-			request.setRequest_id(String.valueOf(column.get("requestID")));
-			request.setMerchant_name(String.valueOf(column.get("merchantName")));
-			request.setAddress(String.valueOf(column.get("requestAddress")));
-			request.setCity(String.valueOf(column.get("requestCity")));
-			request.setPostal_code(String.valueOf(column.get("requestPostalCode")));
-			request.setPhone(String.valueOf(column.get("requestPhone")));
-			request.setPerson_in_charge(String.valueOf(column.get("requestPIC")));
-			request.setTeknisi_id(Integer.valueOf(column.get("teknisiID").toString()));
-			request.setCreated_date((Date)(column.get("requestCreatedDate")));
-			request.setCreated_by(String.valueOf(column.get("requestCreatedBy")));
-			request.setUpdate_date((Date)(column.get("requestUpdateDate")));
-			request.setUpdate_by(String.valueOf(column.get("requestUpdateBy")));
-			teknisiPhoto.setId(column.get("tekPhotoID")==null?null:Long.parseLong(column.get("tekPhotoID").toString()));
-			teknisiPhoto.setTeknisi_id(Integer.parseInt(column.get("tekPhotoTekID").toString()));
-			teknisiPhoto.setFile_type(String.valueOf(column.get("tekPhotoFile")));
-			teknisiPhoto.setName(String.valueOf(column.get("tekPhotoName")));
-			teknisiPhoto.setImages(String.valueOf(column.get("tekPhotoImages")));
-			teknisiPhoto.setCreated_date((Date)(column.get("tekPhotoCreatedDate")));
-			teknisiPhoto.setCreated_by(String.valueOf(column.get("tekPhotoCreatedBy")));
-			teknisiPhoto.setUpdate_date((Date)(column.get("tekPhotoUpdateDate")));
-			teknisiPhoto.setUpdate_by(String.valueOf(column.get("tekPhotoUpdateBy")));
-			listRequest.add(request);
-			teknisi.setRequest(listRequest);
-			teknisi.setTeknisiPhoto(teknisiPhoto);
+			if(column.get("requestID")!=null) {
+				request.setRequest_id(String.valueOf(column.get("requestID")));
+				request.setMerchant_name(String.valueOf(column.get("merchantName")));
+				request.setAddress(String.valueOf(column.get("requestAddress")));
+				request.setCity(String.valueOf(column.get("requestCity")));
+				request.setPostal_code(String.valueOf(column.get("requestPostalCode")));
+				request.setPhone(String.valueOf(column.get("requestPhone")));
+				request.setPerson_in_charge(String.valueOf(column.get("requestPIC")));
+				request.setTeknisi_id(column.get("reqTeknisiId")==null?null:Long.parseLong(column.get("reqTeknisiId").toString()));
+				request.setCreated_date((Date)(column.get("requestCreatedDate")));
+				request.setCreated_by(String.valueOf(column.get("requestCreatedBy")));
+				request.setUpdate_date((Date)(column.get("requestUpdateDate")));
+				request.setUpdate_by(String.valueOf(column.get("requestUpdateBy")));
+				listRequest.add(request);
+				teknisi.setRequest(listRequest);
+			}
+			if(column.get("tekPhotoID")!=null) {
+				teknisiPhoto.setId(column.get("tekPhotoID")==null?null:Long.parseLong(column.get("tekPhotoID").toString()));
+				teknisiPhoto.setTeknisi_id(column.get("tekPhotoTeknisiId")==null?null:Long.parseLong(column.get("tekPhotoTeknisiId").toString()));
+				teknisiPhoto.setFile_type(String.valueOf(column.get("tekPhotoFile")));
+				teknisiPhoto.setName(String.valueOf(column.get("tekPhotoName")));
+				teknisiPhoto.setImages(String.valueOf(column.get("tekPhotoImages")));
+				teknisiPhoto.setCreated_date((Date)(column.get("tekPhotoCreatedDate")));
+				teknisiPhoto.setCreated_by(String.valueOf(column.get("tekPhotoCreatedBy")));
+				teknisiPhoto.setUpdate_date((Date)(column.get("tekPhotoUpdateDate")));
+				teknisiPhoto.setUpdate_by(String.valueOf(column.get("tekPhotoUpdateBy")));
+				teknisi.setTeknisiPhoto(teknisiPhoto);
+			}
 			teknisiList.add(teknisi);
 		}
 		return teknisiList;
 	}
 
 	@Override
-	public List<Teknisi> findTeknisiById(long id) {
+	public List<Teknisi> findTeknisiById(Long id) {
 		String query = "select tek.id as teknisiID, tek.phone as teknisiPhone, tek.name as teknisiName, tek.nik as teknisiNIK, tek.address as teknisiAddress, tek.email as teknisiEmail, tek.city as teknisiCity, "
 				+ "tek.postal_code as teknisiPostalCode, tek.last_login as teknisiLastLogin, tek.longitude as teknisiLongitude, tek.latitude as teknisiLatitude, "
 				+ "tek.created_date as teknisiCreatedDate, tek.created_by as teknisiCreatedBy, tek.update_date as teknisiUpdateDate, tek.update_by as teknisiUpdateBy, "
-				+ "req.request_id as requestID, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
+				+ "req.request_id as requestID, req.teknisi_id as reqTeknisiId, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
 				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy, "
-				+ "tekPhoto.id as tekPhotoID, tekPhoto.teknisi_id as tekPhotoTekID, tekPhoto.file_type as tekPhotoFile, tekPhoto.name as tekPhotoName, "
+				+ "tekPhoto.id as tekPhotoID, tekPhoto.teknisi_id as tekPhotoTeknisiId, tekPhoto.file_type as tekPhotoFile, tekPhoto.name as tekPhotoName, "
 				+ "tekPhoto.images as tekPhotoImages, tekPhoto.created_date as tekPhotoCreatedDate, tekPhoto.created_by as tekPhotoCreatedBy, tekPhoto.update_date as tekPhotoUpdateDate, tekPhoto.update_by as tekPhotoUpdateBy "
 				+ "from teknisi tek "
 				+ "left join request req on req.teknisi_id = tek.id "
@@ -132,30 +136,34 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				teknisi.setCreated_by(String.valueOf(column.get("teknisiCreatedBy")));
 				teknisi.setUpdate_date((Date)(column.get("teknisiUpdateDate")));
 				teknisi.setUpdate_by(String.valueOf(column.get("teknisiUpdateBy")));
-				request.setRequest_id(String.valueOf(column.get("requestID")));
-				request.setMerchant_name(String.valueOf(column.get("merchantName")));
-				request.setAddress(String.valueOf(column.get("requestAddress")));
-				request.setCity(String.valueOf(column.get("requestCity")));
-				request.setPostal_code(String.valueOf(column.get("requestPostalCode")));
-				request.setPhone(String.valueOf(column.get("requestPhone")));
-				request.setPerson_in_charge(String.valueOf(column.get("requestPIC")));
-				request.setTeknisi_id(Integer.valueOf(column.get("teknisiID").toString()));
-				request.setCreated_date((Date)(column.get("requestCreatedDate")));
-				request.setCreated_by(String.valueOf(column.get("requestCreatedBy")));
-				request.setUpdate_date((Date)(column.get("requestUpdateDate")));
-				request.setUpdate_by(String.valueOf(column.get("requestUpdateBy")));
-				teknisiPhoto.setId(column.get("tekPhotoID")==null?null:Long.parseLong(column.get("tekPhotoID").toString()));
-				teknisiPhoto.setTeknisi_id(Integer.parseInt(column.get("tekPhotoTekID").toString()));
-				teknisiPhoto.setFile_type(String.valueOf(column.get("tekPhotoFile")));
-				teknisiPhoto.setName(String.valueOf(column.get("tekPhotoName")));
-				teknisiPhoto.setImages(String.valueOf(column.get("tekPhotoImages")));
-				teknisiPhoto.setCreated_date((Date)(column.get("tekPhotoCreatedDate")));
-				teknisiPhoto.setCreated_by(String.valueOf(column.get("tekPhotoCreatedBy")));
-				teknisiPhoto.setUpdate_date((Date)(column.get("tekPhotoUpdateDate")));
-				teknisiPhoto.setUpdate_by(String.valueOf(column.get("tekPhotoUpdateBy")));
-				listRequest.add(request);
-				teknisi.setRequest(listRequest);
-				teknisi.setTeknisiPhoto(teknisiPhoto);
+				if(column.get("requestID")!=null) {
+					request.setRequest_id(String.valueOf(column.get("requestID")));
+					request.setMerchant_name(String.valueOf(column.get("merchantName")));
+					request.setAddress(String.valueOf(column.get("requestAddress")));
+					request.setCity(String.valueOf(column.get("requestCity")));
+					request.setPostal_code(String.valueOf(column.get("requestPostalCode")));
+					request.setPhone(String.valueOf(column.get("requestPhone")));
+					request.setPerson_in_charge(String.valueOf(column.get("requestPIC")));
+					request.setTeknisi_id(column.get("reqTeknisiId")==null?null:Long.parseLong(column.get("reqTeknisiId").toString()));
+					request.setCreated_date((Date)(column.get("requestCreatedDate")));
+					request.setCreated_by(String.valueOf(column.get("requestCreatedBy")));
+					request.setUpdate_date((Date)(column.get("requestUpdateDate")));
+					request.setUpdate_by(String.valueOf(column.get("requestUpdateBy")));
+					listRequest.add(request);
+					teknisi.setRequest(listRequest);
+				}
+				if(column.get("tekPhotoID")!=null) {
+					teknisiPhoto.setId(column.get("tekPhotoID")==null?null:Long.parseLong(column.get("tekPhotoID").toString()));
+					teknisiPhoto.setTeknisi_id(column.get("tekPhotoTeknisiId")==null?null:Long.parseLong(column.get("tekPhotoTeknisiId").toString()));
+					teknisiPhoto.setFile_type(String.valueOf(column.get("tekPhotoFile")));
+					teknisiPhoto.setName(String.valueOf(column.get("tekPhotoName")));
+					teknisiPhoto.setImages(String.valueOf(column.get("tekPhotoImages")));
+					teknisiPhoto.setCreated_date((Date)(column.get("tekPhotoCreatedDate")));
+					teknisiPhoto.setCreated_by(String.valueOf(column.get("tekPhotoCreatedBy")));
+					teknisiPhoto.setUpdate_date((Date)(column.get("tekPhotoUpdateDate")));
+					teknisiPhoto.setUpdate_by(String.valueOf(column.get("tekPhotoUpdateBy")));
+					teknisi.setTeknisiPhoto(teknisiPhoto);
+				}
 				teknisiList.add(teknisi);
 			}
 			return teknisiList;
@@ -204,7 +212,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 	}
 
 	@Override
-	public boolean isTeknisiIdExists(long id) {
+	public boolean isTeknisiIdExists(Long id) {
 		String sql = "select count(*) from teknisi where id = ? limit 1";
 	    @SuppressWarnings("deprecation")
 		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id }, Long.class);
