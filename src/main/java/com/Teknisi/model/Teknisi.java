@@ -90,10 +90,10 @@ public class Teknisi implements Serializable{
     @ApiModelProperty(hidden = true)
 	private String update_by;
 
-
+    @ApiModelProperty(hidden = true)
     private List<Request> request = new ArrayList<Request>();
 	
-	
+    @ApiModelProperty(hidden = true)
     private TeknisiPhoto teknisiPhoto;
 	
 	public Teknisi() {

@@ -74,13 +74,15 @@ public class TeknisiController {
 	@RequestMapping(value = "/teknisi/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createTeknisi(@Valid @RequestBody Teknisi teknisi) {
 		Long id = teknisi.getId();
-		if(teknisiService.isTeknisiIdExists(id) == true) {
+		if(teknisiService.isTeknisiIdExists(id) != true) {
+			teknisiService.insertTeknisi(teknisi);
+			return new ResponseEntity<>("Teknisi Created Successsfully", HttpStatus.OK);
+		}else if(teknisiService.isTeknisiIdExists(id) == true) {
 			return new ResponseEntity<>("Teknisi ID already exist", HttpStatus.BAD_REQUEST);
 		}else if (teknisi.getId() == null ) {
 			return new ResponseEntity<>("Teknisi ID cannot be empty", HttpStatus.BAD_REQUEST);
 		}else {
-			teknisiService.insertTeknisi(teknisi);
-			return new ResponseEntity<>("Teknisi Created Successsfully", HttpStatus.OK);
+			return new ResponseEntity<>("Check your input again", HttpStatus.BAD_REQUEST);
 		}
 	}
 	

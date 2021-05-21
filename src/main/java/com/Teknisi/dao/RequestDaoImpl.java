@@ -125,7 +125,7 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 	public boolean isRequestIdExists(String id) {
 		String sql = "select count(*) from request where request_id= ? limit 1";
 	    @SuppressWarnings("deprecation")
-		long count = getJdbcTemplate().queryForObject(sql, new Object[] { id }, Long.class);
+	    Long count = getJdbcTemplate().queryForObject(sql, new Object[] { id }, Long.class);
 		return count > 0;
 	}
 
