@@ -87,7 +87,7 @@ public class TeknisiPhotoController {
 		Long id = teknisiPhoto.getId();
 		Long teknisi_id = teknisiPhoto.getTeknisi_id();
 		if(teknisiPhotoService.isTeknisiPhotoIdOrTeknisiIdExists(id, teknisi_id) != true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null
-				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false && fileType.isBlank() != false)) {
+				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false)) {
 			teknisiPhotoService.insertTeknisiPhoto(teknisiPhoto, fileName, fileType, base64);
 			return new ResponseEntity<>("TeknisiPhoto Created Successsfully", HttpStatus.OK);
 		}else if(teknisiPhotoService.isTeknisiPhotoIdOrTeknisiIdExists(id, teknisi_id) == true) {
@@ -117,7 +117,7 @@ public class TeknisiPhotoController {
 		Long id = teknisiPhoto.getId();
 		Long teknisi_id = teknisiPhoto.getTeknisi_id();
 		if(teknisiPhotoService.isTeknisiPhotoIdAndTeknisiIdExists(id, teknisi_id) == true && teknisiService.isTeknisiIdExists(teknisi_id) == true && teknisiPhoto.getId() != null
-				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false && fileType.isBlank() != false)) {
+				&& (fileType.equals("png") || fileType.equals("jpg") || fileType.equals("jpeg") && fileType.isEmpty() != false)) {
 			teknisiPhotoService.updateTeknisiPhoto(teknisiPhoto, fileName, fileType, base64);
 			return new ResponseEntity<>("TeknisiPhoto Updated Successsfully", HttpStatus.OK);
 		}else if(teknisiPhotoService.isTeknisiPhotoIdExists(id) != true) {

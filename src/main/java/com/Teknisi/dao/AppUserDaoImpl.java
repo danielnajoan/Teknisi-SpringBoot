@@ -136,4 +136,28 @@ public class AppUserDaoImpl extends JdbcDaoSupport implements AppUserDao{
 		Long count = getJdbcTemplate().queryForObject(sql, new Object[] {email}, Long.class);
 		return count > 0;
 	}
+
+	@Override
+	public AppUser findAppUserByUsername(String username) {
+		String query = "select * from app_user where username = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		//using RowMapper anonymous class, we can create a separate RowMapper for reuse
+		@SuppressWarnings("deprecation")
+		AppUser appUser = jdbcTemplate.queryForObject(query, new Object[]{username}, new RowMapper<AppUser>(){
+			@Override
+			public AppUser mapRow(ResultSet rs, int rowNum)
+					throws SQLException {
+				AppUser appUser = new AppUser();
+				appUser.setId(rs.getLong("id"));
+				appUser.setUsername(rs.getString("username"));
+				appUser.setPassword(rs.getString("password"));
+				appUser.setEmail(rs.getString("email"));
+				appUser.setCreated_date(rs.getDate("created_date"));
+				appUser.setCreated_by(rs.getString("created_by"));
+				appUser.setUpdate_date(rs.getDate("update_date"));
+				appUser.setUpdate_by(rs.getString("update_by"));
+				return appUser;
+			}});
+		return appUser;
+	}
 }
