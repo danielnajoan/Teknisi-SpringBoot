@@ -1,8 +1,7 @@
 package com.Teknisi.controller;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.Teknisi.services.AppUserService;
 import com.Teknisi.services.JwtUserDetailsService;
 
 
 import com.Teknisi.configuration.JwtTokenUtil;
+import com.Teknisi.model.AppUser;
 import com.Teknisi.model.JwtRequest;
 import com.Teknisi.model.JwtResponse;
 
@@ -25,6 +27,8 @@ import com.Teknisi.model.JwtResponse;
 @CrossOrigin
 public class JwtAuthenticationController {
 
+	@Autowired AppUserService appUserService;
+	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -47,6 +51,12 @@ public class JwtAuthenticationController {
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<Object> saveAppUser(@RequestBody AppUser appUser) throws Exception {
+		appUserService.insertAppUser(appUser);
+		return new ResponseEntity<>("AppUser Created Successsfully", HttpStatus.OK);
+	}
+	
 	private void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
