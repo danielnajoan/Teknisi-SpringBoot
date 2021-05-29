@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +39,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        "/authenticate", 
 	        "/register"
 	};
-
+	
+	private static final String[] URL = {
+			"/teknisi/*",
+			"/teknisiPhoto/*",
+			"/appUser/*",
+			"/request/*"
+	};
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		// configure AuthenticationManager so that it knows from where to load
@@ -64,8 +72,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors().and().csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
-				.antMatchers(HttpMethod.GET,"/teknisi/{^[a-​zA-Z]*$}","/request/{^[a-​zA-Z]*$}").hasRole("USER")
-				.antMatchers("/teknisi/**", "/request/{^[a-​zA-Z]*$}").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET, URL).hasAnyAuthority("USER","ADMIN")
+				.antMatchers(HttpMethod.POST, URL).hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.PUT, URL).hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.DELETE, URL).hasAuthority("ADMIN")
 				// all other requests need to be authenticated
 				.anyRequest().authenticated().and()
 				// make sure we use stateless session; session won't be used to
