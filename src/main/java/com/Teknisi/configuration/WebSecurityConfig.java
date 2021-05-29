@@ -3,6 +3,7 @@ package com.Teknisi.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -63,12 +64,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors().and().csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
+				.antMatchers(HttpMethod.GET,"/teknisi/{^[a-​zA-Z]*$}","/request/{^[a-​zA-Z]*$}").hasRole("USER")
+				.antMatchers("/teknisi/**", "/request/{^[a-​zA-Z]*$}").hasRole("ADMIN")
 				// all other requests need to be authenticated
 				.anyRequest().authenticated().and()
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
 				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+			    .logout()
+			    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			    .logoutSuccessUrl("/login")
+			    .permitAll();
 
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

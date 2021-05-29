@@ -40,6 +40,9 @@ public class AppUser implements Serializable{
 	private String email;
 	
 	@ApiModelProperty(hidden = true)
+	private String roles;
+	
+	@ApiModelProperty(hidden = true)
 	@PastOrPresent
 	private Date created_date;
 
@@ -101,6 +104,14 @@ public class AppUser implements Serializable{
 		this.email = email;
 	}
 
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
 	public Date getCreated_date() {
 		return created_date;
 	}
@@ -144,6 +155,8 @@ public class AppUser implements Serializable{
 		builder.append(password);
 		builder.append(", email=");
 		builder.append(email);
+		builder.append(", roles=");
+		builder.append(roles);
 		builder.append(", created_date=");
 		builder.append(created_date);
 		builder.append(", created_by=");
@@ -155,5 +168,5 @@ public class AppUser implements Serializable{
 		builder.append("]");
 		return builder.toString();
 	}
-    
+
 }

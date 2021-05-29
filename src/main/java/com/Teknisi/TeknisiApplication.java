@@ -5,13 +5,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.Teknisi.services.AppUserService;
 import com.Teknisi.services.TeknisiService;
 
 @SpringBootApplication
 public class TeknisiApplication implements CommandLineRunner{
 
-	@Autowired
-	TeknisiService teknisiService;
+	@Autowired TeknisiService teknisiService;
+	@Autowired AppUserService appUserService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TeknisiApplication.class, args);
@@ -19,8 +20,7 @@ public class TeknisiApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		
+
 	}
 
 }

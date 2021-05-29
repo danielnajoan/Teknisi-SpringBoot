@@ -1,8 +1,10 @@
 package com.Teknisi.services;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,8 +22,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		AppUser appUser = appUserDao.findAppUserByUsername(username);
+		GrantedAuthority authority = new SimpleGrantedAuthority(appUser.getRoles());
 		if (appUserDao.isAppUserUsernameExists(username) == true) {
-			return new User(appUser.getUsername(), appUser.getPassword(),new ArrayList<>());
+			return new User(appUser.getUsername(), appUser.getPassword(), Arrays.asList(authority));
 		} else {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}

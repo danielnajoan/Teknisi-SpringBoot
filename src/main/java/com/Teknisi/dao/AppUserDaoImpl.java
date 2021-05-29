@@ -48,6 +48,7 @@ public class AppUserDaoImpl extends JdbcDaoSupport implements AppUserDao{
 				appUser.setCreated_by(String.valueOf(column.get("created_by")));
 				appUser.setUpdate_date((Date)(column.get("update_date")));
 				appUser.setUpdate_by(String.valueOf(column.get("update_by")));
+				appUser.setRoles(String.valueOf(column.get("roles")));
 				appUserList.add(appUser);
 			}
 			return appUserList;
@@ -72,6 +73,7 @@ public class AppUserDaoImpl extends JdbcDaoSupport implements AppUserDao{
 				appUser.setCreated_by(rs.getString("created_by"));
 				appUser.setUpdate_date(rs.getDate("update_date"));
 				appUser.setUpdate_by(rs.getString("update_by"));
+				appUser.setRoles(rs.getString("roles"));
 				return appUser;
 			}});
 		return appUser;
@@ -82,15 +84,15 @@ public class AppUserDaoImpl extends JdbcDaoSupport implements AppUserDao{
 		String query = 
 	    		 "INSERT INTO app_user("
 	    		 + "id, username, password, email, "
-	    		 + "created_date, created_by, update_date, update_by) "
-	    		 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)" ;
+	    		 + "created_date, created_by, update_date, update_by, roles) "
+	    		 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
 	    Date created_date = new Date();
 		String created_by = "User App Admin";
-		
+		String roles = "USER";
 	     getJdbcTemplate()
 	     	.update(query, new Object[]{
 	     			appUser.getId(), appUser.getUsername(), appUser.getPassword(), appUser.getEmail(), 
-	     			created_date, created_by, appUser.getUpdate_date(), appUser.getUpdate_by()
+	     			created_date, created_by, appUser.getUpdate_date(), appUser.getUpdate_by(), roles
 	     		});
 	}
 
@@ -156,6 +158,7 @@ public class AppUserDaoImpl extends JdbcDaoSupport implements AppUserDao{
 				appUser.setCreated_by(rs.getString("created_by"));
 				appUser.setUpdate_date(rs.getDate("update_date"));
 				appUser.setUpdate_by(rs.getString("update_by"));
+				appUser.setRoles(rs.getString("roles"));
 				return appUser;
 			}});
 		return appUser;
