@@ -47,6 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			"/request/*"
 	};
 	
+	private static final String[] DELETE_URL = {
+			"/teknisi/**/*",
+			"/teknisiPhoto/**/*",
+			"/appUser/**/*",
+			"/request/**/*"
+	};
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		// configure AuthenticationManager so that it knows from where to load
@@ -75,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, URL).hasAnyAuthority("USER","ADMIN")
 				.antMatchers(HttpMethod.POST, URL).hasAuthority("ADMIN")
 				.antMatchers(HttpMethod.PUT, URL).hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.DELETE, URL).hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.DELETE, DELETE_URL).hasAuthority("ADMIN")
 				// all other requests need to be authenticated
 				.anyRequest().authenticated().and()
 				// make sure we use stateless session; session won't be used to
