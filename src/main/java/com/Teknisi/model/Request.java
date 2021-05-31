@@ -1,4 +1,4 @@
-package com.Teknisi.model;
+package com.teknisi.model;
 
 import java.util.Date;
 

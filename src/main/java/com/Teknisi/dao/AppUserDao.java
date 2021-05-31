@@ -1,8 +1,8 @@
-package com.Teknisi.dao;
+package com.teknisi.dao;
 
 import java.util.List;
 
-import com.Teknisi.model.AppUser;
+import com.teknisi.model.AppUser;
 
 public interface AppUserDao {
 	List<AppUser> getAllAppUser();

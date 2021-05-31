@@ -1,12 +1,12 @@
-package com.Teknisi;
+package com.teknisi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.Teknisi.services.AppUserService;
-import com.Teknisi.services.TeknisiService;
+import com.teknisi.services.AppUserService;
+import com.teknisi.services.TeknisiService;
 
 @SpringBootApplication
 public class TeknisiApplication implements CommandLineRunner{
@@ -20,7 +20,7 @@ public class TeknisiApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		
 	}
 
 }

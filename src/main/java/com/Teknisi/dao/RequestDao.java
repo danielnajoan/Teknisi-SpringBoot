@@ -1,8 +1,8 @@
-package com.Teknisi.dao;
+package com.teknisi.dao;
 
 import java.util.List;
 
-import com.Teknisi.model.Request;
+import com.teknisi.model.Request;
 
 public interface RequestDao {
 	List<Request> getAllRequest();

@@ -1,4 +1,4 @@
-package com.Teknisi.dao;
+package com.teknisi.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,9 +13,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.Teknisi.model.Request;
-import com.Teknisi.model.Teknisi;
-import com.Teknisi.model.TeknisiPhoto;
+import com.teknisi.model.Request;
+import com.teknisi.model.Teknisi;
+import com.teknisi.model.TeknisiPhoto;
 
 @Repository
 public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{

@@ -1,4 +1,4 @@
-package com.Teknisi.controller;
+package com.teknisi.controller;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Teknisi.model.AppUser;
-import com.Teknisi.services.AppUserService;
+import com.teknisi.model.AppUser;
+import com.teknisi.services.AppUserService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

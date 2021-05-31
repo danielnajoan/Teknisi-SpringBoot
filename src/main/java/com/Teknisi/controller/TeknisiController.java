@@ -1,4 +1,4 @@
-package com.Teknisi.controller;
+package com.teknisi.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Teknisi.model.Teknisi;
-import com.Teknisi.services.TeknisiService;
+import com.teknisi.model.Teknisi;
+import com.teknisi.services.TeknisiService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

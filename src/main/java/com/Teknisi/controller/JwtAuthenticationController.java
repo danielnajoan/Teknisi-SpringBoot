@@ -1,4 +1,4 @@
-package com.Teknisi.controller;
+package com.teknisi.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,14 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Teknisi.services.AppUserService;
-import com.Teknisi.services.JwtUserDetailsService;
-
-
-import com.Teknisi.configuration.JwtTokenUtil;
-import com.Teknisi.model.AppUser;
-import com.Teknisi.model.JwtRequest;
-import com.Teknisi.model.JwtResponse;
+import com.teknisi.configuration.JwtTokenUtil;
+import com.teknisi.model.AppUser;
+import com.teknisi.model.JwtRequest;
+import com.teknisi.model.JwtResponse;
+import com.teknisi.services.AppUserService;
+import com.teknisi.services.JwtUserDetailsService;
 
 @RestController
 @CrossOrigin

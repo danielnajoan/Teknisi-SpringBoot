@@ -1,4 +1,4 @@
-package com.Teknisi.configuration;
+package com.teknisi.configuration;
 
 import java.io.Serializable;
 import java.util.Date;

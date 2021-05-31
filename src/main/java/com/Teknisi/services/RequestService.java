@@ -1,8 +1,8 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.List;
 
-import com.Teknisi.model.Request;
+import com.teknisi.model.Request;
 
 public interface RequestService {
 	List<Request> showAllRequest();

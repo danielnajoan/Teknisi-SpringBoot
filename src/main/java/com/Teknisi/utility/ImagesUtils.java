@@ -1,4 +1,4 @@
-package com.Teknisi.utility;
+package com.teknisi.utility;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

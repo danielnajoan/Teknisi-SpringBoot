@@ -1,4 +1,4 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.Teknisi.dao.AppUserDao;
-import com.Teknisi.model.AppUser;
+import com.teknisi.dao.AppUserDao;
+import com.teknisi.model.AppUser;
 
 @Service
 public class AppUserServiceImpl implements AppUserService{

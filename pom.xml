@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.</groupId>
-	<artifactId>Teknisi</artifactId>
+	<artifactId>teknisi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Teknisi</name>
 	<description>Teknisi project for Spring Boot</description>

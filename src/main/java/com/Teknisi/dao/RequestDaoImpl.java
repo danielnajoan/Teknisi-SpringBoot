@@ -1,4 +1,4 @@
-package com.Teknisi.dao;
+package com.teknisi.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.Teknisi.model.Request;
+import com.teknisi.model.Request;
 
 @Repository
 public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{

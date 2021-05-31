@@ -1,4 +1,4 @@
-package com.Teknisi.configuration;
+package com.teknisi.configuration;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.Teknisi.services.JwtUserDetailsService;
+import com.teknisi.services.JwtUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 

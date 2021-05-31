@@ -1,8 +1,8 @@
-package com.Teknisi.dao;
+package com.teknisi.dao;
 
 import java.util.List;
 
-import com.Teknisi.model.TeknisiPhoto;
+import com.teknisi.model.TeknisiPhoto;
 
 public interface TeknisiPhotoDao {
 	List<TeknisiPhoto> getAllTeknisiPhoto();

@@ -1,8 +1,8 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.List;
 
-import com.Teknisi.model.AppUser;
+import com.teknisi.model.AppUser;
 
 public interface AppUserService {
 	List<AppUser> showAllAppUser();

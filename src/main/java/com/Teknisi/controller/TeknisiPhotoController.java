@@ -1,4 +1,4 @@
-package com.Teknisi.controller;
+package com.teknisi.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.Teknisi.model.TeknisiPhoto;
-import com.Teknisi.services.TeknisiPhotoService;
-import com.Teknisi.services.TeknisiService;
-import com.Teknisi.utility.ImagesUtils;
+import com.teknisi.model.TeknisiPhoto;
+import com.teknisi.services.TeknisiPhotoService;
+import com.teknisi.services.TeknisiService;
+import com.teknisi.utility.ImagesUtils;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

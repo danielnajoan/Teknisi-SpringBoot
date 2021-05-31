@@ -1,12 +1,12 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Teknisi.dao.TeknisiPhotoDao;
-import com.Teknisi.model.TeknisiPhoto;
+import com.teknisi.dao.TeknisiPhotoDao;
+import com.teknisi.model.TeknisiPhoto;
 
 @Service
 public class TeknisiPhotoServiceImpl implements TeknisiPhotoService{

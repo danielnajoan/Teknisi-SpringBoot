@@ -1,8 +1,8 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.List;
 
-import com.Teknisi.model.Teknisi;
+import com.teknisi.model.Teknisi;
 
 public interface TeknisiService {
 	List<Teknisi> showAllTeknisi();

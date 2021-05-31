@@ -1,8 +1,8 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.List;
 
-import com.Teknisi.model.TeknisiPhoto;
+import com.teknisi.model.TeknisiPhoto;
 
 public interface TeknisiPhotoService {
 	List<TeknisiPhoto> showAllTeknisiPhoto();

@@ -1,12 +1,12 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Teknisi.dao.RequestDao;
-import com.Teknisi.model.Request;
+import com.teknisi.dao.RequestDao;
+import com.teknisi.model.Request;
 
 @Service
 public class RequestServiceImpl implements RequestService{

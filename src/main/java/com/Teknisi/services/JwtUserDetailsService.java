@@ -1,4 +1,4 @@
-package com.Teknisi.services;
+package com.teknisi.services;
 
 import java.util.Arrays;
 
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.Teknisi.dao.AppUserDao;
-import com.Teknisi.model.AppUser;
+import com.teknisi.dao.AppUserDao;
+import com.teknisi.model.AppUser;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
