@@ -28,7 +28,7 @@ public class AppUser implements Serializable{
 	@Pattern(regexp = "^[A-Za-z0-9]{1,50}+$", message = "Username should have length between 1 and 50 characters")
 	private String username;
 	
-	@ApiModelProperty(notes = "Password of the User", name = "password", required = true, example = "Dante")
+	@ApiModelProperty(notes = "Password of the User", name = "password", required = true, example = "DarkTemplar26!")
 	@NotBlank(message = "Password cannot be blank")
 	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,250}$", 
 	message = "Password should have Minimum eight characters and maximum 250 characters, at least one uppercase letter, one lowercase letter, one number and one special character")

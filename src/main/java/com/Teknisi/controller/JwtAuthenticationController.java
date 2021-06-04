@@ -127,8 +127,8 @@ public class JwtAuthenticationController {
     private void sendEmail(String email, String username) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(email);
-        String message = "Hello "+ username +", you have register your email into this account";
-        msg.setSubject("Welcome to Teknisi Application");
+        String message = "Hello "+ username;
+        msg.setSubject("Testing Spring Boot Application");
         msg.setText(message);
         javaMailSender.send(msg);
     }
