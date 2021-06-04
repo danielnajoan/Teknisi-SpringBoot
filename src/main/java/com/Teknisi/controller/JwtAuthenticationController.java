@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -36,17 +38,16 @@ import com.teknisi.services.JwtUserDetailsService;
 public class JwtAuthenticationController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+    @Autowired private JavaMailSender javaMailSender;
 
 	@Autowired AppUserService appUserService;
 	
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	@Autowired private AuthenticationManager authenticationManager;
 
-	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
+	@Autowired private JwtTokenUtil jwtTokenUtil;
 
-	@Autowired
-	private JwtUserDetailsService userDetailsService;
+	@Autowired private JwtUserDetailsService userDetailsService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(HttpServletRequest request, 
@@ -74,10 +75,32 @@ public class JwtAuthenticationController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		appUserService.insertAppUser(appUser);
-		logger.debug("Create AppUser: {}", appUser);
-		logger.info("AppUser Created Successsfully");
-		return new ResponseEntity<>("AppUser Created Successsfully", HttpStatus.OK);
+		Long id = appUser.getId();
+		String username = appUser.getUsername();
+		String email = appUser.getEmail();
+		if(appUserService.isAppUserIdExists(id) != true && appUserService.isAppUserUsernameExists(username) != true 
+				&& appUserService.isAppUserEmailExists(email) != true) {
+			appUserService.insertAppUser(appUser);
+			logger.debug("Create AppUser: {}", appUser);
+			logger.info("AppUser Created Successsfully");
+			sendEmail(email, username);
+			return new ResponseEntity<>("AppUser Created Successsfully", HttpStatus.OK);
+		}else if (appUserService.isAppUserIdExists(id) == true ) {
+			logger.error("AppUser with id {} already exist", id);
+			return new ResponseEntity<>("AppUser ID already exist", HttpStatus.BAD_REQUEST);
+		}else if (appUserService.isAppUserUsernameExists(username) == true ) {
+			logger.error("AppUser with username {} already exist", username);
+			return new ResponseEntity<>("AppUser Username already exist", HttpStatus.BAD_REQUEST);
+		}else if (appUserService.isAppUserEmailExists(email) == true ) {
+			logger.error("AppUser with email {} already exist", email);
+			return new ResponseEntity<>("AppUser Email already exist", HttpStatus.BAD_REQUEST);
+		}else if (appUser.getId() == null ) {
+			logger.error("AppUser ID cannot be empty");
+			return new ResponseEntity<>("AppUser ID cannot be empty", HttpStatus.BAD_REQUEST);
+		}else {
+			logger.error("Check your input again");
+			return new ResponseEntity<>("Check your input again", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -100,4 +123,13 @@ public class JwtAuthenticationController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
+	
+    private void sendEmail(String email, String username) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(email);
+        String message = "Hello "+ username +", you have register your email into this account";
+        msg.setSubject("Welcome to Teknisi Application");
+        msg.setText(message);
+        javaMailSender.send(msg);
+    }
 }
