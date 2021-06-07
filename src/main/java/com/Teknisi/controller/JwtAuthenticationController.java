@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -32,16 +30,17 @@ import com.teknisi.model.JwtRequest;
 import com.teknisi.model.JwtResponse;
 import com.teknisi.services.AppUserService;
 import com.teknisi.services.JwtUserDetailsService;
+import com.teknisi.services.MessageService;
 
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-    @Autowired private JavaMailSender javaMailSender;
 
 	@Autowired AppUserService appUserService;
+	
+	@Autowired MessageService messageService;
 	
 	@Autowired private AuthenticationManager authenticationManager;
 
@@ -83,7 +82,7 @@ public class JwtAuthenticationController {
 			appUserService.insertAppUser(appUser);
 			logger.debug("Create AppUser: {}", appUser);
 			logger.info("AppUser Created Successsfully");
-			sendEmail(email, username);
+			messageService.sendEmail(email, username);
 			return new ResponseEntity<>("AppUser Created Successsfully", HttpStatus.OK);
 		}else if (appUserService.isAppUserIdExists(id) == true ) {
 			logger.error("AppUser with id {} already exist", id);
@@ -124,12 +123,5 @@ public class JwtAuthenticationController {
 		}
 	}
 	
-    private void sendEmail(String email, String username) {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(email);
-        String message = "Hello "+ username;
-        msg.setSubject("Testing Spring Boot Application");
-        msg.setText(message);
-        javaMailSender.send(msg);
-    }
+
 }

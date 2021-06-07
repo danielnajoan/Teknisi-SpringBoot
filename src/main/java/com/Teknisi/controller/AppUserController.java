@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teknisi.model.AppUser;
 import com.teknisi.services.AppUserService;
+import com.teknisi.services.MessageService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -32,7 +31,7 @@ public class AppUserController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-    @Autowired private JavaMailSender javaMailSender;
+	@Autowired MessageService messageService;
 	
 	@Autowired AppUserService appUserService;
 	
@@ -101,7 +100,7 @@ public class AppUserController {
 			appUserService.insertAppUser(appUser);
 			logger.debug("Create AppUser: {}", appUser);
 			logger.info("AppUser Created Successsfully");
-			sendEmail(email, username);
+			messageService.sendEmail(email, username);
 			return new ResponseEntity<>("AppUser Created Successsfully", HttpStatus.OK);
 		}else if (appUserService.isAppUserIdExists(id) == true ) {
 			logger.error("AppUser with id {} already exist", id);
@@ -174,13 +173,4 @@ public class AppUserController {
 			return new ResponseEntity<>("AppUser ID did not exist", HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-    private void sendEmail(String email, String username) {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(email);
-        String message = "Hello "+ username +", you have register your email into this account";
-        msg.setSubject("Welcome to Teknisi Application");
-        msg.setText(message);
-        javaMailSender.send(msg);
-    }
 }
