@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.context.annotation.Configuration;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -25,7 +27,7 @@ public class Request {
 	private String merchant_name;
 	
 	@NotBlank(message = "Address cannot be blank")
-	@Pattern(regexp = "^[-a-zA-Z0-9,]{5,140}$", message = "Address should have length between 5 and 140 characters")
+	@Pattern(regexp = "^[\\w]+([-_,.\\s]{1,2}[A-Za-z0-9]+){1,140}+$", message = "Address should have length between 5 and 140 characters")
 	@ApiModelProperty(notes = "address of the Merchant", name = "address", required = true, example = "Jalan bunga matahari IX, Bekasi")
 	private String address;
 	
@@ -67,6 +69,9 @@ public class Request {
 	
     @ApiModelProperty(hidden = true)
 	private String update_by;
+    
+    @ApiModelProperty(hidden = true)
+	private String status;
 	
 	public Request() {
 		
@@ -75,7 +80,7 @@ public class Request {
 	public Request(
 			@NotBlank(message = "Request ID cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,10}$", message = "Request ID should have length between 1 and 10 Alphanumeric characters") String request_id,
 			@NotBlank(message = "Merchant name cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "Name should have length between 1 and 50 characters") String merchant_name,
-			@NotBlank(message = "Address cannot be blank") @Pattern(regexp = "^[-a-zA-Z0-9,]{5,140}$", message = "Address should have length between 5 and 140 characters") String address,
+			@NotBlank(message = "Address cannot be blank") @Pattern(regexp = "^[\\w]+([-_,.\\s]{1,2}[A-Za-z0-9]+){1,140}+$", message = "Address should have length between 5 and 140 characters") String address,
 			@NotBlank(message = "City cannot be blank") @Pattern(regexp = "^[-a-zA-Z0-9,]{1,25}$", message = "City should have length between 1 and 25 characters") String city,
 			@NotBlank(message = "Postal code cannot be blank") @Pattern(regexp = "[\\d]{1,5}", message = "Postal Code should have length between 1 and 5 numeric") String postal_code,
 			@NotBlank(message = "Phone cannot be blank") @Pattern(regexp = "[\\d]{1,13}", message = "NIK should have length between 1 and 13 numeric") String phone,
@@ -188,6 +193,14 @@ public class Request {
 		this.update_by = update_by;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -215,6 +228,8 @@ public class Request {
 		builder.append(update_date);
 		builder.append(", update_by=");
 		builder.append(update_by);
+		builder.append(", status=");
+		builder.append(status);
 		builder.append("]");
 		return builder.toString();
 	}

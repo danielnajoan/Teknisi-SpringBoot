@@ -55,6 +55,21 @@ public class RequestController {
 		return new ResponseEntity<>(listRequest, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Fetch All New Request Data")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success", response = Iterable.class),
+			@ApiResponse(code = 401, message = "Unauthorized!"),
+			@ApiResponse(code = 403, message = "Forbidden!"),
+			@ApiResponse(code = 404, message = "Not Found")
+	})
+	@RequestMapping(value = "/request/showAllNewRequest", method = RequestMethod.GET)
+	public ResponseEntity<Object> retrieveAllNewRequest() {
+		List<Request> listRequest = requestService.showAllNewRequest();
+		logger.info("Retrieve all new request");
+		logger.debug("All new request: {}", listRequest);
+		return new ResponseEntity<>(listRequest, HttpStatus.OK);
+	}
+	
 
 	@ApiOperation(value = "Fetch Request by ID")
 	@ApiResponses(value = {

@@ -17,6 +17,11 @@ public class RequestServiceImpl implements RequestService{
 	public List<Request> showAllRequest() {
 		return requestDao.getAllRequest();
 	}
+	
+	@Override
+	public List<Request> showAllNewRequest() {
+		return requestDao.getAllNewRequest();
+	}
 
 	@Override
 	public Request getRequestById(String id) {
@@ -41,6 +46,11 @@ public class RequestServiceImpl implements RequestService{
 	@Override
 	public boolean isRequestIdExists(String id) {
 		return requestDao.isRequestIdExists(id);
+	}
+
+	@Override
+	public boolean isStatusExists() {
+		return requestDao.isStatusExists();
 	}
 
 }

@@ -44,7 +44,7 @@ public class Teknisi implements Serializable{
 
 	@ApiModelProperty(notes = "Address of the Teknisi", name = "address", required = true, example = "Dubai")
 	@NotBlank(message = "Address cannot be blank")
-	@Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "Address should have length between 1 and 50 characters")
+	@Pattern(regexp = "^[\\w]+([-_,.\\s]{1,2}[A-Za-z0-9]+){1,140}+$", message = "Address should have length between 1 and 140 characters")
 	private String address;
 
 	@ApiModelProperty(notes = "Email of the Teknisi", name = "email", required = true, example = "dante@gmail.com")
@@ -103,7 +103,7 @@ public class Teknisi implements Serializable{
 			@NotBlank(message = "Phone cannot be blank") @Pattern(regexp = "[\\d]{1,13}", message = "NIK should have length between 1 and 13 numeric") String phone,
 			@NotBlank(message = "Name cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}+$", message = "Name should have length between 1 and 50 characters") String name,
 			@NotBlank(message = "NIK cannot be blank") @Pattern(regexp = "[\\d]{1,16}", message = "NIK should have length between 1 and 16 numeric") String nik,
-			@NotBlank(message = "Address cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "Address should have length between 1 and 50 characters") String address,
+			@NotBlank(message = "Address cannot be blank") @Pattern(regexp = "^[\\w]+([-_,.\\s]{1,2}[A-Za-z0-9]+){1,140}+$", message = "Address should have length between 1 and 140 characters") String address,
 			@NotBlank(message = "Email cannot be blank") @Email(message = "Email should be valid") String email,
 			@NotBlank(message = "City cannot be blank") @Pattern(regexp = "^[A-Za-z0-9]{1,50}$", message = "City should have length between 1 and 50 characters") String city,
 			@NotBlank(message = "Postal Code cannot be blank") @Pattern(regexp = "[\\d]{1,5}", message = "Postal Code should have length between 1 and 5 numeric") String postal_code,
