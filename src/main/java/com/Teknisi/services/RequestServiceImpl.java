@@ -19,8 +19,8 @@ public class RequestServiceImpl implements RequestService{
 	}
 	
 	@Override
-	public List<Request> showAllNewRequest() {
-		return requestDao.getAllNewRequest();
+	public List<Request> showAllStatusRequest(String status) {
+		return requestDao.getAllStatusRequest(status);
 	}
 
 	@Override
@@ -41,6 +41,11 @@ public class RequestServiceImpl implements RequestService{
 	@Override
 	public void updateRequest(Request request) {
 		requestDao.updateRequest(request);
+	}
+	
+	@Override
+	public void updateStatusRequest(Request request) {
+		requestDao.updateStatusRequest(request);
 	}
 
 	@Override

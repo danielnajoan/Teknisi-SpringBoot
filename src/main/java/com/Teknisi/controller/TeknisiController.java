@@ -1,4 +1,4 @@
-	package com.teknisi.controller;
+package com.teknisi.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +29,6 @@ import com.teknisi.services.TeknisiService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
-
 
 @ApiOperation(value = "/teknisi", tags = "Teknisi Profile Controller")
 @RestController

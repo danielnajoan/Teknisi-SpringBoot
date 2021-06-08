@@ -59,13 +59,13 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 	}
 	
 	@Override
-	public List<Request> getAllNewRequest() {
+	public List<Request> getAllStatusRequest(String status) {
 		String query = 
-			"select * from request where status='NEW' order by request_id asc";
+			"select * from request where status=? order by request_id asc";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Request> requestList = new ArrayList<Request>();
 
-		List<Map<String,Object>> rows = jdbcTemplate.queryForList(query);
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(query, new Object[]{status});
 
 		for(Map<String,Object> column : rows){
 			Request request = new Request();
@@ -153,6 +153,15 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
      			update_date, update_by, request.getRequest_id()
      		});
 	}
+	
+	@Override
+	public void updateStatusRequest(Request request) {
+		String query = "update request set status=? where request_id=?";
+		String status = "MAIL_SENT";
+		getJdbcTemplate()
+     	.update(query, new Object[]{ status, request.getRequest_id() });
+	}
+	
 	@Override
 	public boolean isRequestIdExists(String id) {
 		String sql = "select count(*) from request where request_id= ? limit 1";
