@@ -68,7 +68,7 @@ public class RequestController {
 	})
 	@RequestMapping(value = "/request/showAllNewRequest", method = RequestMethod.GET)
 	public ResponseEntity<Object> retrieveAllNewRequest() {
-		List<Request> listRequest = requestService.showAllStatusRequest("NEW");
+		List<Request> listRequest = requestService.showAllStatusRequest("NEW",false);
 		logger.info("Retrieve all new request");
 		logger.debug("All new request: {}", listRequest);
 		return new ResponseEntity<>(listRequest, HttpStatus.OK);

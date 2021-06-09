@@ -2,9 +2,6 @@ package com.teknisi.scheduler;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,55 +32,44 @@ public class Scheduler {
 
 	@Scheduled(cron = "0 0/10 * * * *")
 	public ResponseEntity<Object> sendEmailTicketRequest() throws IOException {
-		List<Request> listRequest = requestService.showAllStatusRequest("NEW");
+		logger.info("Check all ticket request that has status new");
+		List<Request> listRequest = requestService.showAllStatusRequest("NEW", false);
 		for (Request request : listRequest) {
-			Long teknisi_id = request.getTeknisi_id();
-			String request_id = request.getRequest_id();
-			String merchant_name = request.getMerchant_name();
-			String address = request.getAddress();
-			String city = request.getCity();
-			String pic = request.getPerson_in_charge();
 			String message = environment.getProperty("mail.template.message");
-			String formattedMessage = MessageFormat.format(message, request_id, merchant_name, address, city, pic);
-			List<Teknisi> listTeknisi = teknisiService.getTeknisiById(teknisi_id);
+			String formattedMessage = MessageFormat.format(message, request.getRequest_id(), 
+					request.getMerchant_name(), request.getAddress(), request.getCity(), 
+					request.getPerson_in_charge());
+			logger.debug("Formatted Message {}" + formattedMessage);
+			List<Teknisi> listTeknisi = teknisiService.getTeknisiById(request.getTeknisi_id());
 			for(Teknisi teknisi : listTeknisi) {
 				messageService.sendEmailTicketRequest(teknisi.getEmail(),teknisi.getName(), ", You have new ticket request!", formattedMessage);
+				logger.debug("Send reminder ticket request to each Teknisi {} " + teknisi.getEmail() + teknisi.getName());
 				requestService.updateStatusRequest(request);
+				logger.info("The request status has been updated to status mail_sent");
+				logger.debug("Request {}" + request);
 			}
 		}
-		logger.info("Send all new request to each Teknisi");
+		logger.info("Schedule reminder for ticket request status = new has been sent to email");
 		return new ResponseEntity<>(listRequest, HttpStatus.OK);
 	}
 	
 	@Scheduled(fixedRate = 300000)
 	public ResponseEntity<Object> sendEmailMailRequestV2() throws ParseException, java.text.ParseException {
-		List<Request> listRequest = requestService.showAllStatusRequest("MAIL_SENT");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date now = new Date();
-		logger.info("check {} " + now);
-        Calendar calender = Calendar.getInstance();
-        calender.setTime(now);
-        calender.add(Calendar.HOUR, -6);
-        Date currentDate = calender.getTime();
+		logger.info("Check all ticket request that has status mail_sent");
+		List<Request> listRequest = requestService.showAllStatusRequest("MAIL_SENT", true);
 		for (Request request : listRequest) {
-			Date createdDate = sdf.parse(request.getCreated_date().toString());
-			logger.info("check {} " + createdDate);
-			if(createdDate.before(currentDate)) {
-				Long teknisi_id = request.getTeknisi_id();
-				String request_id = request.getRequest_id();
-				String merchant_name = request.getMerchant_name();
-				String address = request.getAddress();
-				String city = request.getCity();
-				String pic = request.getPerson_in_charge();
-				String message = environment.getProperty("mail.template.message");
-				String formattedMessage = MessageFormat.format(message, request_id, merchant_name, address, city, pic);
-				List<Teknisi> listTeknisi = teknisiService.getTeknisiById(teknisi_id);
-				for(Teknisi teknisi : listTeknisi) {
-					messageService.sendEmailTicketRequest(teknisi.getEmail(),teknisi.getName(), ", Please processnew request", formattedMessage);
-				}
+			String message = environment.getProperty("mail.template.message");
+			String formattedMessage = MessageFormat.format(message, request.getRequest_id(), 
+					request.getMerchant_name(), request.getAddress(), request.getCity(), 
+					request.getPerson_in_charge());
+			logger.debug("Formatted Message {}" + formattedMessage);
+			List<Teknisi> listTeknisi = teknisiService.getTeknisiById(request.getTeknisi_id());
+			for(Teknisi teknisi : listTeknisi) {
+				messageService.sendEmailTicketRequest(teknisi.getEmail(),teknisi.getName(), ", Please processnew request", formattedMessage);
+				logger.debug("Send reminder ticket request to each Teknisi {} " + teknisi.getEmail() + teknisi.getName());
 			}
 		}
-		logger.info("Send all new request to each Teknisi => " + now);
+		logger.info("Schedule reminder for ticket request status = mail_sent has been sent to email");
 		return new ResponseEntity<>(listRequest, HttpStatus.OK);
 	}
 }

@@ -6,7 +6,7 @@ import com.teknisi.model.Request;
 
 public interface RequestService {
 	List<Request> showAllRequest();
-	List<Request> showAllStatusRequest(String status);
+	List<Request> showAllStatusRequest(String status, boolean created_date);
 	Request getRequestById(String id);
 	void insertRequest(Request request);
 	void deleteRequestById(String id);

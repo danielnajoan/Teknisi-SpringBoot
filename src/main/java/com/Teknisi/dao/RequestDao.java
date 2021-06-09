@@ -6,7 +6,7 @@ import com.teknisi.model.Request;
 
 public interface RequestDao {
 	List<Request> getAllRequest();
-	List<Request> getAllStatusRequest(String status);
+	List<Request> getAllStatusRequest(String status, boolean created_date);
 	public Request findRequestById(String id);
 	void insertRequest(Request request);
 	int deleteRequestById(String id);
