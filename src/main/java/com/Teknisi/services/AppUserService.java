@@ -6,6 +6,7 @@ import com.teknisi.model.AppUser;
 
 public interface AppUserService {
 	List<AppUser> showAllAppUser();
+	List<AppUser> showAllAppUserBasedOnRole(String role);
 	AppUser getAppUserById(Long id);
 	void insertAppUser(AppUser appUser);
 	void deleteAppUserById(Long id);

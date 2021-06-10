@@ -4,18 +4,21 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.expression.ParseException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.teknisi.model.AppUser;
 import com.teknisi.model.Request;
 import com.teknisi.model.Teknisi;
+import com.teknisi.services.AppUserService;
+import com.teknisi.services.FileService;
 import com.teknisi.services.MessageService;
 import com.teknisi.services.RequestService;
 import com.teknisi.services.TeknisiService;
@@ -26,12 +29,14 @@ public class Scheduler {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired Environment environment;
+	@Autowired AppUserService appUserService;
 	@Autowired RequestService requestService;
 	@Autowired TeknisiService teknisiService;
 	@Autowired MessageService messageService;
+	@Autowired FileService fileService;
 
-	@Scheduled(cron = "0 0/10 * * * *")
-	public ResponseEntity<Object> sendEmailTicketRequest() throws IOException {
+//	@Scheduled(cron = "0 0/10 * * * *")
+	public void emailReminderStatusNew() throws IOException {
 		logger.info("Check all ticket request that has status new");
 		List<Request> listRequest = requestService.showAllStatusRequest("NEW");
 		for (Request request : listRequest) {
@@ -50,15 +55,14 @@ public class Scheduler {
 			}
 		}
 		logger.info("Schedule reminder for ticket request status = new has been sent to email");
-		return new ResponseEntity<>(listRequest, HttpStatus.OK);
 	}
 	
-	@Scheduled(fixedRate = 300000)
-	public ResponseEntity<Object> sendEmailMailRequestV2() throws ParseException, java.text.ParseException {
+//	@Scheduled(fixedRate = 300000)
+	public void emailReminderStatusMail_Sent() throws ParseException, java.text.ParseException {
 		logger.info("Check all ticket request that has status mail_sent");
 		List<Request> listRequest = requestService.showRequestByBeforeDate("MAIL_SENT");
 		for (Request request : listRequest) {
-			String message = environment.getProperty("mail.template.message");
+			String message = environment.getProperty("mail.system.template.message");
 			String formattedMessage = MessageFormat.format(message, request.getRequest_id(), 
 					request.getMerchant_name(), request.getAddress(), request.getCity(), 
 					request.getPerson_in_charge());
@@ -70,6 +74,22 @@ public class Scheduler {
 			}
 		}
 		logger.info("Schedule reminder for ticket request status = mail_sent has been sent to email");
-		return new ResponseEntity<>(listRequest, HttpStatus.OK);
+	}
+	//corn position meaning: second, minute, hour, day of month, month, day(s) of week
+//	@Scheduled(cron = "0 0 12 * * 1-5")
+	@Scheduled(cron = "10 * * * * *")
+	public void emailReminderAllPendingStatus() throws IOException, MessagingException {
+		logger.info("Check all ticket request that has status mail_sent, new and processed");
+		fileService.exportToCSV();
+		logger.info("Exporting all data to CSV");
+		logger.info("Get latest CSV that will be send to Admin");
+		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
+		for (AppUser appUser : listAppUser) {
+			String message = environment.getProperty("mail.admin.template.message");
+			String formattedMessage = MessageFormat.format(message, appUser.getUsername());
+			logger.debug("Formatted Message {}" + formattedMessage);
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List Pending Ticket Request", formattedMessage);
+		}
+		logger.info("Schedule information for pending ticket request has been sent to admin email");
 	}
 }

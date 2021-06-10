@@ -1,5 +1,6 @@
-package com.teknisi.exporter;
+package com.teknisi.services;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -8,22 +9,22 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import com.teknisi.model.Request;
-import com.teknisi.services.RequestService;
 
-@Component
-public class CsvExporter {
-
+@Service
+public class FileServiceImpl implements FileService{
+	
 	@Autowired RequestService requestService;
 	
     public CsvPreference customCsvPreference(){
         return new CsvPreference.Builder(',', '|', "\n").build();
     }
+    
     public void exportToCSV() throws IOException {
         List<Request> listRequest = requestService.showAllPendingRequest();
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
@@ -38,5 +39,27 @@ public class CsvExporter {
         }
         csvWriter.close();
     }
-        
+
+	@Override
+	public File getLastModified() {
+		 File directory = new File("./csv");
+		    File[] files = directory.listFiles(File::isFile);
+		    long lastModifiedTime = Long.MIN_VALUE;
+		    File chosenFile = null;
+
+		    if (files != null)
+		    {
+		        for (File file : files)
+		        {
+		            if (file.lastModified() > lastModifiedTime)
+		            {
+		                chosenFile = file;
+		                lastModifiedTime = file.lastModified();
+		            }
+		        }
+		    }
+
+		    return chosenFile;
+	}
+
 }
