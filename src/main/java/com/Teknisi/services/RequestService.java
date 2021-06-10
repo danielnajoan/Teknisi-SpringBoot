@@ -6,6 +6,7 @@ import com.teknisi.model.Request;
 
 public interface RequestService {
 	List<Request> showAllRequest();
+	List<Request> showAllPendingRequest();
 	List<Request> showAllStatusRequest(String status);
 	List<Request> showRequestByBeforeDate (String status);
 	Request getRequestById(String id);

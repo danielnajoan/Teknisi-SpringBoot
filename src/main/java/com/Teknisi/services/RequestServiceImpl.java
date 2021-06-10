@@ -19,6 +19,11 @@ public class RequestServiceImpl implements RequestService{
 	}
 	
 	@Override
+	public List<Request> showAllPendingRequest() {
+		return requestDao.getAllPendingRequest();
+	}
+	
+	@Override
 	public List<Request> showAllStatusRequest(String status) {
 		return requestDao.getAllStatusRequest(status);
 	}

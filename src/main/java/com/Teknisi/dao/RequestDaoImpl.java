@@ -59,6 +59,35 @@ public class RequestDaoImpl extends JdbcDaoSupport implements RequestDao{
 	}
 	
 	@Override
+	public List<Request> getAllPendingRequest() {
+		String query = 
+			"select * from request where status in ('NEW', 'MAIL_SENT', 'PROCESSED') order by request_id asc";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Request> requestList = new ArrayList<Request>();
+
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(query);
+
+		for(Map<String,Object> column : rows){
+			Request request = new Request();
+			request.setRequest_id(String.valueOf(column.get("request_id")));
+			request.setMerchant_name(String.valueOf(column.get("merchant_name")));
+			request.setAddress(String.valueOf(column.get("address")));
+			request.setCity(String.valueOf(column.get("city")));
+			request.setPostal_code(String.valueOf(column.get("postal_code")));
+			request.setPhone(String.valueOf(column.get("phone")));
+			request.setPerson_in_charge(String.valueOf(column.get("pic")));
+			request.setTeknisi_id(Long.parseLong(column.get("teknisi_id").toString()));
+			request.setCreated_date((Date)(column.get("created_date")));
+			request.setCreated_by(String.valueOf(column.get("created_by")));
+			request.setUpdate_date((Date)(column.get("update_date")));
+			request.setUpdate_by(String.valueOf(column.get("update_by")));
+			request.setStatus(String.valueOf(column.get("status")));
+			requestList.add(request);
+		}
+		return requestList;
+	}
+	
+	@Override
 	public List<Request> getAllStatusRequest(String status) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Request> requestList = new ArrayList<Request>();

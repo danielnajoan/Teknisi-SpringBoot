@@ -22,14 +22,14 @@ public class CsvExporter {
 	@Autowired RequestService requestService;
 	
     public CsvPreference customCsvPreference(){
-        return new CsvPreference.Builder('|', ',', "\n").build();
+        return new CsvPreference.Builder(',', '|', "\n").build();
     }
     public void exportToCSV() throws IOException {
-        List<Request> listRequest = requestService.showAllRequest();
+        List<Request> listRequest = requestService.showAllPendingRequest();
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
         FileWriter filePath = new FileWriter("./csv/"+ "REQUEST_"+ currentDateTime + ".csv", true);
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(filePath, CsvPreference.STANDARD_PREFERENCE);
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(filePath, customCsvPreference());
         String[] csvHeader = {"Teknisi ID", "Request ID", "Merchant Name", "Address", "City", "PIC", "Created_date", "Status"};
         String[] nameMapping = {"teknisi_id", "request_id", "merchant_name", "address", "city","person_in_charge","created_date","status"};
         csvWriter.writeHeader(csvHeader);
