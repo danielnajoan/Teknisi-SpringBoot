@@ -19,8 +19,13 @@ public class RequestServiceImpl implements RequestService{
 	}
 	
 	@Override
-	public List<Request> showAllStatusRequest(String status, boolean created_date) {
-		return requestDao.getAllStatusRequest(status, created_date);
+	public List<Request> showAllStatusRequest(String status) {
+		return requestDao.getAllStatusRequest(status);
+	}
+	
+	@Override
+	public List<Request> showRequestByBeforeDate(String status) {
+		return requestDao.getRequestByBeforeDate(status);
 	}
 
 	@Override

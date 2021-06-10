@@ -33,7 +33,7 @@ public class Scheduler {
 	@Scheduled(cron = "0 0/10 * * * *")
 	public ResponseEntity<Object> sendEmailTicketRequest() throws IOException {
 		logger.info("Check all ticket request that has status new");
-		List<Request> listRequest = requestService.showAllStatusRequest("NEW", false);
+		List<Request> listRequest = requestService.showAllStatusRequest("NEW");
 		for (Request request : listRequest) {
 			String message = environment.getProperty("mail.template.message");
 			String formattedMessage = MessageFormat.format(message, request.getRequest_id(), 
@@ -56,7 +56,7 @@ public class Scheduler {
 	@Scheduled(fixedRate = 300000)
 	public ResponseEntity<Object> sendEmailMailRequestV2() throws ParseException, java.text.ParseException {
 		logger.info("Check all ticket request that has status mail_sent");
-		List<Request> listRequest = requestService.showAllStatusRequest("MAIL_SENT", true);
+		List<Request> listRequest = requestService.showRequestByBeforeDate("MAIL_SENT");
 		for (Request request : listRequest) {
 			String message = environment.getProperty("mail.template.message");
 			String formattedMessage = MessageFormat.format(message, request.getRequest_id(), 

@@ -1,5 +1,6 @@
 package com.teknisi.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teknisi.exporter.CsvExporter;
 import com.teknisi.model.Request;
 import com.teknisi.services.MessageService;
 import com.teknisi.services.RequestService;
@@ -43,6 +45,7 @@ public class RequestController {
 	@Autowired RequestService requestService;
 	@Autowired TeknisiService teknisiService;
 	@Autowired MessageService messageService;
+	@Autowired CsvExporter csvExporter;
 	
 	@ApiOperation(value = "Fetch All Request Data")
 	@ApiResponses(value = {
@@ -178,6 +181,12 @@ public class RequestController {
 			logger.error("Request with id {} did not exist", id);
 			return new ResponseEntity<>("Request ID did not exist", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@RequestMapping(value = "/request/test", method = RequestMethod.GET)
+	public ResponseEntity<Object> test() throws IOException {
+		csvExporter.exportToCSV();
+		return new ResponseEntity<>("Success", HttpStatus.OK);
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
