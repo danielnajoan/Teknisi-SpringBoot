@@ -23,6 +23,8 @@ import com.teknisi.services.MessageService;
 import com.teknisi.services.RequestService;
 import com.teknisi.services.TeknisiService;
 
+import net.sf.jasperreports.engine.JRException;
+
 @Component
 public class Scheduler {
 	
@@ -77,19 +79,35 @@ public class Scheduler {
 	}
 	//corn position meaning: second, minute, hour, day of month, month, day(s) of week
 //	@Scheduled(cron = "0 0 12 * * 1-5")
-	@Scheduled(cron = "10 * * * * *")
 	public void emailReminderAllPendingStatus() throws IOException, MessagingException {
 		logger.info("Check all ticket request that has status mail_sent, new and processed");
-		fileService.exportToCSV();
 		logger.info("Exporting all data to CSV");
+		fileService.exportToCSV();
 		logger.info("Get latest CSV that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			String message = environment.getProperty("mail.admin.template.message");
+			String message = environment.getProperty("mail.admin.template.reminder.message");
 			String formattedMessage = MessageFormat.format(message, appUser.getUsername());
 			logger.debug("Formatted Message {}" + formattedMessage);
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List Pending Ticket Request", formattedMessage);
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Pending Ticket Request", formattedMessage, "./csv");
 		}
 		logger.info("Schedule information for pending ticket request has been sent to admin email");
+	}
+	
+//	@Scheduled(cron = "0 0 17 * * 1-5")
+	@Scheduled(cron = "10 * * * * *")
+	public void emailReportAllFinishedStatus() throws IOException, MessagingException, JRException {
+		logger.info("Check all ticket request that has status Finished");
+		logger.info("Exporting all data to PDF");
+		fileService.exportToPDF();
+		logger.info("Get latest PDF that will be send to Admin");
+		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
+		for (AppUser appUser : listAppUser) {
+			String message = environment.getProperty("mail.admin.template.report.message");
+			String formattedMessage = MessageFormat.format(message, appUser.getUsername());
+			logger.debug("Formatted Message {}" + formattedMessage);
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Finished Ticket Request", formattedMessage, "./pdf");
+		}
+		logger.info("Schedule report for finished ticket request has been sent to admin email");
 	}
 }

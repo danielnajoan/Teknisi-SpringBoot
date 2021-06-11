@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b901f051-b015-463b-a4b1-cb8bf2f69e1a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="cmVxdWVzdCAsMTUsMTUsNmUwN2EyZTktMzQzOC00MWEyLThkY2UtOTZhZDk3Y2FlZmE0Ow=="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<field name="teknisi_id" class="java.lang.Long"/>
+	<field name="request_id" class="java.lang.String"/>
+	<field name="merchant_name" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="city" class="java.lang.String"/>
+	<field name="person_in_charge" class="java.lang.String"/>
+	<field name="created_date" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="35ea1c68-c27e-46d9-ad8c-3c6c4f617aba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Finished Request List]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="60" uuid="122e2e6b-f6fd-4e83-a8cb-f019b121f448"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report Date: "+new SimpleDateFormat("dd/MM/YYYY hh:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="30" uuid="46e55598-8b52-4e3a-814c-8912db23a733"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teknisi ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="80" height="30" uuid="8f978cf0-2daa-4a96-bd3f-cba94c4b8539"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Request ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="80" height="30" uuid="f5a6d6cc-1c88-4f5e-b4bf-93b5051e3463"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Merchant Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="105" height="30" uuid="4266d654-8a86-41cc-a247-d05a317b0b86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="0" width="60" height="30" uuid="7ea23e88-e12c-40c4-b42a-670e6609b8f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[City]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="80" height="30" uuid="e44fe358-bdfd-4ea2-a546-856a5cd4a839"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PIC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="80" height="30" uuid="d6052c2c-e75b-4b1e-b0d2-d5ce5b5a1688"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Created Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="30" uuid="7ce2f783-05a1-4a99-97c3-2b92825e6376"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{teknisi_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="80" height="30" uuid="0f5985e0-38f2-4102-8203-72221b1575e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{request_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="80" height="30" uuid="cfccc2b8-f047-4139-9348-745992dc31ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{merchant_name}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="104" height="30" uuid="9af08c22-381a-42e7-bf77-f1241f14a2cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="0" width="60" height="30" uuid="a4d00120-39fd-45c0-b6e7-0dfe2f2bbdf1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{city}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="80" height="30" uuid="fad577f8-5cbb-47df-ba61-2020292f96ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{person_in_charge}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="80" height="30" uuid="154fea44-fd13-4d09-a299-d8893e99ea68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{created_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="54" uuid="969ed7fe-878f-45a1-b901-751aa87b2bf9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

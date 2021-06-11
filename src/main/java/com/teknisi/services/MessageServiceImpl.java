@@ -44,16 +44,16 @@ public class MessageServiceImpl implements MessageService{
         javaMailSender.send(msg);
     }
     
-    public void sendEmailTicketRequestWithAttachment(String email, String name, String subject, String message) throws MessagingException, IOException {
+    public void sendEmailTicketRequestWithAttachment(String email, String name, String subject, String message, String filePath) throws MessagingException, IOException {
 
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
         helper.setTo(email);
         helper.setSubject(name+subject);
-        helper.setText(message);
+        helper.setText(message, true);
         // hard coded a file path
         //FileSystemResource file = new FileSystemResource(new File("path/android.png"));
-        FileSystemResource file = new FileSystemResource(fileService.getLastModified());
+        FileSystemResource file = new FileSystemResource(fileService.getLastModified(filePath));
         helper.addAttachment(file.getFilename(), file);
         javaMailSender.send(msg);
 

@@ -1,11 +1,15 @@
 package com.teknisi.services;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +20,40 @@ import org.supercsv.prefs.CsvPreference;
 
 import com.teknisi.model.Request;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
+
 @Service
 public class FileServiceImpl implements FileService{
 	
 	@Autowired RequestService requestService;
+	
+	@Override
+	public File getLastModified(String path) {
+		 File directory = new File(path);
+		    File[] files = directory.listFiles(File::isFile);
+		    long lastModifiedTime = Long.MIN_VALUE;
+		    File chosenFile = null;
+
+		    if (files != null)
+		    {
+		        for (File file : files)
+		        {
+		            if (file.lastModified() > lastModifiedTime)
+		            {
+		                chosenFile = file;
+		                lastModifiedTime = file.lastModified();
+		            }
+		        }
+		    }
+
+		    return chosenFile;
+	}
 	
     public CsvPreference customCsvPreference(){
         return new CsvPreference.Builder(',', '|', "\n").build();
@@ -41,25 +75,15 @@ public class FileServiceImpl implements FileService{
     }
 
 	@Override
-	public File getLastModified() {
-		 File directory = new File("./csv");
-		    File[] files = directory.listFiles(File::isFile);
-		    long lastModifiedTime = Long.MIN_VALUE;
-		    File chosenFile = null;
-
-		    if (files != null)
-		    {
-		        for (File file : files)
-		        {
-		            if (file.lastModified() > lastModifiedTime)
-		            {
-		                chosenFile = file;
-		                lastModifiedTime = file.lastModified();
-		            }
-		        }
-		    }
-
-		    return chosenFile;
+	public void exportToPDF() throws FileNotFoundException, JRException {
+		ArrayList<Request> arrayListRequest =(ArrayList<Request>) requestService.showAllStatusRequest("FINISHED");
+		Object[] arrayObjectRequest = arrayListRequest.toArray();
+		JRBeanArrayDataSource beanCollectionDataSource = new JRBeanArrayDataSource(arrayObjectRequest);
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/report.jrxml"));
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+		JasperExportManager.exportReportToPdfFile(report, "FINISHED_REQUEST_"+ currentDateTime + ".pdf");
 	}
-
 }
