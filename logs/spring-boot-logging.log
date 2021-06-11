@@ -106,3 +106,182 @@ Thank you
 2021-06-11 12:42:24,195 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
 2021-06-11 12:42:24,197 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
 2021-06-11 12:42:24,197 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-11 13:30:55,732 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.7.Final
+2021-06-11 13:30:55,747 INFO org.springframework.boot.StartupInfoLogger [main] Starting TeknisiApplication using Java 15.0.2 on DESKTOP-SJ54SUK with PID 23544 (D:\Java\Eclipse-Workspace\Teknisi\target\classes started by Daniel SN in D:\Java\Eclipse-Workspace\Teknisi)
+2021-06-11 13:30:55,748 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-06-11 13:30:55,749 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-06-11 13:30:57,088 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-06-11 13:30:57,090 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2021-06-11 13:30:57,113 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 19 ms. Found 0 JDBC repository interfaces.
+2021-06-11 13:30:57,124 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-06-11 13:30:57,125 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-11 13:30:57,136 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2021-06-11 13:30:57,560 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@309dcdf3' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-11 13:30:57,566 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-11 13:30:57,986 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-06-11 13:30:58,001 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-11 13:30:58,002 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-06-11 13:30:58,002 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-11 13:30:58,248 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-06-11 13:30:58,248 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2403 ms
+2021-06-11 13:30:58,340 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:30:58,422 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'jwtRequestFilter' configured for use
+2021-06-11 13:30:58,474 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-06-11 13:30:58,962 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-06-11 13:30:59,044 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-11 13:30:59,180 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-11 13:30:59,430 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-11 13:30:59,682 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-06-11 13:31:00,584 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-11 13:31:00,596 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-11 13:31:00,614 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:31:00,679 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-11 13:31:00,809 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:31:00,844 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:31:01,286 INFO springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping [main] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-11 13:31:01,604 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@16120270, org.springframework.security.web.context.SecurityContextPersistenceFilter@15a2fddd, org.springframework.security.web.header.HeaderWriterFilter@5c16561a, org.springframework.web.filter.CorsFilter@74babce8, org.springframework.security.web.authentication.logout.LogoutFilter@518a7b8a, com.teknisi.configuration.JwtRequestFilter@2ee92e7d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@18c0f025, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a69b3cf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1fab0394, org.springframework.security.web.session.SessionManagementFilter@1c382179, org.springframework.security.web.access.ExceptionTranslationFilter@165824f5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3fda8dae]
+2021-06-11 13:31:01,703 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-11 13:31:01,970 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'taskScheduler'
+2021-06-11 13:31:02,002 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-06-11 13:31:02,037 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-11 13:31:02,039 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Context refreshed
+2021-06-11 13:31:02,072 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Found 1 custom documentation plugin(s)
+2021-06-11 13:31:02,112 INFO springfox.documentation.spring.web.scanners.ApiListingReferenceScanner [main] Scanning for api listing references
+2021-06-11 13:31:02,536 INFO org.springframework.boot.StartupInfoLogger [main] Started TeknisiApplication in 7.33 seconds (JVM running for 8.01)
+2021-06-11 13:31:10,014 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Check all ticket request that has status Finished
+2021-06-11 13:31:10,015 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Exporting all data to PDF
+2021-06-11 13:31:13,922 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Get latest PDF that will be send to Admin
+2021-06-11 13:31:13,944 DEBUG com.teknisi.scheduler.Scheduler [scheduling-1] Formatted Message {}<html><body><h1>Dear Davira</h1>, <br>Below are the attachment file of the latest report of finished ticket request</body></body>
+2021-06-11 13:31:13,990 ERROR org.springframework.scheduling.support.TaskUtils$LoggingErrorHandler [scheduling-1] Unexpected error occurred in scheduled task
+java.lang.IllegalArgumentException: File must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:201)
+	at org.springframework.core.io.FileSystemResource.<init>(FileSystemResource.java:100)
+	at com.teknisi.services.MessageServiceImpl.sendEmailTicketRequestWithAttachment(MessageServiceImpl.java:56)
+	at com.teknisi.scheduler.Scheduler.emailReportAllFinishedStatus(Scheduler.java:109)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-06-11 13:34:06,802 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.7.Final
+2021-06-11 13:34:06,819 INFO org.springframework.boot.StartupInfoLogger [main] Starting TeknisiApplication using Java 15.0.2 on DESKTOP-SJ54SUK with PID 23820 (D:\Java\Eclipse-Workspace\Teknisi\target\classes started by Daniel SN in D:\Java\Eclipse-Workspace\Teknisi)
+2021-06-11 13:34:06,820 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-06-11 13:34:06,820 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-06-11 13:34:08,282 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-06-11 13:34:08,284 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2021-06-11 13:34:08,307 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2021-06-11 13:34:08,322 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-06-11 13:34:08,324 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-11 13:34:08,336 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 6 ms. Found 0 JPA repository interfaces.
+2021-06-11 13:34:08,860 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@309dcdf3' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-11 13:34:08,868 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-11 13:34:09,324 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-06-11 13:34:09,339 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-11 13:34:09,339 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-06-11 13:34:09,340 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-11 13:34:09,558 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-06-11 13:34:09,559 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2665 ms
+2021-06-11 13:34:09,667 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:34:09,749 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'jwtRequestFilter' configured for use
+2021-06-11 13:34:09,812 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-06-11 13:34:10,118 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-06-11 13:34:10,180 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-11 13:34:10,257 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-11 13:34:10,436 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-11 13:34:10,612 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-06-11 13:34:11,159 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-11 13:34:11,168 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-11 13:34:11,181 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:34:11,262 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-11 13:34:11,400 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:34:11,433 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:34:11,922 INFO springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping [main] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-11 13:34:12,244 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@c8531b9, org.springframework.security.web.context.SecurityContextPersistenceFilter@4cbb11e4, org.springframework.security.web.header.HeaderWriterFilter@52f118aa, org.springframework.web.filter.CorsFilter@3adbd038, org.springframework.security.web.authentication.logout.LogoutFilter@46ff1aad, com.teknisi.configuration.JwtRequestFilter@2ee92e7d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@647aa45c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2e09e367, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5e976553, org.springframework.security.web.session.SessionManagementFilter@226e95e9, org.springframework.security.web.access.ExceptionTranslationFilter@5e0bba2f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5c70c771]
+2021-06-11 13:34:12,351 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-11 13:34:12,599 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'taskScheduler'
+2021-06-11 13:34:12,626 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-06-11 13:34:12,664 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-11 13:34:12,666 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Context refreshed
+2021-06-11 13:34:12,691 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Found 1 custom documentation plugin(s)
+2021-06-11 13:34:12,726 INFO springfox.documentation.spring.web.scanners.ApiListingReferenceScanner [main] Scanning for api listing references
+2021-06-11 13:34:13,101 INFO org.springframework.boot.StartupInfoLogger [main] Started TeknisiApplication in 6.829 seconds (JVM running for 7.61)
+2021-06-11 13:35:10,010 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Check all ticket request that has status Finished
+2021-06-11 13:35:10,010 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Exporting all data to PDF
+2021-06-11 13:35:10,031 INFO com.teknisi.services.FileServiceImpl [scheduling-1] All request: [Request [request_id=2, merchant_name=David, address=Jalan Anggrek IX Bekasi, city=Bekasi, postal_code=00119, phone=08194455222, person_in_charge=Saputra, teknisi_id=1, created_date=2021-06-08 13:53:18.12, created_by=Merchant PIC, update_date=null, update_by=null, status=FINISHED]]
+2021-06-11 13:35:11,572 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Get latest PDF that will be send to Admin
+2021-06-11 13:35:11,581 DEBUG com.teknisi.scheduler.Scheduler [scheduling-1] Formatted Message {}<html><body><h1>Dear Davira</h1>, <br>Below are the attachment file of the latest report of finished ticket request</body></body>
+2021-06-11 13:35:11,620 ERROR org.springframework.scheduling.support.TaskUtils$LoggingErrorHandler [scheduling-1] Unexpected error occurred in scheduled task
+java.lang.IllegalArgumentException: File must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:201)
+	at org.springframework.core.io.FileSystemResource.<init>(FileSystemResource.java:100)
+	at com.teknisi.services.MessageServiceImpl.sendEmailTicketRequestWithAttachment(MessageServiceImpl.java:56)
+	at com.teknisi.scheduler.Scheduler.emailReportAllFinishedStatus(Scheduler.java:109)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-06-11 13:36:30,215 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.7.Final
+2021-06-11 13:36:30,235 INFO org.springframework.boot.StartupInfoLogger [main] Starting TeknisiApplication using Java 15.0.2 on DESKTOP-SJ54SUK with PID 23840 (D:\Java\Eclipse-Workspace\Teknisi\target\classes started by Daniel SN in D:\Java\Eclipse-Workspace\Teknisi)
+2021-06-11 13:36:30,236 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-06-11 13:36:30,237 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-06-11 13:36:31,691 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-06-11 13:36:31,693 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2021-06-11 13:36:31,717 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 18 ms. Found 0 JDBC repository interfaces.
+2021-06-11 13:36:31,732 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-06-11 13:36:31,734 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-11 13:36:31,745 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2021-06-11 13:36:32,251 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7573b9ee' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-11 13:36:32,259 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-11 13:36:32,800 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-06-11 13:36:32,819 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-11 13:36:32,819 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-06-11 13:36:32,820 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-11 13:36:33,033 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-06-11 13:36:33,034 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2722 ms
+2021-06-11 13:36:33,139 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:36:33,241 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'jwtRequestFilter' configured for use
+2021-06-11 13:36:33,294 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-06-11 13:36:33,594 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-06-11 13:36:33,662 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-11 13:36:33,736 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-11 13:36:33,975 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-11 13:36:34,193 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-06-11 13:36:34,808 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-11 13:36:34,822 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-11 13:36:34,834 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:36:34,916 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-11 13:36:35,052 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:36:35,088 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-06-11 13:36:35,598 INFO springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping [main] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-06-11 13:36:35,982 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2831c178, org.springframework.security.web.context.SecurityContextPersistenceFilter@647aa45c, org.springframework.security.web.header.HeaderWriterFilter@3294102e, org.springframework.web.filter.CorsFilter@70e8c019, org.springframework.security.web.authentication.logout.LogoutFilter@6ed87ccf, com.teknisi.configuration.JwtRequestFilter@759a678a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2d02a066, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a24390b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a79da3a, org.springframework.security.web.session.SessionManagementFilter@4cbb11e4, org.springframework.security.web.access.ExceptionTranslationFilter@52f118aa, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@50a095cb]
+2021-06-11 13:36:36,086 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-11 13:36:36,373 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'taskScheduler'
+2021-06-11 13:36:36,404 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-06-11 13:36:36,442 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-11 13:36:36,444 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Context refreshed
+2021-06-11 13:36:36,470 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Found 1 custom documentation plugin(s)
+2021-06-11 13:36:36,512 INFO springfox.documentation.spring.web.scanners.ApiListingReferenceScanner [main] Scanning for api listing references
+2021-06-11 13:36:36,921 INFO org.springframework.boot.StartupInfoLogger [main] Started TeknisiApplication in 7.25 seconds (JVM running for 7.944)
+2021-06-11 13:37:10,009 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Check all ticket request that has status Finished
+2021-06-11 13:37:10,009 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Exporting all data to PDF
+2021-06-11 13:37:11,503 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Get latest PDF that will be send to Admin
+2021-06-11 13:37:11,512 DEBUG com.teknisi.scheduler.Scheduler [scheduling-1] Formatted Message {}<html><body><h1>Dear Davira</h1>, <br>Below are the attachment file of the latest report of finished ticket request</body></body>
+2021-06-11 13:37:17,834 DEBUG com.teknisi.scheduler.Scheduler [scheduling-1] Formatted Message {}<html><body><h1>Dear David</h1>, <br>Below are the attachment file of the latest report of finished ticket request</body></body>
+2021-06-11 13:37:22,246 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Schedule report for finished ticket request has been sent to admin email
