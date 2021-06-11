@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.teknisi.configuration.DisableWarnings;
 import com.teknisi.services.AppUserService;
 import com.teknisi.services.TeknisiService;
 
@@ -22,7 +23,7 @@ public class TeknisiApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+		DisableWarnings.disableAccessWarnings();
 	}
 
 }

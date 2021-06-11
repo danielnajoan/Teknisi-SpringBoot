@@ -37,7 +37,9 @@ public class Scheduler {
 	@Autowired MessageService messageService;
 	@Autowired FileService fileService;
 
-//	@Scheduled(cron = "0 0/10 * * * *")
+//corn position meaning: second, minute, hour, day of month, month, day(s) of week
+//	@Scheduled(cron = "10 * * * * *")
+	@Scheduled(cron = "0 0/10 * * * *")
 	public void emailReminderStatusNew() throws IOException {
 		logger.info("Check all ticket request that has status new");
 		List<Request> listRequest = requestService.showAllStatusRequest("NEW");
@@ -59,7 +61,7 @@ public class Scheduler {
 		logger.info("Schedule reminder for ticket request status = new has been sent to email");
 	}
 	
-//	@Scheduled(fixedRate = 300000)
+	@Scheduled(fixedRate = 300000)
 	public void emailReminderStatusMail_Sent() throws ParseException, java.text.ParseException {
 		logger.info("Check all ticket request that has status mail_sent");
 		List<Request> listRequest = requestService.showRequestByBeforeDate("MAIL_SENT");
@@ -77,8 +79,8 @@ public class Scheduler {
 		}
 		logger.info("Schedule reminder for ticket request status = mail_sent has been sent to email");
 	}
-	//corn position meaning: second, minute, hour, day of month, month, day(s) of week
-//	@Scheduled(cron = "0 0 12 * * 1-5")
+
+	@Scheduled(cron = "0 0 12 * * 1-5")
 	public void emailReminderAllPendingStatus() throws IOException, MessagingException {
 		logger.info("Check all ticket request that has status mail_sent, new and processed");
 		logger.info("Exporting all data to CSV");
@@ -94,8 +96,7 @@ public class Scheduler {
 		logger.info("Schedule information for pending ticket request has been sent to admin email");
 	}
 	
-//	@Scheduled(cron = "0 0 17 * * 1-5")
-	@Scheduled(cron = "10 * * * * *")
+	@Scheduled(cron = "0 0 17 * * 1-5")
 	public void emailReportAllFinishedStatus() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request that has status Finished");
 		logger.info("Exporting all data to PDF");
