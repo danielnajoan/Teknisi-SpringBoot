@@ -14,10 +14,26 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="555" height="79" uuid="5ec3fc72-67a8-4573-be02-9200e7d91148"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Finished Request List]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="60" splitType="Stretch"/>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="55" uuid="fd070967-adcc-4d70-a685-54481ba0977c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report Date: "+new SimpleDateFormat("dd/MM/YYYY hh:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="33" splitType="Stretch">
@@ -165,9 +181,9 @@
 		</band>
 	</pageFooter>
 	<noData>
-		<band height="234">
+		<band height="207">
 			<staticText>
-				<reportElement x="0" y="170" width="70" height="30" uuid="626560c0-7795-4a0e-9dde-872635f41031"/>
+				<reportElement x="0" y="140" width="70" height="30" uuid="626560c0-7795-4a0e-9dde-872635f41031"/>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
@@ -177,7 +193,7 @@
 				<text><![CDATA[Teknisi ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="70" y="170" width="80" height="30" uuid="dd06b640-44df-48dc-9a10-9b4ee07e8b6d"/>
+				<reportElement x="70" y="140" width="80" height="30" uuid="dd06b640-44df-48dc-9a10-9b4ee07e8b6d"/>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
@@ -187,7 +203,7 @@
 				<text><![CDATA[Request ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="150" y="170" width="80" height="30" uuid="a286490f-a358-4598-b2de-3056a4f4694d"/>
+				<reportElement x="150" y="140" width="80" height="30" uuid="a286490f-a358-4598-b2de-3056a4f4694d"/>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
@@ -197,7 +213,7 @@
 				<text><![CDATA[Merchant Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="230" y="170" width="105" height="30" uuid="04b1dd96-b6d1-44ef-ab06-25703bb8a542"/>
+				<reportElement x="230" y="140" width="105" height="30" uuid="04b1dd96-b6d1-44ef-ab06-25703bb8a542"/>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
@@ -207,7 +223,7 @@
 				<text><![CDATA[Address]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="335" y="170" width="60" height="30" uuid="9f5b62b6-b4ac-43e5-abeb-6573dc47afed"/>
+				<reportElement x="335" y="140" width="60" height="30" uuid="9f5b62b6-b4ac-43e5-abeb-6573dc47afed"/>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
@@ -217,7 +233,7 @@
 				<text><![CDATA[City]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="395" y="170" width="80" height="30" uuid="5074ee7b-bda7-4e6d-8561-eb04d8b58e8f"/>
+				<reportElement x="395" y="140" width="80" height="30" uuid="5074ee7b-bda7-4e6d-8561-eb04d8b58e8f"/>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
@@ -227,7 +243,7 @@
 				<text><![CDATA[PIC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="170" width="80" height="30" uuid="8ec7b861-9a16-4443-b149-79bc05119534"/>
+				<reportElement x="475" y="140" width="80" height="30" uuid="8ec7b861-9a16-4443-b149-79bc05119534"/>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
@@ -237,7 +253,7 @@
 				<text><![CDATA[Created Date]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="200" width="70" height="30" uuid="bf2d9ca6-edfe-46d1-8e8b-13a7965458b4"/>
+				<reportElement x="0" y="170" width="70" height="30" uuid="bf2d9ca6-edfe-46d1-8e8b-13a7965458b4"/>
 				<box padding="5">
 					<pen lineWidth="1.0"/>
 				</box>
@@ -245,7 +261,7 @@
 				<textFieldExpression><![CDATA[$F{teknisi_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="200" width="80" height="30" uuid="5209459b-1843-4e97-9e83-aa3a413d1615"/>
+				<reportElement x="70" y="170" width="80" height="30" uuid="5209459b-1843-4e97-9e83-aa3a413d1615"/>
 				<box padding="5">
 					<pen lineWidth="1.0"/>
 				</box>
@@ -253,7 +269,7 @@
 				<textFieldExpression><![CDATA[$F{request_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="200" width="80" height="30" uuid="516ff359-6c26-4165-b7e5-3fc350c9b97f"/>
+				<reportElement x="150" y="170" width="80" height="30" uuid="516ff359-6c26-4165-b7e5-3fc350c9b97f"/>
 				<box padding="5">
 					<pen lineWidth="1.0"/>
 				</box>
@@ -261,7 +277,7 @@
 				<textFieldExpression><![CDATA[$F{merchant_name}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="200" width="105" height="30" uuid="1fb877d0-533c-46c6-bb73-e8030806fd5b"/>
+				<reportElement x="230" y="170" width="105" height="30" uuid="1fb877d0-533c-46c6-bb73-e8030806fd5b"/>
 				<box padding="5">
 					<pen lineWidth="1.0"/>
 				</box>
@@ -269,7 +285,7 @@
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="335" y="200" width="60" height="30" uuid="d47a91c4-ea10-4ea8-9239-22327248f18e"/>
+				<reportElement x="335" y="170" width="60" height="30" uuid="d47a91c4-ea10-4ea8-9239-22327248f18e"/>
 				<box padding="5">
 					<pen lineWidth="1.0"/>
 				</box>
@@ -277,7 +293,7 @@
 				<textFieldExpression><![CDATA[$F{city}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="395" y="200" width="80" height="30" uuid="618b8155-b78b-4435-b21d-8d8ab4eddc72"/>
+				<reportElement x="395" y="170" width="80" height="30" uuid="618b8155-b78b-4435-b21d-8d8ab4eddc72"/>
 				<box padding="5">
 					<pen lineWidth="1.0"/>
 				</box>
@@ -285,7 +301,7 @@
 				<textFieldExpression><![CDATA[$F{person_in_charge}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="475" y="200" width="80" height="30" uuid="c6e06439-2622-42ee-801d-f060b0c4caae"/>
+				<reportElement x="475" y="170" width="80" height="30" uuid="c6e06439-2622-42ee-801d-f060b0c4caae"/>
 				<box padding="5">
 					<pen lineWidth="1.0"/>
 				</box>
@@ -293,14 +309,14 @@
 				<textFieldExpression><![CDATA[$F{created_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="110" width="555" height="60" uuid="122e2e6b-f6fd-4e83-a8cb-f019b121f448"/>
+				<reportElement x="0" y="80" width="555" height="60" uuid="122e2e6b-f6fd-4e83-a8cb-f019b121f448"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Report Date: "+new SimpleDateFormat("dd/MM/YYYY hh:mm:ss").format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="31" width="555" height="79" uuid="35ea1c68-c27e-46d9-ad8c-3c6c4f617aba"/>
+				<reportElement x="0" y="1" width="555" height="79" uuid="35ea1c68-c27e-46d9-ad8c-3c6c4f617aba"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="36" isBold="true"/>
 				</textElement>
