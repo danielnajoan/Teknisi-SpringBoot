@@ -3,6 +3,7 @@ package com.teknisi.services;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -14,8 +15,6 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -28,6 +27,7 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import com.teknisi.model.Request;
+import com.teknisi.model.Teknisi;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -98,32 +98,82 @@ public class FileServiceImpl implements FileService{
 		JasperExportManager.exportReportToPdfFile(report, "./pdf/"+"FINISHED_REQUEST_"+ currentDateTime + ".pdf");
 	}
 	
+	@SuppressWarnings("resource")
 	@Override
-	public void exportToXLS() {
+	public void exportToXLS() throws IOException {
 		Workbook workbook = new XSSFWorkbook();
 
 		Sheet sheet = workbook.createSheet("Persons");
 		sheet.setColumnWidth(0, 6000);
 		sheet.setColumnWidth(1, 4000);
-
-		Row header = sheet.createRow(0);
-
+		
 		CellStyle headerStyle = workbook.createCellStyle();
-		headerStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-		headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
 		XSSFFont font = ((XSSFWorkbook) workbook).createFont();
 		font.setFontName("Arial");
 		font.setFontHeightInPoints((short) 16);
 		font.setBold(true);
 		headerStyle.setFont(font);
+		
+		String[] xlsHeader = {"No", "Tanggal Process", "Request ID", "Merchant Name", "Address", "City", "PIC", "Teknisi ID","Teknisi Name", "Status"};
+	    
+		Row headlineHeader = sheet.createRow(0);
+		Cell headlineCell = headlineHeader.createCell(1);
+		headlineCell.setCellValue("Rekapitulasi Data Request");
+		headlineCell.setCellStyle(headerStyle);
 
-		Cell headerCell = header.createCell(0);
-		headerCell.setCellValue("Name");
-		headerCell.setCellStyle(headerStyle);
-
-		headerCell = header.createCell(1);
-		headerCell.setCellValue("Age");
-		headerCell.setCellStyle(headerStyle);
+		Row dateHeader = sheet.createRow(1);
+		Cell dateCell = dateHeader.createCell(1);
+		DateFormat dateXLSFormatter = new SimpleDateFormat("dd/MM/yyyy_hh:mm:ss");
+        String currentXLSDateTime = dateXLSFormatter.format(new Date());
+        dateCell.setCellValue("Report Date: " + currentXLSDateTime);
+        
+        Row dataHeader = sheet.createRow(3);
+        for(int i = 0; i < xlsHeader.length; i++) {
+        	Cell nameCell = dataHeader.createCell(i);
+        	nameCell.setCellValue(xlsHeader[i]);
+        	nameCell.setCellStyle(headerStyle);
+        }
+        
+        CellStyle style = workbook.createCellStyle();
+        style.setWrapText(true);
+        List<Request> listRequest = requestService.showAllRecapitulationRequest();
+        int index = 0;
+        for (Request request : listRequest) {
+        	Teknisi teknisi = new Teknisi();
+        	Row row = sheet.createRow(4+index);
+        	Cell columnOne = row.createCell(0);
+        	columnOne.setCellValue(index+1);
+        	Cell columnTwo = row.createCell(1);
+        	if(request.getUpdate_date() == null) {
+        		columnTwo.setCellValue(request.getCreated_date());
+        	}else {
+        		columnTwo.setCellValue(request.getUpdate_date());
+        	}
+        	Cell columnThree = row.createCell(2);
+        	columnThree.setCellValue(request.getRequest_id());
+        	Cell columnFour = row.createCell(3);
+        	columnFour.setCellValue(request.getMerchant_name());
+        	Cell columnFive = row.createCell(4);
+        	columnFive.setCellValue(request.getAddress());
+        	Cell columnSix = row.createCell(5);
+        	columnSix.setCellValue(request.getCity());
+        	Cell columnSeven = row.createCell(6);
+        	columnSeven.setCellValue(request.getPerson_in_charge());
+        	Cell columnEight = row.createCell(7);
+        	columnEight.setCellValue(teknisi.getId());
+        	Cell columnNine = row.createCell(8);
+        	columnNine.setCellValue(teknisi.getName());
+        	Cell columnTen = row.createCell(9);
+        	columnTen.setCellValue(request.getStatus());
+        	index++;
+        }
+        DateFormat dateFileFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-MM-ss");
+        String currentFileDateTime = dateFileFormatter.format(new Date());
+        File file = new File("./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime + ".xls");
+        String filePath = file.getAbsolutePath();
+        FileOutputStream outputStream = new FileOutputStream(filePath);
+        workbook.write(outputStream);
+        workbook.close();
     }
 }
