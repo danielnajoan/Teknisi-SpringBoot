@@ -55,10 +55,12 @@ public class FileServiceImpl implements FileService{
 		    return chosenFile;
 	}
 	
+	@Override
     public CsvPreference customCsvPreference(){
         return new CsvPreference.Builder(',', '|', "\n").build();
     }
     
+    @Override
     public void exportToCSV() throws IOException {
         List<Request> listRequest = requestService.showAllPendingRequest();
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
@@ -86,4 +88,9 @@ public class FileServiceImpl implements FileService{
         String currentDateTime = dateFormatter.format(new Date());
 		JasperExportManager.exportReportToPdfFile(report, "./pdf/"+"FINISHED_REQUEST_"+ currentDateTime + ".pdf");
 	}
+	
+	@Override
+	public void exportToXML() {
+        
+    }
 }

@@ -33,7 +33,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				+ "tek.postal_code as teknisiPostalCode, tek.last_login as teknisiLastLogin, tek.longitude as teknisiLongitude, tek.latitude as teknisiLatitude, "
 				+ "tek.created_date as teknisiCreatedDate, tek.created_by as teknisiCreatedBy, tek.update_date as teknisiUpdateDate, tek.update_by as teknisiUpdateBy, "
 				+ "req.request_id as requestID, req.teknisi_id as reqTeknisiId, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
-				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy, "
+				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy, req.status as requestStatus, "
 				+ "tekPhoto.id as tekPhotoID, tekPhoto.teknisi_id as tekPhotoTeknisiId, tekPhoto.file_type as tekPhotoFile, tekPhoto.name as tekPhotoName, "
 				+ "tekPhoto.images as tekPhotoImages, tekPhoto.created_date as tekPhotoCreatedDate, tekPhoto.created_by as tekPhotoCreatedBy, tekPhoto.update_date as tekPhotoUpdateDate, tekPhoto.update_by as tekPhotoUpdateBy "
 				+ "from teknisi tek "
@@ -78,6 +78,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				request.setCreated_by(String.valueOf(column.get("requestCreatedBy")));
 				request.setUpdate_date((Date)(column.get("requestUpdateDate")));
 				request.setUpdate_by(String.valueOf(column.get("requestUpdateBy")));
+				request.setStatus(String.valueOf(column.get("requestStatus")));
 				listRequest.add(request);
 				teknisi.setRequest(listRequest);
 			}
@@ -104,7 +105,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 				+ "tek.postal_code as teknisiPostalCode, tek.last_login as teknisiLastLogin, tek.longitude as teknisiLongitude, tek.latitude as teknisiLatitude, "
 				+ "tek.created_date as teknisiCreatedDate, tek.created_by as teknisiCreatedBy, tek.update_date as teknisiUpdateDate, tek.update_by as teknisiUpdateBy, "
 				+ "req.request_id as requestID, req.teknisi_id as reqTeknisiId, req.merchant_name as merchantName, req.address as requestAddress, req.city as requestCity, req.postal_code as requestPostalCode, req.phone as requestPhone, req.pic as requestPIC, "
-				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy, "
+				+ "req.created_date as requestCreatedDate, req.created_by as requestCreatedBy, req.update_date as requestUpdateDate, req.update_by as requestUpdateBy, req.status as requestStatus, "
 				+ "tekPhoto.id as tekPhotoID, tekPhoto.teknisi_id as tekPhotoTeknisiId, tekPhoto.file_type as tekPhotoFile, tekPhoto.name as tekPhotoName, "
 				+ "tekPhoto.images as tekPhotoImages, tekPhoto.created_date as tekPhotoCreatedDate, tekPhoto.created_by as tekPhotoCreatedBy, tekPhoto.update_date as tekPhotoUpdateDate, tekPhoto.update_by as tekPhotoUpdateBy "
 				+ "from teknisi tek "
@@ -149,6 +150,7 @@ public class TeknisiDaoImpl extends JdbcDaoSupport implements TeknisiDao{
 					request.setCreated_by(String.valueOf(column.get("requestCreatedBy")));
 					request.setUpdate_date((Date)(column.get("requestUpdateDate")));
 					request.setUpdate_by(String.valueOf(column.get("requestUpdateBy")));
+					request.setStatus(String.valueOf(column.get("requestStatus")));
 					listRequest.add(request);
 					teknisi.setRequest(listRequest);
 				}

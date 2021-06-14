@@ -14,4 +14,5 @@ public interface FileService {
 	CsvPreference customCsvPreference();
 	void exportToCSV() throws IOException;
 	void exportToPDF() throws FileNotFoundException, JRException;
+	void exportToXML();
 }

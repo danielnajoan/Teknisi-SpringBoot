@@ -94,6 +94,11 @@
 		    <artifactId>jasperreports</artifactId>
 		    <version>6.4.0</version>
 		</dependency>
+				<!-- JACKSON XML -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
