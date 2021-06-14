@@ -177,9 +177,9 @@ public class FileServiceImpl implements FileService{
         	
         	columnOne.setCellValue(index+1);
         	if(request.getUpdate_date() == null) {
-        		columnTwo.setCellValue(request.getCreated_date());
+        		columnTwo.setCellValue(new SimpleDateFormat("MM/dd/yyyy  hh:mm:ss").format(request.getCreated_date()));
         	}else {
-        		columnTwo.setCellValue(request.getUpdate_date());
+        		columnTwo.setCellValue(new SimpleDateFormat("MM/dd/yyyy  hh:mm:ss").format(request.getUpdate_date()));
         	}
         	columnThree.setCellValue(request.getRequest_id());
         	columnFour.setCellValue(request.getMerchant_name());
