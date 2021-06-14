@@ -27,7 +27,6 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import com.teknisi.model.Request;
-import com.teknisi.model.Teknisi;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -98,7 +97,6 @@ public class FileServiceImpl implements FileService{
 		JasperExportManager.exportReportToPdfFile(report, "./pdf/"+"FINISHED_REQUEST_"+ currentDateTime + ".pdf");
 	}
 	
-	@SuppressWarnings("resource")
 	@Override
 	public void exportToXLS() throws IOException {
 		Workbook workbook = new XSSFWorkbook();
@@ -140,7 +138,6 @@ public class FileServiceImpl implements FileService{
         List<Request> listRequest = requestService.showAllRecapitulationRequest();
         int index = 0;
         for (Request request : listRequest) {
-        	Teknisi teknisi = new Teknisi();
         	Row row = sheet.createRow(4+index);
         	Cell columnOne = row.createCell(0);
         	columnOne.setCellValue(index+1);
@@ -161,9 +158,9 @@ public class FileServiceImpl implements FileService{
         	Cell columnSeven = row.createCell(6);
         	columnSeven.setCellValue(request.getPerson_in_charge());
         	Cell columnEight = row.createCell(7);
-        	columnEight.setCellValue(teknisi.getId());
+        	columnEight.setCellValue(request.getTeknisi().getId());
         	Cell columnNine = row.createCell(8);
-        	columnNine.setCellValue(teknisi.getName());
+        	columnNine.setCellValue(request.getTeknisi().getName());
         	Cell columnTen = row.createCell(9);
         	columnTen.setCellValue(request.getStatus());
         	index++;
