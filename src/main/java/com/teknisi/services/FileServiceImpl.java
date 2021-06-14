@@ -14,11 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,72 +99,107 @@ public class FileServiceImpl implements FileService{
 		JasperExportManager.exportReportToPdfFile(report, "./pdf/"+"FINISHED_REQUEST_"+ currentDateTime + ".pdf");
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void exportToXLS() throws IOException {
-		Workbook workbook = new XSSFWorkbook();
+		XSSFWorkbook workbook = new XSSFWorkbook();
 
-		Sheet sheet = workbook.createSheet("Persons");
-		sheet.setColumnWidth(0, 6000);
-		sheet.setColumnWidth(1, 4000);
-		
-		CellStyle headerStyle = workbook.createCellStyle();
-
+		XSSFSheet sheet = workbook.createSheet("Recapitulation");
+		sheet.setDefaultColumnWidth(25);
+		sheet.setColumnWidth(0, 5);;
 		XSSFFont font = ((XSSFWorkbook) workbook).createFont();
 		font.setFontName("Arial");
 		font.setFontHeightInPoints((short) 16);
 		font.setBold(true);
+		XSSFCellStyle headerStyle = workbook.createCellStyle();
 		headerStyle.setFont(font);
+		headerStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		headerStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
 		
 		String[] xlsHeader = {"No", "Tanggal Process", "Request ID", "Merchant Name", "Address", "City", "PIC", "Teknisi ID","Teknisi Name", "Status"};
 	    
-		Row headlineHeader = sheet.createRow(0);
-		Cell headlineCell = headlineHeader.createCell(1);
+		XSSFRow headlineHeader = sheet.createRow(0);
+		//(first row, last row, first column, last column)
+		sheet.addMergedRegion(new CellRangeAddress( 0, 0, 1, 9 ));
+		XSSFCell headlineCell = headlineHeader.createCell(1);
 		headlineCell.setCellValue("Rekapitulasi Data Request");
 		headlineCell.setCellStyle(headerStyle);
 
-		Row dateHeader = sheet.createRow(1);
-		Cell dateCell = dateHeader.createCell(1);
+		XSSFRow dateHeader = sheet.createRow(1);
+		sheet.addMergedRegion(new CellRangeAddress( 1, 1, 1, 9 ));
+		XSSFCell  dateCell = dateHeader.createCell(1);
 		DateFormat dateXLSFormatter = new SimpleDateFormat("dd/MM/yyyy_hh:mm:ss");
         String currentXLSDateTime = dateXLSFormatter.format(new Date());
         dateCell.setCellValue("Report Date: " + currentXLSDateTime);
+        dateCell.setCellStyle(headerStyle);
         
-        Row dataHeader = sheet.createRow(3);
+
+        
+		XSSFCellStyle columnTitle = workbook.createCellStyle();
+		columnTitle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+		columnTitle.setBorderRight(XSSFCellStyle.BORDER_THIN);
+		columnTitle.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		columnTitle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
+		columnTitle.setFont(font);
+		columnTitle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		columnTitle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+        
+        XSSFRow dataHeader = sheet.createRow(3);
         for(int i = 0; i < xlsHeader.length; i++) {
         	Cell nameCell = dataHeader.createCell(i);
         	nameCell.setCellValue(xlsHeader[i]);
-        	nameCell.setCellStyle(headerStyle);
+        	nameCell.setCellStyle(columnTitle);
         }
         
-        CellStyle style = workbook.createCellStyle();
-        style.setWrapText(true);
+        XSSFCellStyle contentStyle = workbook.createCellStyle();
+        contentStyle.setWrapText(true);
+        contentStyle.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+        contentStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);
+        contentStyle.setBorderTop(XSSFCellStyle.BORDER_THIN);
+        contentStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
+        contentStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+        contentStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+        
         List<Request> listRequest = requestService.showAllRecapitulationRequest();
         int index = 0;
         for (Request request : listRequest) {
         	Row row = sheet.createRow(4+index);
-        	Cell columnOne = row.createCell(0);
+        	XSSFCell  columnOne = (XSSFCell) row.createCell(0);
+        	XSSFCell  columnTwo = (XSSFCell) row.createCell(1);
+        	XSSFCell  columnThree = (XSSFCell) row.createCell(2);
+        	XSSFCell  columnFour = (XSSFCell) row.createCell(3);
+        	XSSFCell  columnFive = (XSSFCell) row.createCell(4);
+        	XSSFCell  columnSix = (XSSFCell) row.createCell(5);
+        	XSSFCell  columnSeven = (XSSFCell) row.createCell(6);
+        	XSSFCell  columnEight = (XSSFCell) row.createCell(7);
+        	XSSFCell  columnNine = (XSSFCell) row.createCell(8);
+        	XSSFCell  columnTen = (XSSFCell) row.createCell(9);
+        	
         	columnOne.setCellValue(index+1);
-        	Cell columnTwo = row.createCell(1);
         	if(request.getUpdate_date() == null) {
         		columnTwo.setCellValue(request.getCreated_date());
         	}else {
         		columnTwo.setCellValue(request.getUpdate_date());
         	}
-        	Cell columnThree = row.createCell(2);
         	columnThree.setCellValue(request.getRequest_id());
-        	Cell columnFour = row.createCell(3);
         	columnFour.setCellValue(request.getMerchant_name());
-        	Cell columnFive = row.createCell(4);
         	columnFive.setCellValue(request.getAddress());
-        	Cell columnSix = row.createCell(5);
         	columnSix.setCellValue(request.getCity());
-        	Cell columnSeven = row.createCell(6);
         	columnSeven.setCellValue(request.getPerson_in_charge());
-        	Cell columnEight = row.createCell(7);
         	columnEight.setCellValue(request.getTeknisi().getId());
-        	Cell columnNine = row.createCell(8);
         	columnNine.setCellValue(request.getTeknisi().getName());
-        	Cell columnTen = row.createCell(9);
         	columnTen.setCellValue(request.getStatus());
+        	
+        	columnOne.setCellStyle(contentStyle);
+        	columnTwo.setCellStyle(contentStyle);
+        	columnThree.setCellStyle(contentStyle);
+        	columnFour.setCellStyle(contentStyle);
+        	columnFive.setCellStyle(contentStyle);
+        	columnSix.setCellStyle(contentStyle);
+        	columnSeven.setCellStyle(contentStyle);
+        	columnEight.setCellStyle(contentStyle);
+        	columnNine.setCellStyle(contentStyle);
+        	columnTen.setCellStyle(contentStyle);
         	index++;
         }
         DateFormat dateFileFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-MM-ss");
