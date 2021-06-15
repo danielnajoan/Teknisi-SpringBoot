@@ -4,7 +4,7 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="update_date" class="java.sql.Date"/>
+	<field name="update_date" class="java.util.Date"/>
 	<field name="request_id" class="java.lang.String"/>
 	<field name="merchant_name" class="java.lang.String"/>
 	<field name="address" class="java.lang.String"/>
@@ -13,7 +13,7 @@
 	<field name="teknisi.id" class="java.lang.Long"/>
 	<field name="teknisi.name" class="java.lang.String"/>
 	<field name="status" class="java.lang.String"/>
-	<field name="created_date" class="java.sql.Date"/>
+	<field name="created_date" class="java.util.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -169,7 +169,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Gill Sans MT"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{update_date}.equals(null) ? $F{created_date} : $F{update_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{update_date} == null?new SimpleDateFormat("dd/MM/YYYY hh:mm:ss").format($F{created_date}):new SimpleDateFormat("dd/MM/YYYY hh:mm:ss").format($F{update_date})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="0" width="60" height="30" uuid="8f5806bb-6ec8-462a-b328-2979f8d045bc"/>
