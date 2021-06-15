@@ -88,10 +88,7 @@ public class Scheduler {
 		logger.info("Get latest CSV that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			String message = environment.getProperty("mail.admin.template.reminder.message");
-			String formattedMessage = MessageFormat.format(message, appUser.getUsername());
-			logger.debug("Formatted Message {}" + formattedMessage);
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Pending Ticket Request", formattedMessage, "./csv");
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Pending Ticket Request", "reminder", "./csv");
 		}
 		logger.info("Schedule information for pending ticket request has been sent to admin email");
 	}
@@ -104,10 +101,7 @@ public class Scheduler {
 		logger.info("Get latest PDF that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			String message = environment.getProperty("mail.admin.template.report.message");
-			String formattedMessage = MessageFormat.format(message, appUser.getUsername());
-			logger.debug("Formatted Message {}" + formattedMessage);
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Finished Ticket Request", formattedMessage, "./pdf");
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Finished Ticket Request", "report", "./pdf");
 		}
 		logger.info("Schedule report for finished ticket request has been sent to admin email");
 	}
@@ -121,10 +115,7 @@ public class Scheduler {
 		logger.info("Get latest XLS that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			String message = environment.getProperty("mail.admin.template.recapitulation.message");
-			String formattedMessage = MessageFormat.format(message, appUser.getUsername());
-			logger.debug("Formatted Message {}" + formattedMessage);
-			messageService.sendEmailRecapRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", formattedMessage, "./xls");
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", "./xls");
 		}
 		logger.info("Schedule recapitulation report of ticket request has been sent to admin email");
 	}
