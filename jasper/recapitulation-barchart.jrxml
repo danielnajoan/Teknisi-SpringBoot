@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BarChartRekapitulasiDataRequest" pageWidth="595" pageHeight="860" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" uuid="5507fe3c-97da-457b-a38c-3cd3c4025a5a">
+	<field name="request_id" class="java.lang.String"/>
+	<field name="update_date" class="java.util.Date"/>
+	<field name="created_date" class="java.util.Date"/>
+	<field name="status" class="java.lang.String"/>
+	<variable name="countStatus" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[Boolean.TRUE]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="515" height="79" uuid="8fe4a9fd-5be0-4994-b9dc-95217b7b9cb6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Gill Sans MT" size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rekapitulasi Data Request]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="515" height="60" uuid="f797be76-3e28-431f-b752-f368e2a7cba9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Gill Sans MT" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report Date: "+new SimpleDateFormat("dd/MM/YYYY hh:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="0" width="515" height="200" uuid="dba12c75-befc-4737-8bf0-00669e065f86"/>
+					<chartTitle>
+						<titleExpression><![CDATA["7 Days Report"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{status}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{update_date} == null?new SimpleDateFormat("dd/MM/YYYY").format($F{created_date}):new SimpleDateFormat("dd/MM/YYYY").format($F{update_date})]]></categoryExpression>
+						<valueExpression><![CDATA[$V{countStatus}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowTickMarks="false">
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="515" height="54" uuid="cf0f4c9f-c405-4ae4-acdd-8fee099be60a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Gill Sans MT" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

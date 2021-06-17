@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -128,4 +129,21 @@ public class FileServiceImpl implements FileService{
         }
 
     }
+	
+	@Override
+	public void exportToBarChart() throws FileNotFoundException, JRException {
+		ArrayList<Request> arrayListRequest =(ArrayList<Request>) requestService.showAllRecapitulationRequest();
+		Object[] arrayObjectRequest = arrayListRequest.toArray();
+		JRBeanArrayDataSource beanCollectionDataSource = new JRBeanArrayDataSource(arrayObjectRequest);
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/recapitulation-barchart.jrxml"));
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        String currentDateTime = dateFormatter.format(new Date());
+        Calendar calender = Calendar.getInstance();
+        calender.add(Calendar.DATE, -7);
+        Date lastWeekDate = calender.getTime();    
+        String lastWeekFriday = dateFormatter.format(lastWeekDate);
+		JasperExportManager.exportReportToPdfFile(report, "./pdf/barchart/"+"REQUEST_"+lastWeekFriday+" - " +currentDateTime + ".pdf");
+	}
 }

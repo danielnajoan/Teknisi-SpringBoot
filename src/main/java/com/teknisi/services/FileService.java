@@ -15,4 +15,5 @@ public interface FileService {
 	void exportToCSV() throws IOException;
 	void exportToPDF() throws FileNotFoundException, JRException;
 	void exportToXLS() throws IOException, JRException;
+	void exportToBarChart() throws FileNotFoundException, JRException;
 }
