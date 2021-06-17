@@ -93,7 +93,7 @@ public class Scheduler {
 		logger.info("Schedule information for pending ticket request has been sent to admin email");
 	}
 	
-	@Scheduled(cron = "0 0 17 * * 1-5")
+//	@Scheduled(cron = "0 0 17 * * 1-5")
 	public void emailReportAllFinishedStatus() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request that has status Finished");
 		logger.info("Exporting all data to PDF");
