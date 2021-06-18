@@ -56,7 +56,7 @@
 					<dataset resetType="Report"/>
 					<categorySeries>
 						<seriesExpression><![CDATA[$F{status}]]></seriesExpression>
-						<categoryExpression><![CDATA[new SimpleDateFormat("EEEE DD/MM/YY").format($F{created_date})]]></categoryExpression>
+						<categoryExpression><![CDATA[new SimpleDateFormat("EEE dd/MM/YY").format($F{created_date})]]></categoryExpression>
 						<valueExpression><![CDATA[$F{count}]]></valueExpression>
 						<labelExpression><![CDATA["7 days"]]></labelExpression>
 					</categorySeries>
