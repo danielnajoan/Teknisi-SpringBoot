@@ -23,6 +23,7 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import com.teknisi.model.BarChart;
 import com.teknisi.model.Request;
 
 import net.sf.jasperreports.engine.JRException;
@@ -32,6 +33,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
@@ -42,6 +44,7 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 public class FileServiceImpl implements FileService{
 	
 	@Autowired RequestService requestService;
+	@Autowired BarChartService barChartService;
 	
 	@Override
 	public File getLastModified(String path) {
@@ -129,15 +132,14 @@ public class FileServiceImpl implements FileService{
         }
 
     }
-	
+
 	@Override
 	public void exportToBarChart() throws FileNotFoundException, JRException {
-		ArrayList<Request> arrayListRequest =(ArrayList<Request>) requestService.showAllRecapitulationRequest();
-		Object[] arrayObjectRequest = arrayListRequest.toArray();
-		JRBeanArrayDataSource beanCollectionDataSource = new JRBeanArrayDataSource(arrayObjectRequest);
+		ArrayList<BarChart> arrayListRequest =(ArrayList<BarChart>) barChartService.showAllRequestCount();
+		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(arrayListRequest);
 		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/recapitulation-barchart.jrxml"));
 		HashMap<String, Object> map = new HashMap<>();
-		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanColDataSource);
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         String currentDateTime = dateFormatter.format(new Date());
         Calendar calender = Calendar.getInstance();
