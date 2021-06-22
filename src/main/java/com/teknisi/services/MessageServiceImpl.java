@@ -1,12 +1,10 @@
 package com.teknisi.services;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +50,7 @@ public class MessageServiceImpl implements MessageService{
         javaMailSender.send(msg);
     }
     @Override
-    public void sendEmailTicketRequestWithAttachment(String email, String name, String subject, String templateName, String fileName, InputStream inputStream) throws MessagingException, IOException {
+    public void sendEmailTicketRequestWithAttachment(String email, String name, String subject, String templateName, String fileName, byte[] attachment) throws MessagingException, IOException {
 
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
@@ -66,7 +64,7 @@ public class MessageServiceImpl implements MessageService{
         helper.setTo(email);
         helper.setSubject(name+subject);
         helper.setText(html, true);
-        helper.addAttachment(fileName, new ByteArrayResource(IOUtils.toByteArray(inputStream)));
+        helper.addAttachment(fileName, new ByteArrayResource(attachment));
         javaMailSender.send(msg);
     }
 }

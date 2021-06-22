@@ -1,9 +1,11 @@
 package com.teknisi.scheduler;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -86,11 +88,14 @@ public class Scheduler {
 	public void emailReminderAllPendingStatus() throws IOException, MessagingException {
 		logger.info("Check all ticket request that has status mail_sent, new and processed");
 		logger.info("Exporting all data to CSV");
-		File csv = fileService.exportToCSV();
+		byte[] csv = fileService.exportToCSV();
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+		String fileName = "./csv/"+ "REQUEST_"+ currentDateTime+".csv";
 		logger.info("Get latest CSV that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Pending Ticket Request", "reminder", csv.getName(), new FileInputStream(csv));
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Pending Ticket Request", "reminder", fileName, csv);
 		}
 		logger.info("Schedule information for pending ticket request has been sent to admin email");
 	}
@@ -99,11 +104,14 @@ public class Scheduler {
 	public void emailReportAllFinishedStatus() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request that has status Finished");
 		logger.info("Exporting all data to PDF");
-		File pdf = fileService.exportToPDF();
+		byte[] pdf = fileService.exportToPDF();
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+        String fileName = "./pdf/"+"FINISHED_REQUEST_"+ currentDateTime +".pdf";
 		logger.info("Get latest PDF that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Finished Ticket Request", "report", pdf.getName(), new FileInputStream(pdf));
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Finished Ticket Request", "report", fileName, pdf);
 		}
 		logger.info("Schedule report for finished ticket request has been sent to admin email");
 	}
@@ -112,11 +120,14 @@ public class Scheduler {
 	public void emailRecapitulationReport() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request for a recapitulation");
 		logger.info("Exporting all data to XLS");
-		File xls = fileService.exportToXLS();
+		byte[] xls = fileService.exportToXLS();
+        DateFormat dateFileFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-MM-ss");
+        String currentFileDateTime = dateFileFormatter.format(new Date());
+        String fileName = "./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime +".xls";
 		logger.info("Get latest XLS that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", xls.getName(), new FileInputStream(xls));
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", fileName, xls);
 		}
 		logger.info("Schedule recapitulation report of ticket request has been sent to admin email");
 	}
@@ -125,11 +136,20 @@ public class Scheduler {
 	public void emailBarchartRecapitulationReport() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request for a recapitulation");
 		logger.info("Exporting all data to BarChart PDF");
-		File pdfBarChart =fileService.exportToBarChart();
+		byte[] pdfBarChart =fileService.exportToBarChart();
 		logger.info("Get latest BarChart PDF that will be send to Admin");
+		
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        String currentDateTime = dateFormatter.format(new Date());
+        Calendar calender = Calendar.getInstance();
+        calender.add(Calendar.DATE, -7);
+        Date lastWeekDate = calender.getTime();    
+        String lastWeekFriday = dateFormatter.format(lastWeekDate);
+        String fileName ="REQUEST_"+lastWeekFriday+" - " +currentDateTime+".pdf";
+        
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", pdfBarChart.getName(), new FileInputStream(pdfBarChart));
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", fileName,  pdfBarChart);
 		}
 		logger.info("Schedule report for finished ticket request has been sent to admin email");
 	}

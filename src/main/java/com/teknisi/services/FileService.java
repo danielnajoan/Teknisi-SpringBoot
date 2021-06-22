@@ -14,8 +14,8 @@ public interface FileService {
 	
 	File getLastModified(String path);
 	CsvPreference customCsvPreference();
-	File exportToCSV() throws IOException;
-	File exportToPDF() throws FileNotFoundException, IOException, JRException, MessagingException;
-	File exportToXLS() throws IOException, JRException;
-	File exportToBarChart() throws FileNotFoundException, JRException, IOException;
+	byte[] exportToCSV() throws IOException;
+	byte[] exportToPDF() throws FileNotFoundException, IOException, JRException, MessagingException;
+	byte[] exportToXLS() throws IOException, JRException;
+	byte[] exportToBarChart() throws FileNotFoundException, JRException, IOException;
 }
