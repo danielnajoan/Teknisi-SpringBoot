@@ -127,7 +127,7 @@ public class FileServiceImpl implements FileService{
 
         DateFormat dateFileFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-MM-ss");
         String currentFileDateTime = dateFileFormatter.format(new Date());
-        File outputFile = File.createTempFile("./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime+"#", ".csv");
+        File outputFile = File.createTempFile("./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime+"#", ".xls");
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              OutputStream fileOutputStream = new FileOutputStream(outputFile)) {
             Exporter exporter = new JRXlsxExporter();
