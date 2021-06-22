@@ -81,7 +81,7 @@ public class FileServiceImpl implements FileService{
         List<Request> listRequest = requestService.showAllPendingRequest();
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
-        File outputFile = File.createTempFile("./csv/"+ "REQUEST_"+ currentDateTime, ".csv");
+        File outputFile = File.createTempFile("./csv/"+ "REQUEST_"+ currentDateTime+"#", ".csv");
         FileWriter filePath = new FileWriter(outputFile, true);
         ICsvBeanWriter csvWriter = new CsvBeanWriter(filePath, customCsvPreference());
         String[] csvHeader = {"Teknisi ID", "Request ID", "Merchant Name", "Address", "City", "PIC", "Created_date", "Status"};
@@ -104,7 +104,7 @@ public class FileServiceImpl implements FileService{
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
-        File outputFile = File.createTempFile("./pdf/"+"FINISHED_REQUEST_"+ currentDateTime, ".pdf");
+        File outputFile = File.createTempFile("./pdf/"+"FINISHED_REQUEST_"+ currentDateTime +"#", ".pdf");
         JasperExportManager.exportReportToPdfStream(report,new FileOutputStream(outputFile));
         return outputFile;
 	}
@@ -127,7 +127,7 @@ public class FileServiceImpl implements FileService{
 
         DateFormat dateFileFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-MM-ss");
         String currentFileDateTime = dateFileFormatter.format(new Date());
-        File outputFile = File.createTempFile("./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime, ".csv");
+        File outputFile = File.createTempFile("./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime+"#", ".csv");
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              OutputStream fileOutputStream = new FileOutputStream(outputFile)) {
             Exporter exporter = new JRXlsxExporter();
@@ -154,7 +154,7 @@ public class FileServiceImpl implements FileService{
         calender.add(Calendar.DATE, -7);
         Date lastWeekDate = calender.getTime();    
         String lastWeekFriday = dateFormatter.format(lastWeekDate);
-        File outputFile = File.createTempFile("./pdf/barchart/"+"REQUEST_"+lastWeekFriday+" - " +currentDateTime, ".pdf");
+        File outputFile = File.createTempFile("./pdf/barchart/"+"REQUEST_"+lastWeekFriday+" - " +currentDateTime+"#", ".pdf");
 		JasperExportManager.exportReportToPdfStream(report, new FileOutputStream(outputFile));
 		return outputFile;
 	}
