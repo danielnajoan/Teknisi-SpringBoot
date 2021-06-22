@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.supercsv.io.CsvBeanWriter;
@@ -45,6 +47,7 @@ public class FileServiceImpl implements FileService{
 	
 	@Autowired RequestService requestService;
 	@Autowired BarChartService barChartService;
+	@Autowired MessageService messageService;
 	
 	@Override
 	public File getLastModified(String path) {
@@ -74,11 +77,12 @@ public class FileServiceImpl implements FileService{
     }
     
     @Override
-    public void exportToCSV() throws IOException {
+    public File exportToCSV() throws IOException {
         List<Request> listRequest = requestService.showAllPendingRequest();
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
-        FileWriter filePath = new FileWriter("./csv/"+ "REQUEST_"+ currentDateTime + ".csv", true);
+        File outputFile = File.createTempFile("./csv/"+ "REQUEST_"+ currentDateTime, ".csv");
+        FileWriter filePath = new FileWriter(outputFile, true);
         ICsvBeanWriter csvWriter = new CsvBeanWriter(filePath, customCsvPreference());
         String[] csvHeader = {"Teknisi ID", "Request ID", "Merchant Name", "Address", "City", "PIC", "Created_date", "Status"};
         String[] nameMapping = {"teknisi_id", "request_id", "merchant_name", "address", "city","person_in_charge","created_date","status"};
@@ -87,10 +91,11 @@ public class FileServiceImpl implements FileService{
             csvWriter.write(request, nameMapping);
         }
         csvWriter.close();
+		return outputFile;
     }
 
 	@Override
-	public void exportToPDF() throws FileNotFoundException, JRException {
+	public File exportToPDF() throws FileNotFoundException, JRException, IOException, MessagingException {
 		ArrayList<Request> arrayListRequest =(ArrayList<Request>) requestService.showAllStatusRequest("FINISHED");
 		Object[] arrayObjectRequest = arrayListRequest.toArray();
 		JRBeanArrayDataSource beanCollectionDataSource = new JRBeanArrayDataSource(arrayObjectRequest);
@@ -99,12 +104,14 @@ public class FileServiceImpl implements FileService{
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
-		JasperExportManager.exportReportToPdfFile(report, "./pdf/"+"FINISHED_REQUEST_"+ currentDateTime + ".pdf");
+        File outputFile = File.createTempFile("./pdf/"+"FINISHED_REQUEST_"+ currentDateTime, ".pdf");
+        JasperExportManager.exportReportToPdfStream(report,new FileOutputStream(outputFile));
+        return outputFile;
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void exportToXLS() throws IOException, JRException {
+	public File exportToXLS() throws IOException, JRException {
 		
         JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/recapitulation.jrxml"));
         ArrayList<Request> arrayListRequest =(ArrayList<Request>) requestService.showAllRecapitulationRequest();
@@ -120,7 +127,7 @@ public class FileServiceImpl implements FileService{
 
         DateFormat dateFileFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-MM-ss");
         String currentFileDateTime = dateFileFormatter.format(new Date());
-        File outputFile = new File("./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime + ".xls");
+        File outputFile = File.createTempFile("./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime, ".csv");
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              OutputStream fileOutputStream = new FileOutputStream(outputFile)) {
             Exporter exporter = new JRXlsxExporter();
@@ -130,11 +137,12 @@ public class FileServiceImpl implements FileService{
             exporter.exportReport();
             byteArrayOutputStream.writeTo(fileOutputStream);
         }
+		return outputFile;
 
     }
 
 	@Override
-	public void exportToBarChart() throws FileNotFoundException, JRException {
+	public File exportToBarChart() throws FileNotFoundException, JRException, IOException {
 		ArrayList<BarChart> arrayListRequest =(ArrayList<BarChart>) barChartService.showAllRequestCount();
 		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(arrayListRequest);
 		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/recapitulation-barchart.jrxml"));
@@ -146,6 +154,8 @@ public class FileServiceImpl implements FileService{
         calender.add(Calendar.DATE, -7);
         Date lastWeekDate = calender.getTime();    
         String lastWeekFriday = dateFormatter.format(lastWeekDate);
-		JasperExportManager.exportReportToPdfFile(report, "./pdf/barchart/"+"REQUEST_"+lastWeekFriday+" - " +currentDateTime + ".pdf");
+        File outputFile = File.createTempFile("./pdf/barchart/"+"REQUEST_"+lastWeekFriday+" - " +currentDateTime, ".pdf");
+		JasperExportManager.exportReportToPdfStream(report, new FileOutputStream(outputFile));
+		return outputFile;
 	}
 }

@@ -1,15 +1,17 @@
 package com.teknisi.services;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -23,7 +25,6 @@ public class MessageServiceImpl implements MessageService{
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired private JavaMailSender javaMailSender;
-	@Autowired private FileService fileService;
     @Autowired private SpringTemplateEngine templateEngine;
 	
 	@Value("${template.mail.subject:Hello }")
@@ -50,8 +51,8 @@ public class MessageServiceImpl implements MessageService{
         msg.setText(message);
         javaMailSender.send(msg);
     }
-    
-    public void sendEmailTicketRequestWithAttachment(String email, String name, String subject, String templateName, String attachmentPath) throws MessagingException, IOException {
+    @Override
+    public void sendEmailTicketRequestWithAttachment(String email, String name, String subject, String templateName, String fileName, InputStream inputStream) throws MessagingException, IOException {
 
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
@@ -65,9 +66,7 @@ public class MessageServiceImpl implements MessageService{
         helper.setTo(email);
         helper.setSubject(name+subject);
         helper.setText(html, true);
-        FileSystemResource file = new FileSystemResource(fileService.getLastModified(attachmentPath));
-        helper.addAttachment(file.getFilename(), file);
+        helper.addAttachment(fileName, new ByteArrayResource(IOUtils.toByteArray(inputStream)));
         javaMailSender.send(msg);
-
     }
 }

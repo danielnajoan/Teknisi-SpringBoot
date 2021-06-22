@@ -1,5 +1,7 @@
 package com.teknisi.scheduler;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
@@ -39,7 +41,7 @@ public class Scheduler {
 
 //corn position meaning: second, minute, hour, day of month, month, day(s) of week
 //	@Scheduled(cron = "10 * * * * *")
-	@Scheduled(cron = "0 0/10 * * * *")
+//	@Scheduled(cron = "0 0/10 * * * *")
 	public void emailReminderStatusNew() throws IOException {
 		logger.info("Check all ticket request that has status new");
 		List<Request> listRequest = requestService.showAllStatusRequest("NEW");
@@ -61,7 +63,7 @@ public class Scheduler {
 		logger.info("Schedule reminder for ticket request status = new has been sent to email");
 	}
 	
-	@Scheduled(fixedRate = 300000)
+//	@Scheduled(fixedRate = 300000)
 	public void emailReminderStatusMail_Sent() throws ParseException, java.text.ParseException {
 		logger.info("Check all ticket request that has status mail_sent");
 		List<Request> listRequest = requestService.showRequestByBeforeDate("MAIL_SENT");
@@ -80,54 +82,55 @@ public class Scheduler {
 		logger.info("Schedule reminder for ticket request status = mail_sent has been sent to email");
 	}
 
-	@Scheduled(cron = "0 0 12 * * 1-5")
+//	@Scheduled(cron = "0 0 12 * * 1-5")
 	public void emailReminderAllPendingStatus() throws IOException, MessagingException {
 		logger.info("Check all ticket request that has status mail_sent, new and processed");
 		logger.info("Exporting all data to CSV");
-		fileService.exportToCSV();
+		File csv = fileService.exportToCSV();
 		logger.info("Get latest CSV that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Pending Ticket Request", "reminder", "./csv");
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Pending Ticket Request", "reminder", csv.getName(), new FileInputStream(csv));
 		}
 		logger.info("Schedule information for pending ticket request has been sent to admin email");
 	}
 	
-	@Scheduled(cron = "0 0 17 * * 1-5")
+//	@Scheduled(cron = "0 0 17 * * 1-5")
+	@Scheduled(cron = "10 * * * * *")
 	public void emailReportAllFinishedStatus() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request that has status Finished");
 		logger.info("Exporting all data to PDF");
-		fileService.exportToPDF();
+		File pdf = fileService.exportToPDF();
 		logger.info("Get latest PDF that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Finished Ticket Request", "report", "./pdf");
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Finished Ticket Request", "report", pdf.getName(), new FileInputStream(pdf));
 		}
 		logger.info("Schedule report for finished ticket request has been sent to admin email");
 	}
 	
-	@Scheduled(cron = "0 0 18 * * 5")
+//	@Scheduled(cron = "0 0 18 * * 5")
 	public void emailRecapitulationReport() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request for a recapitulation");
 		logger.info("Exporting all data to XLS");
-		fileService.exportToXLS();
+		File xls = fileService.exportToXLS();
 		logger.info("Get latest XLS that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", "./xls");
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", xls.getName(), new FileInputStream(xls));
 		}
 		logger.info("Schedule recapitulation report of ticket request has been sent to admin email");
 	}
 	
-	@Scheduled(cron = "0 0 17 * * 5")
+//	@Scheduled(cron = "0 0 17 * * 5")
 	public void emailBarchartRecapitulationReport() throws IOException, MessagingException, JRException {
 		logger.info("Check all ticket request for a recapitulation");
 		logger.info("Exporting all data to BarChart PDF");
-		fileService.exportToBarChart();
+		File pdfBarChart =fileService.exportToBarChart();
 		logger.info("Get latest BarChart PDF that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
-			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", "./pdf/barchart");
+			messageService.sendEmailTicketRequestWithAttachment( appUser.getEmail(), appUser.getUsername(), ", Here Are The List of Recapitulation Ticket Request", "recapitulation", pdfBarChart.getName(), new FileInputStream(pdfBarChart));
 		}
 		logger.info("Schedule report for finished ticket request has been sent to admin email");
 	}

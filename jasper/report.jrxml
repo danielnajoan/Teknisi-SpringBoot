@@ -8,7 +8,7 @@
 	<field name="merchant_name" class="java.lang.String"/>
 	<field name="address" class="java.lang.String"/>
 	<field name="city" class="java.lang.String"/>
-	<field name="pic" class="java.lang.String"/>
+	<field name="person_in_charge" class="java.lang.String"/>
 	<field name="created_date" class="java.util.Date"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -169,7 +169,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Gill Sans MT"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pic}.toUpperCase()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{person_in_charge}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="475" y="-3" width="80" height="30" uuid="154fea44-fd13-4d09-a299-d8893e99ea68"/>
