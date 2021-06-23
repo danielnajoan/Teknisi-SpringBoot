@@ -1,5 +1,6 @@
 package com.teknisi.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class RequestServiceImpl implements RequestService{
 	@Override
 	public List<Request> showAllRecapitulationRequest() {
 		return requestDao.getAllRecapitulationRequest();
+	}
+	
+	@Override
+	public List<Request> showAllRecapitulationRequest(Date startDate, Date endDate) {
+		return requestDao.getAllRecapitulationRequest(startDate, endDate);
 	}
 	
 	@Override

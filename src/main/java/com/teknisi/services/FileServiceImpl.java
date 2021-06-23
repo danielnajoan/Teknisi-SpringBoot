@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.MessagingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.supercsv.io.CsvBeanWriter;
@@ -94,13 +92,29 @@ public class FileServiceImpl implements FileService{
     }
 
 	@Override
-	public byte[] exportToPDF() throws FileNotFoundException, JRException, IOException, MessagingException {
+	public byte[] exportToPDF() throws FileNotFoundException, JRException, IOException {
 		ArrayList<Request> arrayListRequest =(ArrayList<Request>) requestService.showAllStatusRequest("FINISHED");
 		Object[] arrayObjectRequest = arrayListRequest.toArray();
 		JRBeanArrayDataSource beanCollectionDataSource = new JRBeanArrayDataSource(arrayObjectRequest);
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/report.jrxml"));
+		JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/report.jrxml"));
 		HashMap<String, Object> map = new HashMap<>();
-		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		JasperPrint report = JasperFillManager.fillReport(jasperReport, map, beanCollectionDataSource);
+        return JasperExportManager.exportReportToPdf(report);
+	}
+	
+	@Override
+	public byte[] exportToPDF(Date startDate, Date endDate) throws FileNotFoundException, JRException, IOException {
+		ArrayList<Request> arrayListRequest =(ArrayList<Request>) requestService.showAllRecapitulationRequest(startDate, endDate);
+		Object[] arrayObjectRequest = arrayListRequest.toArray();
+		JRBeanArrayDataSource beanCollectionDataSource = new JRBeanArrayDataSource(arrayObjectRequest);
+		JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream("./jasper/all-request-data.jrxml"));
+		HashMap<String, Object> map = new HashMap<>();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");  
+        String stringStartDate = dateFormat.format(startDate); 
+        String stringEndDate = dateFormat.format(endDate); 
+		map.put("reportStartDate", stringStartDate);
+		map.put("reportEndDate", stringEndDate);
+		JasperPrint report = JasperFillManager.fillReport(jasperReport, map, beanCollectionDataSource);
         return JasperExportManager.exportReportToPdf(report);
 	}
 	

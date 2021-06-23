@@ -91,7 +91,7 @@ public class Scheduler {
 		byte[] csv = fileService.exportToCSV();
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
-		String fileName = "./csv/"+ "REQUEST_"+ currentDateTime+".csv";
+		String fileName = "REQUEST_"+ currentDateTime+".csv";
 		logger.info("Get latest CSV that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
@@ -107,7 +107,7 @@ public class Scheduler {
 		byte[] pdf = fileService.exportToPDF();
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
-        String fileName = "./pdf/"+"FINISHED_REQUEST_"+ currentDateTime +".pdf";
+        String fileName = "FINISHED_REQUEST_"+ currentDateTime +".pdf";
 		logger.info("Get latest PDF that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {
@@ -123,7 +123,7 @@ public class Scheduler {
 		byte[] xls = fileService.exportToXLS();
         DateFormat dateFileFormatter = new SimpleDateFormat("dd-MM-yyyy_hh-MM-ss");
         String currentFileDateTime = dateFileFormatter.format(new Date());
-        String fileName = "./xls/"+ "REKAP_REQUEST_"+ currentFileDateTime +".xls";
+        String fileName = "REKAP_REQUEST_"+ currentFileDateTime +".xls";
 		logger.info("Get latest XLS that will be send to Admin");
 		List<AppUser> listAppUser = appUserService.showAllAppUserBasedOnRole("ADMIN");
 		for (AppUser appUser : listAppUser) {

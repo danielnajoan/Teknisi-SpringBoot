@@ -1,5 +1,10 @@
 package com.teknisi.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,12 +26,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teknisi.model.Request;
+import com.teknisi.services.FileService;
 import com.teknisi.services.MessageService;
 import com.teknisi.services.RequestService;
 import com.teknisi.services.TeknisiService;
@@ -32,6 +41,7 @@ import com.teknisi.services.TeknisiService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import net.sf.jasperreports.engine.JRException;
 
 @ApiOperation(value = "/request", tags = "Request Profile Controller")
 @RestController
@@ -43,6 +53,7 @@ public class RequestController {
 	@Autowired RequestService requestService;
 	@Autowired TeknisiService teknisiService;
 	@Autowired MessageService messageService;
+	@Autowired FileService fileService;
 	
 	@ApiOperation(value = "Fetch All Request Data")
 	@ApiResponses(value = {
@@ -178,6 +189,34 @@ public class RequestController {
 			logger.error("Request with id {} did not exist", id);
 			return new ResponseEntity<>("Request ID did not exist", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@ApiOperation(value = "Download Ticket Request")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 401, message = "Unauthorized!"),
+			@ApiResponse(code = 403, message = "Forbidden!"),
+			@ApiResponse(code = 404, message = "Not Found")
+	})
+	@RequestMapping(value = "/request/download", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> downloadRequest(@RequestParam String startDate, @RequestParam String endDate) throws IOException, JRException, ParseException {
+		logger.info("Parsing the date");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		logger.debug("dateFormat {}", dateFormat);
+		Date formatedStartDate = dateFormat.parse(startDate);
+		logger.debug("formatedStartDate {}", formatedStartDate);
+		Date formatedEndDate = dateFormat.parse(endDate);
+		logger.debug("formatedEndDate {}", formatedEndDate);
+		logger.info("Check all ticket request");
+		logger.info("Exporting all data to PDF");
+		byte[] pdf = fileService.exportToPDF(formatedStartDate, formatedEndDate);
+		logger.info("Get latest PDF that will be downloaded");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.parseMediaType("application/pdf"));
+		httpHeaders.setContentDispositionFormData("inline", "Report");
+		logger.info("Downloading the PDF");
+		ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(pdf, httpHeaders, HttpStatus.OK);
+		return response;
 	}
 	
 	
