@@ -1,0 +1,135 @@
+2021-07-21 16:24:22,280 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.7.Final
+2021-07-21 16:24:22,310 INFO org.springframework.boot.StartupInfoLogger [main] Starting TeknisiApplication using Java 15.0.2 on DESKTOP-SJ54SUK with PID 33308 (D:\Java\Eclipse-Workspace\Teknisi\target\classes started by Daniel SN in D:\Java\Eclipse-Workspace\Teknisi)
+2021-07-21 16:24:22,311 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-07-21 16:24:22,311 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-07-21 16:24:25,163 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-07-21 16:24:25,167 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2021-07-21 16:24:25,198 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 25 ms. Found 0 JDBC repository interfaces.
+2021-07-21 16:24:25,213 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-07-21 16:24:25,216 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-07-21 16:24:25,228 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 5 ms. Found 0 JPA repository interfaces.
+2021-07-21 16:24:25,834 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5bb8e6fc' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-07-21 16:24:25,841 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-07-21 16:24:26,396 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-07-21 16:24:26,415 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-07-21 16:24:26,416 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-07-21 16:24:26,417 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-07-21 16:24:26,685 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-07-21 16:24:26,686 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 3910 ms
+2021-07-21 16:24:26,826 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-07-21 16:24:26,929 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'jwtRequestFilter' configured for use
+2021-07-21 16:24:27,005 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-07-21 16:24:28,173 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-07-21 16:24:28,253 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-21 16:24:28,351 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-07-21 16:24:28,658 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-07-21 16:24:28,909 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-07-21 16:24:30,234 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-21 16:24:30,247 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-21 16:24:30,264 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-07-21 16:24:30,321 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-21 16:24:30,592 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-07-21 16:24:30,613 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-07-21 16:24:30,635 INFO org.springframework.aop.framework.CglibAopProxy [main] Unable to proxy interface-implementing method [public final void org.springframework.dao.support.DaoSupport.afterPropertiesSet() throws java.lang.IllegalArgumentException,org.springframework.beans.factory.BeanInitializationException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2021-07-21 16:24:31,183 INFO springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping [main] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-07-21 16:24:31,550 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@61ec2cb5, org.springframework.security.web.context.SecurityContextPersistenceFilter@4e553d60, org.springframework.security.web.header.HeaderWriterFilter@2b9bbaa8, org.springframework.web.filter.CorsFilter@3889c343, org.springframework.security.web.authentication.logout.LogoutFilter@4351d055, com.teknisi.configuration.JwtRequestFilter@6c27e700, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@45f6181a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@65a8c306, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@34be7efb, org.springframework.security.web.session.SessionManagementFilter@28b7646, org.springframework.security.web.access.ExceptionTranslationFilter@7e4dddee, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@cc91fe3]
+2021-07-21 16:24:31,637 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-21 16:24:31,951 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'taskScheduler'
+2021-07-21 16:24:31,988 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-07-21 16:24:32,027 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-07-21 16:24:32,028 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Context refreshed
+2021-07-21 16:24:32,054 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Found 1 custom documentation plugin(s)
+2021-07-21 16:24:32,102 INFO springfox.documentation.spring.web.scanners.ApiListingReferenceScanner [main] Scanning for api listing references
+2021-07-21 16:24:32,602 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Check all ticket request that has status mail_sent
+2021-07-21 16:24:32,606 INFO org.springframework.boot.StartupInfoLogger [main] Started TeknisiApplication in 11.146 seconds (JVM running for 12.881)
+2021-07-21 16:24:32,740 DEBUG com.teknisi.scheduler.Scheduler [scheduling-1] Formatted Message {}You have new request
+Request ID : 1
+Merchant Name: Apolos
+Address : Jalan bunga matahari IX Bekasi
+City : Markus
+Person in charge : Devin
+
+Thank you
+2021-07-21 16:24:38,970 DEBUG com.teknisi.scheduler.Scheduler [scheduling-1] Send reminder ticket request to each Teknisi {} danielnajoan@gmail.comDaniel
+2021-07-21 16:24:38,971 INFO com.teknisi.scheduler.Scheduler [scheduling-1] Schedule reminder for ticket request status = mail_sent has been sent to email
+2021-07-21 16:24:44,631 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-21 16:24:44,632 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2021-07-21 16:24:44,639 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 6 ms
+2021-07-21 16:24:44,736 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] JWT Token does not begin with Bearer String
+2021-07-21 16:24:44,737 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] Validate JWT Token Header
+2021-07-21 16:24:44,919 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] JWT Token does not begin with Bearer String
+2021-07-21 16:24:44,920 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] Validate JWT Token Header
+2021-07-21 16:24:44,919 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-2] JWT Token does not begin with Bearer String
+2021-07-21 16:24:44,921 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] JWT Token does not begin with Bearer String
+2021-07-21 16:24:44,921 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-2] Validate JWT Token Header
+2021-07-21 16:24:44,921 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] Validate JWT Token Header
+2021-07-21 16:24:44,921 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-5] JWT Token does not begin with Bearer String
+2021-07-21 16:24:44,923 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-5] Validate JWT Token Header
+2021-07-21 16:24:44,926 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] JWT Token does not begin with Bearer String
+2021-07-21 16:24:44,928 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] Validate JWT Token Header
+2021-07-21 16:24:45,443 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-9] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,444 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-9] Validate JWT Token Header
+2021-07-21 16:24:45,478 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,478 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] Validate JWT Token Header
+2021-07-21 16:24:45,522 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-7] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,522 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-7] Validate JWT Token Header
+2021-07-21 16:24:45,533 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-10] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,533 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-10] Validate JWT Token Header
+2021-07-21 16:24:45,576 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,576 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] Validate JWT Token Header
+2021-07-21 16:24:45,576 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-2] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,577 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-2] Validate JWT Token Header
+2021-07-21 16:24:45,626 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,626 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] Validate JWT Token Header
+2021-07-21 16:24:45,626 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,626 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] Validate JWT Token Header
+2021-07-21 16:24:45,882 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,882 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-5] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,883 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-5] Validate JWT Token Header
+2021-07-21 16:24:45,883 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] JWT Token does not begin with Bearer String
+2021-07-21 16:24:45,883 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] Validate JWT Token Header
+2021-07-21 16:24:45,884 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] Validate JWT Token Header
+2021-07-21 16:24:50,741 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] JWT Token does not begin with Bearer String
+2021-07-21 16:24:50,742 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] Validate JWT Token Header
+2021-07-21 16:24:52,723 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] JWT Token does not begin with Bearer String
+2021-07-21 16:24:52,724 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] Validate JWT Token Header
+2021-07-21 16:24:55,152 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] JWT Token does not begin with Bearer String
+2021-07-21 16:24:55,153 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] Validate JWT Token Header
+2021-07-21 16:24:55,243 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] JWT Token does not begin with Bearer String
+2021-07-21 16:24:55,243 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] Validate JWT Token Header
+2021-07-21 16:25:26,181 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] JWT Token does not begin with Bearer String
+2021-07-21 16:25:26,181 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] Validate JWT Token Header
+2021-07-21 16:25:30,101 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-10] JWT Token does not begin with Bearer String
+2021-07-21 16:25:30,101 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-10] Validate JWT Token Header
+2021-07-21 16:25:36,545 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-2] JWT Token does not begin with Bearer String
+2021-07-21 16:25:36,545 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-2] Validate JWT Token Header
+2021-07-21 16:25:37,337 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] JWT Token does not begin with Bearer String
+2021-07-21 16:25:37,338 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] Validate JWT Token Header
+2021-07-21 16:25:37,918 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] JWT Token does not begin with Bearer String
+2021-07-21 16:25:37,919 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] Validate JWT Token Header
+2021-07-21 16:25:44,902 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] JWT Token does not begin with Bearer String
+2021-07-21 16:25:44,902 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] Validate JWT Token Header
+2021-07-21 16:25:45,621 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] JWT Token does not begin with Bearer String
+2021-07-21 16:25:45,621 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-6] Validate JWT Token Header
+2021-07-21 16:25:46,493 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] JWT Token does not begin with Bearer String
+2021-07-21 16:25:46,493 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-8] Validate JWT Token Header
+2021-07-21 16:25:49,835 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-9] JWT Token does not begin with Bearer String
+2021-07-21 16:25:49,835 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-9] Validate JWT Token Header
+2021-07-21 16:25:52,116 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-10] JWT Token does not begin with Bearer String
+2021-07-21 16:25:52,117 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-10] Validate JWT Token Header
+2021-07-21 16:27:45,507 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] JWT Token does not begin with Bearer String
+2021-07-21 16:27:45,508 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-4] Validate JWT Token Header
+2021-07-21 16:27:45,553 INFO com.teknisi.controller.JwtAuthenticationController [http-nio-8080-exec-4] Authenticating AppUser
+2021-07-21 16:27:45,554 DEBUG com.teknisi.controller.JwtAuthenticationController [http-nio-8080-exec-4] Authenticate AppUser: Dante
+2021-07-21 16:27:45,981 INFO com.teknisi.controller.JwtAuthenticationController [http-nio-8080-exec-4] Generate AppUser Token
+2021-07-21 16:28:00,362 WARN com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] JWT Token does not begin with Bearer String
+2021-07-21 16:28:00,363 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-1] Validate JWT Token Header
+2021-07-21 16:28:00,365 INFO com.teknisi.controller.JwtAuthenticationController [http-nio-8080-exec-1] Authenticating AppUser
+2021-07-21 16:28:00,365 DEBUG com.teknisi.controller.JwtAuthenticationController [http-nio-8080-exec-1] Authenticate AppUser: David
+2021-07-21 16:28:00,452 INFO com.teknisi.controller.JwtAuthenticationController [http-nio-8080-exec-1] Generate AppUser Token
+2021-07-21 16:28:13,569 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] Retrieve JWT Token Header
+2021-07-21 16:28:13,569 DEBUG com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] JWT Token Header: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEYXZpZCIsInNlc3Npb25JZCI6IjVGQkJCMkY4RDhGMTkzNTc1NkE5OEY1NjEwODU2NTAxIiwiZXhwIjoxNjI2ODc3NjgwLCJpYXQiOjE2MjY4NTk2ODB9.xNLW-I5jkZJBrz1cMaZ6DAFqauWs9REYLyqhYT-mm271DMSSQer2zuSuILTas-Nd9D6sWLQbIHLDqqsGZPeWVQ
+2021-07-21 16:28:13,595 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] Validate JWT Token Header
+2021-07-21 16:28:13,602 INFO com.teknisi.configuration.JwtRequestFilter [http-nio-8080-exec-3] JWT Token Header has been authenticated
+2021-07-21 16:28:13,615 INFO com.teknisi.controller.TeknisiController [http-nio-8080-exec-3] Retrieve all teknisi
+2021-07-21 16:28:13,615 DEBUG com.teknisi.controller.TeknisiController [http-nio-8080-exec-3] All teknisi: [Teknisi [id=1, phone=018344005666, name=Daniel, nik=1000559090, address=United Kingdom, email=danielnajoan@gmail.com, city=London, postal_code=18790, last_login=2021-05-06 13:54:31.329, longitude=90909090, latitude=20005555, created_date=2021-05-06 13:54:31.329, created_by=Dante, update_date=2021-05-06 13:54:31.329, update_by=Stephanus, request=[Request [request_id=2, merchant_name=David, address=Jalan Anggrek IX Bekasi, city=Bekasi, postal_code=00119, phone=08194455222, person_in_charge=Saputra, teknisi_id=1, created_date=2021-06-08 13:53:18.12, created_by=Merchant PIC, update_date=null, update_by=null, status=FINISHED], Request [request_id=1, merchant_name=Apolos, address=Jalan bunga matahari IX Bekasi, city=Markus, postal_code=00119, phone=08194455001, person_in_charge=Devin, teknisi_id=1, created_date=2021-06-08 12:00:15.296, created_by=Merchant PIC, update_date=null, update_by=null, status=MAIL_SENT], Request [request_id=2, merchant_name=David, address=Jalan Anggrek IX Bekasi, city=Bekasi, postal_code=00119, phone=08194455222, person_in_charge=Saputra, teknisi_id=1, created_date=2021-06-08 13:53:18.12, created_by=Merchant PIC, update_date=null, update_by=null, status=FINISHED], Request [request_id=1, merchant_name=Apolos, address=Jalan bunga matahari IX Bekasi, city=Markus, postal_code=00119, phone=08194455001, person_in_charge=Devin, teknisi_id=1, created_date=2021-06-08 12:00:15.296, created_by=Merchant PIC, update_date=null, update_by=null, status=MAIL_SENT]], teknisiPhoto=TeknisiPhoto [id=1, teknisi_id=1, file_type=jpg, name=daniel, images=daniel, created_date=2021-05-06 13:54:31.329, created_by=admin, update_date=2021-05-06 13:54:31.329, update_by=admin]], Teknisi [id=99, phone=08194455001, name=Sasuke, nik=2001732555, address=Konoha, email=danielnajoan@gmail.com, city=Konoha, postal_code=00119, last_login=2021-05-11 12:54:43.846, longitude=5555555, latitude=0000000, created_date=2021-05-11 15:55:08.732, created_by=Manager Teknisi, update_date=null, update_by=null, request=[Request [request_id=3, merchant_name=Putri, address=Jalan BSD IX Tangerang, city=Tangerang, postal_code=00555, phone=08171155333, person_in_charge=Zanisalma, teknisi_id=99, created_date=2021-06-08 22:12:52.272, created_by=Merchant PIC, update_date=null, update_by=null, status=PROCESSED]], teknisiPhoto=null]]
